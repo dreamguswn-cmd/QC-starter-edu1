@@ -46,8 +46,11 @@
     </div>
   </div>
   <div class="hero-status-strip">
-    <div class="status-chip pass"><span class="dot"></span>PROJECT_01 · PASS</div>
-    <div class="status-chip pass"><span class="dot"></span>PROJECT_02 · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_01 · RAG QA · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_02 · BERTScore · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_03 · 회귀평가 · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_04 · Routing · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_05 · WEB · PASS</div>
     <div class="status-chip pending"><span class="dot"></span>NEXT · LLM QA ENGINEER</div>
   </div>
 </header>
@@ -63,10 +66,13 @@
         AI 기반 소프트웨어 품질관리 과정을 통해 <strong>Python, AI QA, LLM 평가, 웹 개발</strong>을
         학습하며 실습 중심의 프로젝트를 수행했습니다. 단순히 강의를 수강하는 것에 그치지 않고,
         직접 프로젝트를 구현하고 테스트하며 <strong>AI 서비스 품질을 평가하는 경험</strong>을 쌓았습니다.
+        4인 팀 RAG 챗봇 품질평가 프로젝트에서는 발표를 맡으며 <strong>전체 QA 프로세스를 이해하고 전달</strong>하는
+        경험을 했고, 이후 개인적으로 Judge Agent와 Correction Agent를 직접 구현하며 더 깊게 파고들었습니다.
       </p>
       <div class="about-meta">
         <div class="meta-row"><span class="meta-key">FOCUS</span><span class="meta-val">AI QA · Python Automation</span></div>
-        <div class="meta-row"><span class="meta-key">STACK</span><span class="meta-val">Python · HTML/CSS/JS</span></div>
+        <div class="meta-row"><span class="meta-key">STACK</span><span class="meta-val">Python · LangChain · HTML/CSS/JS</span></div>
+        <div class="meta-row"><span class="meta-key">TEAM</span><span class="meta-val">RAG QA 4인 팀 프로젝트 (발표)</span></div>
         <div class="meta-row"><span class="meta-key">STATUS</span><span class="meta-val">취업 준비 중</span></div>
       </div>
     </div>
@@ -79,7 +85,97 @@
     <h2 class="section-title">프로젝트</h2>
     <p class="section-desc">각 프로젝트는 <em>문제 → 해결 과정 → 결과</em> 흐름으로 정리했습니다.</p>
 
-    <!-- PROJECT 2 (lead with the AI QA project — strongest match to target role) -->
+    <!-- PROJECT 1 (NEW flagship — RAG chatbot Judge + Correction Agent) -->
+    <article class="project-card project-card-featured" id="project-rag">
+      <div class="project-head">
+        <div class="project-tag featured">PROJECT 01 · FEATURED</div>
+        <h3 class="project-title">RAG 챗봇 자동 품질평가 & 답변 개선 시스템</h3>
+        <p class="project-role">Judge Agent로 채점하고, Correction Agent로 실패 답변을 자동 개선하는 QA 피드백 루프</p>
+      </div>
+
+      <div class="project-stack">
+        <span class="chip">Python</span>
+        <span class="chip">LangChain</span>
+        <span class="chip">OpenAI GPT-4.1-mini</span>
+        <span class="chip">ChromaDB</span>
+        <span class="chip">Streamlit</span>
+      </div>
+
+      <div class="rag-ui-shot">
+        <img src="assets/rag_chatbot_ui.png" alt="RAG 챗봇 Streamlit 화면 — 출처 문서명을 함께 표시하는 답변 예시" loading="lazy">
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROBLEM — 문제</h4>
+        <p>RAG 챗봇은 검색된 문서를 근거로 답변하지만, <strong>검색이 잘 됐는지·답변이 근거에 맞는지·문서에 없는
+        내용을 지어내지(환각) 않는지</strong>를 사람이 매번 직접 확인하면 기준이 흔들리고 시간이 오래 걸립니다.
+        또한 점수만 매겨서는 낮은 점수를 받은 답변이 그대로 폐기되어, 평가가 실제 개선으로 이어지지 않는다는
+        한계가 있었습니다.</p>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROCESS — 해결 과정</h4>
+        <ol class="flow-list">
+          <li><b>RAG 파이프라인 구축</b> — 문서 임베딩 → ChromaDB 저장 → 질문 시 유사 문서 검색 → 근거 기반 답변 생성</li>
+          <li><b>테스트 케이스 설계</b> — 정상·경계·환각 유도·안전 거절 등 <b>15개 카테고리</b>로 시나리오 구성</li>
+          <li><b>Judge Agent 구현 (1단계 평가)</b> — 이해도·정확성·관련성·표현성 4항목을 0~5점 루브릭으로 채점</li>
+          <li><b>감점 규칙 적용 (2단계 평가)</b> — 출처 미기재·근거 미사용·정의만 제공 등 규칙 위반 시 정량 감점 → <code>최종점수 = 루브릭 − 감점</code>으로 점수 인플레이션 방지</li>
+          <li><b>Correction Agent 구현</b> — 평가 리포트(JSON)를 입력받아 감점 원인을 반영한 수정 모범답안을 자동 생성</li>
+          <li><b>리포트 자동화</b> — 전체 결과를 JSON + Markdown 리포트로 자동 저장 (<code>run_tests.py</code>)</li>
+        </ol>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">WHY TWO-STAGE — 설계 의도</h4>
+        <p>평가를 <b>"루브릭(잘한 점)"</b>과 <b>"감점(어긴 규칙)"</b>으로 단계를 나눈 이유는, 단일 점수만 주면
+        근거가 불투명해지고 점수가 후하게 매겨지는 인플레이션이 생기기 쉽기 때문입니다. 두 단계를 분리하면
+        <b>"왜 이 점수인지"</b>를 항상 설명할 수 있고, 그 감점 사유를 그대로 Correction Agent에 넘겨 개선까지
+        자동으로 이어집니다.</p>
+      </div>
+
+      <div class="project-block result-block">
+        <h4 class="block-label">RESULT — 결과</h4>
+
+        <div class="rag-score-summary">
+          <div class="rag-score-big">
+            <span class="num">4.40</span><span class="denom">/ 5.00</span>
+            <span class="rag-score-label">전체 평균 (15개 케이스)</span>
+          </div>
+          <div class="rag-mini-stats">
+            <div><span class="mini-num">15</span><span class="mini-label">테스트 카테고리</span></div>
+            <div><span class="mini-num">5.00</span><span class="mini-label">최고 점수</span></div>
+            <div><span class="mini-num">2.75</span><span class="mini-label">최저 점수 → 자동 개선</span></div>
+          </div>
+        </div>
+
+        <p class="rag-before-after-intro">가장 낮은 점수를 받은 케이스가 Correction Agent를 거쳐 어떻게 개선되는지 예시입니다.</p>
+
+        <div class="ba-grid">
+          <div class="ba-col before">
+            <div class="ba-label">BEFORE · 2.75/5.00</div>
+            <p class="ba-q">Q. "RAG 챗봇이 무엇인지 쉽게 설명해 주세요."</p>
+            <p class="ba-a">"제공된 문서에서는 확인할 수 없습니다."</p>
+            <p class="ba-reason">→ 감점: 질문 의도 파악 실패, 출처 미언급</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col after">
+            <div class="ba-label">AFTER · Correction Agent 생성</div>
+            <p class="ba-a">"RAG 챗봇은 'Retrieval-Augmented Generation'의 약자로, 외부 문서에서 필요한 정보를
+            검색한 후 이를 바탕으로 답변을 생성하는 챗봇입니다. ··· 참고로 제공된 문서에는 RAG 챗봇에 대한
+            내용이 포함되어 있지 않습니다."</p>
+            <p class="ba-reason">→ 개선: 직접 답변 + 출처 부재 명시</p>
+          </div>
+        </div>
+
+        <ul class="learn-list">
+          <li><strong>Two-Stage Evaluation</strong>으로 평가 점수의 근거를 항상 설명 가능하게 설계했습니다.</li>
+          <li>평가에서 멈추지 않고 <strong>개선까지 이어지는 피드백 루프</strong>(Evaluation → Correction → Reporting)를 구현했습니다.</li>
+          <li>Prompt Engineering, RAG, Vector DB를 함께 다루며 <strong>AI 서비스 품질관리 자동화</strong>를 실무 수준으로 경험했습니다.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 (BERTScore) -->
     <article class="project-card" id="project-bertscore">
       <div class="project-head">
         <div class="project-tag">PROJECT 02</div>
@@ -131,10 +227,151 @@
       </div>
     </article>
 
-    <!-- PROJECT 1 -->
+    <!-- PROJECT 3 (Baseline regression evaluation) -->
+    <article class="project-card" id="project-regression">
+      <div class="project-head">
+        <div class="project-tag">PROJECT 03</div>
+        <h3 class="project-title">기준 모델 기반 BERTScore 회귀 평가</h3>
+        <p class="project-role">새 모델(B)이 기준 모델(A)의 응답 특성을 유지하는지 배포 전에 자동 점검하는 회귀 테스트</p>
+      </div>
+
+      <div class="project-stack">
+        <span class="chip">Python</span>
+        <span class="chip">bert-score</span>
+        <span class="chip">pandas</span>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROBLEM — 문제</h4>
+        <p>Golden Answer 기반 평가는 "정답에 가까운가"는 보여주지만, <strong>모델을 교체했을 때 기존 서비스 품질이
+        그대로 유지되는지</strong>는 별도로 확인해야 합니다. 새 모델이 더 효율적이거나 저렴하더라도, 기존 모델과
+        응답 방향이 달라지면 사용자 경험이 갑자기 바뀔 수 있기 때문입니다.</p>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROCESS — 해결 과정</h4>
+        <ol class="flow-list">
+          <li><b>기준 모델(A) 응답을 Reference로 설정</b> — 정답이 아니라 "기존 서비스가 보이던 답변"을 기준점으로 사용</li>
+          <li><b>비교 모델(B) 응답과 BERTScore 산출</b> — Precision/Recall/F1로 두 응답의 의미적 거리 측정</li>
+          <li><b>3단계 자동 판정 기준 설계</b> — F1 0.95↑ 안정적 유지 / 0.85↑ 검토 필요 / 0.85↓ 성능 저하 의심</li>
+          <li><b>케이스별 평가 의견 자동 생성</b> — 판정 결과에 맞는 QA 코멘트를 템플릿으로 자동 작성</li>
+          <li><b>종합 보고서 자동화</b> — 전체 평균 F1, 판정 분포, 배포 권고 사항을 Markdown으로 출력</li>
+        </ol>
+      </div>
+
+      <div class="project-block result-block">
+        <h4 class="block-label">RESULT — 결과</h4>
+        <div class="rag-score-summary">
+          <div class="rag-score-big">
+            <span class="num">0.797</span><span class="denom">평균 F1</span>
+            <span class="rag-score-label">10개 케이스 (TC-001~010)</span>
+          </div>
+          <div class="rag-mini-stats">
+            <div><span class="mini-num">0</span><span class="mini-label">안정적 유지</span></div>
+            <div><span class="mini-num">1</span><span class="mini-label">검토 필요</span></div>
+            <div><span class="mini-num">9</span><span class="mini-label">성능 저하 의심</span></div>
+          </div>
+        </div>
+        <p class="rag-before-after-intro">표현은 다르지만 의미는 비슷한 두 답변도 BERTScore는 낮게 채점할 수 있다는 한계를 직접 확인했습니다.</p>
+        <div class="ba-grid">
+          <div class="ba-col before">
+            <div class="ba-label">Model A (기준) · TC-006</div>
+            <p class="ba-q">Q. "BERTScore는 무엇을 평가하는 지표인가요?"</p>
+            <p class="ba-a">"BERTScore는 두 문장의 의미적 유사도를 측정하는 평가 지표입니다."</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col after">
+            <div class="ba-label">Model B · F1 0.802 · 성능 저하 의심</div>
+            <p class="ba-a">"BERTScore는 문장 간 의미가 얼마나 비슷한지 비교하는 데 사용됩니다."</p>
+            <p class="ba-reason">→ 의미는 거의 동일하지만 표현 차이만으로 "저하 의심"으로 분류됨</p>
+          </div>
+        </div>
+        <ul class="learn-list">
+          <li>BERTScore는 <strong>표현 차이에 민감</strong>해서, 의미가 같아도 점수가 낮게 나올 수 있다는 한계를 확인했습니다.</li>
+          <li>그래서 <strong>자동 점수는 1차 필터일 뿐, 최종 판단은 사람의 검토와 결합</strong>해야 한다는 QA 원칙을 정리했습니다.</li>
+          <li>안전성·환각·숫자·금액처럼 <strong>자동 지표만으로 판단하면 안 되는 영역</strong>을 구분하는 기준을 세웠습니다.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- PROJECT 4 (Routing classifier) -->
+    <article class="project-card" id="project-routing">
+      <div class="project-head">
+        <div class="project-tag">PROJECT 04</div>
+        <h3 class="project-title">Routing Classifier 기반 AI Agent 자동 분류 품질평가</h3>
+        <p class="project-role">사용자 질문을 올바른 전문 Agent로 연결하는 분류기의 정확도와 오분류 원인을 분석</p>
+      </div>
+
+      <div class="project-stack">
+        <span class="chip">Python</span>
+        <span class="chip">scikit-learn</span>
+        <span class="chip">TF-IDF</span>
+        <span class="chip">Logistic Regression</span>
+        <span class="chip">matplotlib</span>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROBLEM — 문제</h4>
+        <p>여러 전문 Agent(스포츠/타이머/주문/일반대화)를 가진 챗봇에서는, 질문에 잘 답하는 것보다
+        <strong>올바른 Agent로 먼저 연결되는 것</strong>이 우선입니다. "결제 방법 알려줘"가 스포츠 Agent로 잘못
+        연결되면, 답변 품질과 무관하게 사용자는 원하는 도움을 받을 수 없습니다.</p>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROCESS — 해결 과정</h4>
+        <ol class="flow-list">
+          <li><b>분류기 학습</b> — TF-IDF(문자 2~5-gram) + Logistic Regression으로 4개 Agent 분류 파이프라인 구축</li>
+          <li><b>정상 케이스 평가</b> — 스포츠/타이머/주문/일반대화 16건으로 Accuracy, Precision/Recall/F1 측정</li>
+          <li><b>혼동행렬(Confusion Matrix) 분석</b> — 어떤 Agent끼리 혼동되는지 시각화</li>
+          <li><b>Edge Case 설계</b> — 오타, 복합 의도, 의미 없는 입력, 짧은 문장 등 8건 별도 테스트</li>
+          <li><b>오분류 원인 분석 & 개선안 도출</b> — 데이터 불균형과 문맥 부족 문제를 구체적 개선 방향으로 정리</li>
+        </ol>
+      </div>
+
+      <div class="project-block result-block">
+        <h4 class="block-label">RESULT — 결과</h4>
+        <div class="rag-score-summary">
+          <div class="rag-score-big">
+            <span class="num">93.75</span><span class="denom">%</span>
+            <span class="rag-score-label">정상 케이스 정확도 (15/16)</span>
+          </div>
+          <div class="rag-mini-stats">
+            <div><span class="mini-num">87.5%</span><span class="mini-label">Edge Case 정확도 (7/8)</span></div>
+            <div><span class="mini-num">4</span><span class="mini-label">분류 대상 Agent</span></div>
+          </div>
+        </div>
+
+        <div class="cm-shot">
+          <img src="assets/confusion_matrix.png" alt="Routing Classifier 혼동행렬 — order_agent 1건이 sports_agent로 오분류" loading="lazy">
+        </div>
+
+        <p class="rag-before-after-intro">혼동행렬에서 order_agent 4건 중 1건이 sports_agent로 잘못 분류된 패턴을 발견했습니다.</p>
+        <div class="ba-grid">
+          <div class="ba-col before">
+            <div class="ba-label">오분류 사례</div>
+            <p class="ba-q">"결제 방법 알려줘"</p>
+            <p class="ba-a">실제: order_agent → 예측: sports_agent</p>
+            <p class="ba-reason">→ 원인: 짧은 문장 + order_agent 학습 데이터 부족으로 일반화 실패</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col after">
+            <div class="ba-label">개선 방안</div>
+            <p class="ba-a">결제·환불·배송 표현 다양화, 오타·복합 의도 데이터 추가, Sentence-BERT 기반 임베딩 분류기와 성능 비교 실험</p>
+          </div>
+        </div>
+
+        <ul class="learn-list">
+          <li>Accuracy 하나만 보지 않고 <strong>혼동행렬로 어떤 Agent 간 혼동이 발생하는지</strong> 분석하는 습관을 들였습니다.</li>
+          <li>정상 케이스만으로는 부족하며 <strong>오타·복합의도 등 Edge Case 테스트가 따로 필요</strong>하다는 것을 확인했습니다.</li>
+          <li>모델 성능 평가는 Accuracy뿐 아니라 <strong>Precision/Recall/F1과 오분류 사례 분석이 함께</strong> 이루어져야 함을 체득했습니다.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- PROJECT 5 (mobile invitation) -->
     <article class="project-card" id="project-invitation">
       <div class="project-head">
-        <div class="project-tag">PROJECT 01</div>
+        <div class="project-tag">PROJECT 05</div>
         <h3 class="project-title">모바일 청첩장 웹페이지 제작</h3>
         <p class="project-role">반응형 UI와 인터랙션을 직접 설계·구현한 모바일 퍼스트 웹페이지</p>
       </div>
@@ -209,6 +446,11 @@
           <li>Cosine Similarity</li>
           <li>Precision / Recall / F1</li>
           <li>Golden Answer 설계</li>
+          <li>LLM-as-a-Judge</li>
+          <li>Two-Stage Evaluation</li>
+          <li>RAG · LangChain · ChromaDB</li>
+          <li>회귀 테스트(Regression Test)</li>
+          <li>scikit-learn · Confusion Matrix</li>
         </ul>
       </div>
       <div class="skill-card">
