@@ -293,6 +293,12 @@ ul, ol { list-style: none; }
   background: var(--green); color: #fff;
   padding: 3px 9px; border-radius: 100px;
 }
+.badge.fail {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  background: #c9503f; color: #fff;
+  padding: 3px 9px; border-radius: 100px;
+}
+.result-table td.score.fail { color: #c9503f; }
 
 .feature-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .feature-pill {

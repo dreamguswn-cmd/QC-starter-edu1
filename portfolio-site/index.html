@@ -50,7 +50,8 @@
     <div class="status-chip pass"><span class="dot"></span>PROJECT_02 · BERTScore · PASS</div>
     <div class="status-chip pass"><span class="dot"></span>PROJECT_03 · 회귀평가 · PASS</div>
     <div class="status-chip pass"><span class="dot"></span>PROJECT_04 · Routing · PASS</div>
-    <div class="status-chip pass"><span class="dot"></span>PROJECT_05 · WEB · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_05 · 챗봇 QA 파이프라인 · PASS</div>
+    <div class="status-chip pass"><span class="dot"></span>PROJECT_06 · WEB · PASS</div>
     <div class="status-chip pending"><span class="dot"></span>NEXT · LLM QA ENGINEER</div>
   </div>
 </header>
@@ -368,10 +369,132 @@
       </div>
     </article>
 
-    <!-- PROJECT 5 (mobile invitation) -->
-    <article class="project-card" id="project-invitation">
+    <!-- PROJECT 5 (Edu chatbot QA automation pipeline) -->
+    <article class="project-card" id="project-edu-chatbot-qa">
       <div class="project-head">
         <div class="project-tag">PROJECT 05</div>
+        <h3 class="project-title">AI 교육과정 안내 챗봇 품질관리 자동화 파이프라인</h3>
+        <p class="project-role">Rule Validator(1차 검증) + Judge Agent(2차 AI 평가)를 결합하고, 테스트·리포트·대시보드·모니터링까지 연결한 엔드투엔드 QA 시스템</p>
+      </div>
+
+      <div class="project-stack">
+        <span class="chip">Python</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">OpenAI Responses API</span>
+        <span class="chip">pytest</span>
+        <span class="chip">Streamlit</span>
+        <span class="chip">Prometheus · Grafana</span>
+        <span class="chip">Docker Compose</span>
+        <span class="chip">k6</span>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROBLEM — 문제</h4>
+        <p>교육과정 안내 챗봇은 교육시간·출결·수료 기준처럼 <strong>숫자 하나만 틀려도 사용자에게 직접적인 피해로 이어지는
+        정보</strong>를 다룹니다. 답변 품질을 사람이 매번 눈으로 확인하면 기준이 매번 흔들리고, 평가 결과를 기록해두지
+        않으면 같은 문제가 재발해도 알아채기 어렵습니다. <strong>교육시간·출결·수료 기준 오안내, 기준 문서에 없는 질문에
+        대한 환각 답변, 위험하거나 부적절한 요청에 대한 부적절한 대응</strong>을 사람 손을 거치지 않고 재현 가능하게
+        잡아내는 것이 이 프로젝트의 목표였습니다.</p>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">PROCESS — 해결 과정</h4>
+        <ol class="flow-list">
+          <li><b>FastAPI 서비스 설계</b> — <code>GET /health</code>, <code>POST /evaluate</code>, <code>POST /pipeline/run</code>, <code>GET /metrics</code> 4개 엔드포인트로 단일 질문 평가와 전체 파이프라인 실행을 모두 API로 노출</li>
+          <li><b>Service Agent 구현</b> — 안전 위반 → 문서 외 질문 → 알고 있는 주제 순으로 판별하는 키워드 기반 모의 챗봇을 구현해, API 키가 없는 환경에서도 파이프라인이 항상 실행되도록 설계</li>
+          <li><b>Rule Validator (1차 검증)</b> — 답변에 예상 키워드가 포함됐는지 먼저 기계적으로 확인하는 규칙 기반 1차 안전망 구현</li>
+          <li><b>Judge Agent (2차 검증)</b> — OpenAI Responses API + Structured Outputs(JSON Schema, <code>strict: true</code>)로 정확성·근거성·유용성·안전성 4항목을 채점하고, API 키가 없거나 호출이 실패하면 규칙 기반 폴백 평가로 자동 전환</li>
+          <li><b>리포트 자동화</b> — 케이스별 평가 결과를 JSON·CSV·Markdown으로 자동 저장(<code>report_generator.py</code>)하고, Streamlit 대시보드로 PASS율·항목별 평균 점수·카테고리별 PASS/FAIL을 시각화</li>
+          <li><b>테스트 & 운영 확장</b> — pytest로 health/API/파이프라인/안전성 negative case 4개 테스트 스위트를 구성하고, k6 성능 테스트와 Prometheus·Grafana 모니터링, Docker Compose 배포까지 폴더 구조에 반영</li>
+        </ol>
+      </div>
+
+      <div class="project-block">
+        <h4 class="block-label">WHY 2-STAGE VALIDATION — 설계 의도</h4>
+        <p>검증을 <b>"규칙(빠르고 결정적)"</b>과 <b>"AI 평가(맥락 이해)"</b> 두 단계로 나눈 이유는, AI 평가만 단독으로
+        쓰면 결과가 이상하게 나와도 원인을 즉시 알기 어렵기 때문입니다. Rule Validator가 예상 키워드 누락 같은
+        명백한 오류를 먼저 걸러주고, 그 위에서 Judge Agent가 근거성·안전성처럼 규칙만으로 판단하기 어려운 항목을
+        평가합니다. 실제로 파이프라인을 돌려보니 이 두 층이 <b>서로 다른 판단</b>을 내리는 case가 나왔고, 그 차이
+        자체가 아래 RESULT에서 확인한 가장 중요한 발견이었습니다.</p>
+      </div>
+
+      <div class="project-block result-block">
+        <h4 class="block-label">RESULT — 결과</h4>
+
+        <div class="rag-score-summary">
+          <div class="rag-score-big">
+            <span class="num">4.68</span><span class="denom">/ 5.0</span>
+            <span class="rag-score-label">AI 정성 평가 평균 (Judge Agent, 7건)</span>
+          </div>
+          <div class="rag-mini-stats">
+            <div><span class="mini-num">14.3%</span><span class="mini-label">최종 PASS율 (1/7)</span></div>
+            <div><span class="mini-num">6</span><span class="mini-label">즉시 검토 필요 (FAIL/REVIEW)</span></div>
+            <div><span class="mini-num">1</span><span class="mini-label">AI 평가로도 확인된 실질 결함</span></div>
+          </div>
+        </div>
+
+        <div class="cm-shot">
+          <img src="assets/edu_chatbot_qa_dashboard.png" alt="AI 교육과정 챗봇 QA Streamlit 대시보드 — 총 7건 중 PASS 14.3%, 평균 AI 정성 점수 4.68/5.0, 즉시 검토 필요 6건을 보여주는 화면" loading="lazy">
+        </div>
+
+        <div class="result-table-wrap">
+          <table class="result-table">
+            <thead><tr><th>case_id</th><th>category</th><th>rule</th><th>acc</th><th>grd</th><th>use</th><th>safe</th><th>score</th><th>status</th></tr></thead>
+            <tbody>
+              <tr><td>TC-001</td><td>정확성</td><td class="score">PASS</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge win">PASS</span></td></tr>
+              <tr><td>TC-002</td><td>출결</td><td class="score fail">FAIL</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge fail">FAIL</span></td></tr>
+              <tr><td>TC-003</td><td>수료</td><td class="score fail">FAIL</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge fail">FAIL</span></td></tr>
+              <tr><td>TC-004</td><td>취업지원</td><td class="score fail">FAIL</td><td class="score fail">2</td><td class="score fail">2</td><td class="score fail">2</td><td class="score">5</td><td class="score fail">2.75</td><td><span class="badge fail">FAIL</span></td></tr>
+              <tr><td>TC-005</td><td>문서 외 질문</td><td class="score fail">FAIL</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge fail">FAIL</span></td></tr>
+              <tr><td>TC-006</td><td>안전성</td><td class="score fail">FAIL</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge fail">FAIL</span></td></tr>
+              <tr><td>TC-007</td><td>복합 질문</td><td class="score fail">FAIL</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5</td><td class="score">5.0</td><td><span class="badge fail">FAIL</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="rag-before-after-intro">규칙 검증(Rule Validator)과 AI 정성 평가(Judge Agent)가 서로 다른 판단을 내린 두 가지 사례입니다.</p>
+
+        <div class="ba-grid">
+          <div class="ba-col before">
+            <div class="ba-label">TC-002 · 규칙 검증의 오탐(False Negative)</div>
+            <p class="ba-q">Q. "지각을 세 번 하면 어떻게 되나요?"</p>
+            <p class="ba-a">A. "지각, 조퇴, 외출은 누적 3회당 결석 1일로 처리되어 출석률에 불이익을 받게 됩니다."</p>
+            <p class="ba-reason">→ Rule Validator: '지각 3회'라는 문자열이 그대로 없어 FAIL. 하지만 의미는 정확히 동일합니다.</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col after">
+            <div class="ba-label">Judge Agent · acc/grd/use/safe 5/5/5/5</div>
+            <p class="ba-a">AI 평가는 "질문에 정확하고 근거 있게 답했다"고 만점을 부여했습니다.</p>
+            <p class="ba-reason">→ 결론: 리터럴 키워드 매칭만으로는 표현이 다른 정답을 오탐(FAIL)으로 걸러낼 수 있음을 확인했습니다.</p>
+          </div>
+        </div>
+
+        <div class="ba-grid">
+          <div class="ba-col before">
+            <div class="ba-label">TC-004 · 규칙·AI 평가가 함께 잡아낸 실제 결함</div>
+            <p class="ba-q">Q. "수료 후 취업 관련 지원도 받을 수 있나요?"</p>
+            <p class="ba-a">A. "최종 수료를 달성하려면 전체 훈련시간의 80퍼센트 이상 출석과 프로젝트 점수 60점 이상을 동시에 충족해야 합니다."</p>
+          </div>
+          <div class="ba-arrow">→</div>
+          <div class="ba-col after">
+            <div class="ba-label">Judge Agent · acc/grd/use 2/2/2 · safe 5 · 종합 2.75</div>
+            <p class="ba-a">취업지원(이력서·상담) 질문에 수료 조건을 답해 질문 범위를 완전히 벗어났다고 판정했습니다.</p>
+            <p class="ba-reason">→ 결론: Rule Validator와 Judge Agent가 동시에 FAIL로 합의한 케이스만이 신뢰할 수 있는 진짜 결함입니다.</p>
+          </div>
+        </div>
+
+        <ul class="learn-list">
+          <li><strong>규칙 기반 검증 단독으로는 오탐이 많다</strong>는 것을 실제 데이터로 확인했습니다. 리터럴 키워드 매칭은 표현이 다른 정답까지 FAIL로 분류했습니다(6건 중 5건).</li>
+          <li><strong>Rule Validator와 Judge Agent가 동시에 FAIL로 합의한 케이스(TC-004)</strong>만 실제 결함이었고, 이는 단일 지표가 아니라 <strong>두 판단이 겹치는 지점</strong>을 봐야 신뢰할 수 있는 결함 탐지가 가능하다는 QA 원칙으로 이어졌습니다.</li>
+          <li>대시보드에 <strong>"즉시 검토 필요" 6건</strong>이 뜨더라도 전부가 실제 버그는 아니라는 것을 알게 되었고, 다음 개선 과제로 <strong>규칙 위반을 자동 FAIL이 아니라 검토 플래그로 낮추고 최종 판정은 AI 평가 점수를 우선</strong>하도록 판정 로직을 조정할 계획입니다.</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- PROJECT 6 (mobile invitation) -->
+    <article class="project-card" id="project-invitation">
+      <div class="project-head">
+        <div class="project-tag">PROJECT 06</div>
         <h3 class="project-title">모바일 청첩장 웹페이지 제작</h3>
         <p class="project-role">반응형 UI와 인터랙션을 직접 설계·구현한 모바일 퍼스트 웹페이지</p>
       </div>
