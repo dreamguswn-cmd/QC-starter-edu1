@@ -451,6 +451,18 @@ ul, ol { list-style: none; }
   font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 8px;
 }
 .footer-sub { color: var(--grey-light); margin-bottom: 28px; font-size: 14.5px; }
+.footer-contact {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 10px 22px; margin-bottom: 28px;
+}
+.footer-contact-name {
+  font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--paper);
+}
+.footer-contact-item {
+  color: var(--orange); font-weight: 600; font-size: 15px;
+  border-bottom: 1px solid transparent; transition: border-color 0.15s, color 0.15s;
+}
+.footer-contact-item:hover { border-color: var(--orange); color: #fff; }
 
 /* ============================================
    SCROLL REVEAL
