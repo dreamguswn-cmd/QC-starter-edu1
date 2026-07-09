@@ -1,0 +1,217 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": {
+    "list": []
+  },
+  "description": "AI Agent 운영 모니터링 대시보드 — agent_* 메트릭 기반",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "id": 1,
+      "title": "요청 수 (agent_request_total)",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "sum(agent_request_total)",
+          "legendFormat": "전체 요청 수",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "title": "성공 수 (agent_success_total)",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "sum(agent_success_total)",
+          "legendFormat": "성공 수",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "오류 수 (agent_error_total)",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "sum(agent_error_total)",
+          "legendFormat": "오류 수",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "서비스 상태 (agent_service_status)",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "agent_service_status",
+          "legendFormat": "1=정상 / 0=비정상",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "비정상",
+                  "color": "red"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "1": {
+                  "text": "정상",
+                  "color": "green"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "평균 응답시간 (agent_response_seconds)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "targets": [
+        {
+          "expr": "rate(agent_response_seconds_sum[1m]) / rate(agent_response_seconds_count[1m])",
+          "legendFormat": "평균 응답시간(초)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "p95 응답시간 (agent_response_seconds)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "description": "최근 5분 동안 요청의 95%가 몇 초 안에 처리되었는지 확인",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(agent_response_seconds_bucket[5m])) by (le))",
+          "legendFormat": "p95 응답시간(초)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "오류율 % (agent_error_total / agent_request_total)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "targets": [
+        {
+          "expr": "100 * sum(rate(agent_error_total[5m])) / sum(rate(agent_request_total[5m]))",
+          "legendFormat": "오류율(%)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "품질평가 PASS율 (%)",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "targets": [
+        {
+          "expr": "100 * sum(quality_eval_pass_total) / (sum(quality_eval_pass_total) + sum(quality_eval_fail_total))",
+          "legendFormat": "PASS율(%)",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "tags": [
+    "ai-agent",
+    "quality",
+    "monitoring"
+  ],
+  "title": "AI Agent 운영 모니터링",
+  "uid": "ai-agent-quality-v2",
+  "version": 2
+}
