@@ -65,11 +65,12 @@
 
   <section id="projects" class="section projects-section">
     <div class="container">
-      <div class="section-heading"><p class="eyebrow">Selected Projects</p><h2>대표 AI 품질관리 프로젝트 3종</h2><p>평가 자동화, 실패 답변 개선, 성능 테스트와 운영 모니터링까지 단계적으로 확장한 프로젝트입니다.</p></div>
+      <div class="section-heading"><p class="eyebrow">Selected Projects</p><h2>대표 AI 품질관리 프로젝트 4종</h2><p>평가 자동화, 실패 답변 개선, 운영 모니터링, 멀티 에이전트 VOC 품질검증까지 단계적으로 확장한 프로젝트입니다.</p></div>
       <div class="project-grid">
         <article class="project-card orange"><img src="assets/rag-orange/page-1.webp" alt="RAG 답변 개선 프로젝트 표지"><div><span class="project-no">01</span><h3>RAG 챗봇 자동 품질 평가 및 답변 개선</h3><p>Judge Agent 평가 결과를 Correction Agent에 다시 입력해 실패 답변을 모범답안으로 자동 수정하는 피드백 루프입니다.</p><div class="mini-tags"><span>Judge Agent</span><span>Correction Agent</span><span>JSON·Markdown</span></div><a href="#rag-orange">자세히 보기 →</a></div></article>
         <article class="project-card blue"><img src="assets/rag-blue/page-1.webp" alt="RAG 자동 품질 평가 프로젝트 표지"><div><span class="project-no">02</span><h3>RAG 챗봇 자동 품질 평가 시스템</h3><p>Two-Stage Evaluation으로 루브릭 평가와 감점 평가를 분리하고 품질 리포트를 자동 생성했습니다.</p><div class="mini-tags"><span>RAG</span><span>LLM Judge</span><span>TSE</span></div><a href="#rag-blue">자세히 보기 →</a></div></article>
         <article class="project-card teal"><img src="assets/page-1.webp" alt="AI Agent 운영 모니터링 프로젝트 요약"><div><span class="project-no">03</span><h3>AI Agent 품질관리·운영 모니터링</h3><p>pytest, k6, Prometheus, Grafana를 활용해 기능·성능·장애·운영 지표를 통합 검증했습니다.</p><div class="mini-tags"><span>FastAPI</span><span>k6</span><span>Grafana</span></div><a href="#agent">자세히 보기 →</a></div></article>
+        <article class="project-card violet"><img src="assets/voc-improve-cover.svg" alt="VOC Improve 멀티 에이전트 QA 프로젝트 요약"><div><span class="project-no">04</span><h3>VOC Improve 멀티 에이전트 QA</h3><p>6개 AI Agent와 독립 LLM Judge로 VOC 분석·개선·품질평가·배포 판정을 자동화했습니다.</p><div class="mini-tags"><span>Multi-Agent</span><span>LLM Judge</span><span>Release Gate</span></div><a href="#voc-improve">자세히 보기 →</a></div></article>
       </div>
     </div>
   </section>
@@ -92,6 +93,62 @@
     <div class="container case-grid"><div><p class="eyebrow">Project 03 · Operations</p><h2>AI Agent 품질관리·<br>운영 모니터링 플랫폼</h2><p>기능 테스트 25건, 품질 파이프라인 7건, k6 성능 테스트와 Grafana 실시간 모니터링을 통합했습니다. VUS 10,000 오설정으로 발생한 오류율 100% 장애를 분석하고 VUS 3으로 수정해 오류율 0.00%, p95 2.3ms를 확인했습니다.</p><div class="before-after"><div><small>기능 테스트</small><strong>25/25</strong><span>전체 PASS</span></div><div class="change">·</div><div><small>성능 개선</small><strong>0.00%</strong><span>p95 2.3ms</span></div></div><div class="button-row"><a class="button mint-button" href="portfolio.pdf" target="_blank">최종 PDF 보기</a></div></div><img src="assets/page-7.webp" alt="k6 성능 테스트 개선 전후 비교"></div>
   </section>
 
+
+  <section id="voc-improve" class="section voc-section">
+    <div class="container">
+      <div class="voc-intro">
+        <div>
+          <p class="eyebrow">Project 04 · Multi-Agent QA</p>
+          <h2>VOC Improve AI Agent<br>품질검증 플랫폼</h2>
+          <p>Interpreter부터 Improver까지 6개 Agent가 고객 VOC를 분석하고 개선안을 생성합니다. 파이프라인 외부의 Anthropic Judge가 결과를 독립 평가하며, 테스트 결과와 결함 상태를 기반으로 Release Gate를 판정했습니다.</p>
+          <div class="button-row">
+            <a class="button primary" href="downloads/VOC_Presentation_v1.8.pptx">발표자료 다운로드</a>
+            <a class="button secondary" href="downloads/VOC_Quality_Report_Team4.docx">품질보고서 다운로드</a>
+            <a class="button secondary" href="downloads/VOC_Improve_Source_v1.8.zip">프로젝트 소스</a>
+          </div>
+        </div>
+        <div class="voc-score-panel" aria-label="VOC Improve 핵심 성과">
+          <div><strong>70</strong><span>총 테스트</span></div>
+          <div><strong>65</strong><span>PASS</span></div>
+          <div><strong>92.9%</strong><span>성공률</span></div>
+          <div><strong>86.4</strong><span>평균 점수</span></div>
+          <div><strong>0</strong><span>Critical</span></div>
+        </div>
+      </div>
+
+      <div class="voc-pipeline" aria-label="6개 Agent 처리 흐름">
+        <div><small>01</small><strong>Interpreter</strong><span>의도·키워드 해석</span></div>
+        <b>→</b><div><small>02</small><strong>Retriever</strong><span>VOC 근거 검색</span></div>
+        <b>→</b><div><small>03</small><strong>Summarizer</strong><span>맥락·원인 요약</span></div>
+        <b>→</b><div><small>04</small><strong>Evaluator</strong><span>품질 점수 산정</span></div>
+        <b>→</b><div><small>05</small><strong>Critic</strong><span>위험·누락 탐지</span></div>
+        <b>→</b><div><small>06</small><strong>Improver</strong><span>개선안 생성</span></div>
+      </div>
+
+      <div class="voc-detail-grid">
+        <article>
+          <span class="voc-label">QA 설계</span>
+          <h3>6개 유형 70건 자동 검증</h3>
+          <p>정상 VOC, 복합 불만, 오타·비문, 모호한 질문, 데이터 없음, 장애 상황을 포함해 실제 운영에서 발생할 수 있는 조건을 테스트했습니다.</p>
+        </article>
+        <article>
+          <span class="voc-label">독립 평가</span>
+          <h3>생성자와 평가자 분리</h3>
+          <p>OpenAI 기반 생성 결과를 파이프라인 외부의 Anthropic Judge가 독립 평가하도록 설계해 내부 평가 편향을 줄였습니다.</p>
+        </article>
+        <article>
+          <span class="voc-label">결함 관리</span>
+          <h3>Medium 3건 · High 2건</h3>
+          <p>모호 질문, 신규 VOC 유형, Retriever 중단, CSV 누락 결함의 원인과 개선 방향을 정리하고 재검증 계획을 수립했습니다.</p>
+        </article>
+        <article>
+          <span class="voc-label">Release Gate</span>
+          <h3>조건부 배포 가능</h3>
+          <p>평균 86.4점, 성공률 92.9%, Critical 0건을 근거로 조건부 배포를 권고하고 장애 응답 보강 후 90점 달성을 목표로 설정했습니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <section id="more-projects" class="section more-projects-section">
     <div class="container">
@@ -139,7 +196,7 @@
 
   <section id="downloads" class="section downloads-section">
     <div class="container"><div class="section-heading"><p class="eyebrow">Downloads</p><h2>포트폴리오 자료 다운로드</h2><p>GitHub Pages에 함께 업로드하면 각 버튼으로 PDF와 DOCX를 바로 열거나 내려받을 수 있습니다.</p></div>
-      <div class="download-grid"><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank"><strong>RAG 답변 개선 포트폴리오</strong><span>PDF · 13페이지</span></a><a href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank"><strong>RAG 품질평가 포트폴리오</strong><span>PDF · 11페이지</span></a><a href="portfolio.pdf" target="_blank"><strong>AI Agent 운영 모니터링</strong><span>PDF · 9페이지</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx"><strong>RAG 답변 개선 원본</strong><span>DOCX</span></a><a href="downloads/기존_AI_QA_Python_포트폴리오.pdf" target="_blank"><strong>기존 AI QA · Python 포트폴리오</strong><span>PDF · 기존 프로젝트 전체</span></a><a href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank"><strong>이력서</strong><span>PDF</span></a><a href="downloads/Yoo_Hyunju_Resume.docx"><strong>이력서 원본</strong><span>DOCX</span></a></div>
+      <div class="download-grid"><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank"><strong>RAG 답변 개선 포트폴리오</strong><span>PDF · 13페이지</span></a><a href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank"><strong>RAG 품질평가 포트폴리오</strong><span>PDF · 11페이지</span></a><a href="portfolio.pdf" target="_blank"><strong>AI Agent 운영 모니터링</strong><span>PDF · 9페이지</span></a><a href="downloads/VOC_Presentation_v1.8.pptx"><strong>VOC Improve 발표자료</strong><span>PPTX · 실시간 시뮬레이션</span></a><a href="downloads/VOC_Quality_Report_Team4.docx"><strong>VOC Improve 종합 품질보고서</strong><span>DOCX · 테스트·결함·배포 판정</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx"><strong>RAG 답변 개선 원본</strong><span>DOCX</span></a><a href="downloads/기존_AI_QA_Python_포트폴리오.pdf" target="_blank"><strong>기존 AI QA · Python 포트폴리오</strong><span>PDF · 기존 프로젝트 전체</span></a><a href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank"><strong>이력서</strong><span>PDF</span></a><a href="downloads/Yoo_Hyunju_Resume.docx"><strong>이력서 원본</strong><span>DOCX</span></a></div>
     </div>
   </section>
 </main>
@@ -147,7 +204,7 @@
   <div class="container footer-wrap">
     <div>
       <strong>AI Software QA Portfolio</strong>
-      <p>RAG 품질평가 · 답변 개선 · Agent 운영 모니터링</p>
+      <p>RAG 품질평가 · 답변 개선 · Agent 운영 모니터링 · 멀티 에이전트 VOC QA</p>
       <div class="footer-contact">
         <a href="mailto:aa01057559209@gmail.com">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
