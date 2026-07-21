@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Software QA 포트폴리오 - RAG 챗봇 자동 품질 평가·답변 개선과 AI Agent 운영 모니터링 프로젝트">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://dreamguswn-cmd.github.io/QC-starter-edu1/portfolio-site/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="AI Software QA Portfolio">
+  <meta property="og:title" content="AI Software QA Portfolio | 유현주">
+  <meta property="og:description" content="RAG 품질평가, LLM Judge, 답변 개선, 테스트 자동화와 운영 모니터링 프로젝트를 소개합니다.">
+  <meta property="og:url" content="https://dreamguswn-cmd.github.io/QC-starter-edu1/portfolio-site/">
+  <meta property="og:image" content="https://dreamguswn-cmd.github.io/QC-starter-edu1/portfolio-site/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI Software QA Portfolio 미리보기">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Software QA Portfolio | 유현주">
+  <meta name="twitter:description" content="RAG 품질평가와 AI Agent 운영 모니터링을 연결한 실무형 QA 포트폴리오">
+  <meta name="twitter:image" content="https://dreamguswn-cmd.github.io/QC-starter-edu1/portfolio-site/assets/og-image.png">
+  <title>AI Software QA Portfolio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 바로가기</a>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="#top"><span class="brand-mark">QA</span><span>AI Software QA Portfolio</span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-nav">메뉴</button>
+    <nav id="main-nav" class="nav" aria-label="주요 메뉴">
+      <a href="#about">소개</a><a href="#projects">대표 프로젝트</a><a href="#more-projects">추가 프로젝트</a><a href="#skills">기술</a><a href="#downloads">자료</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section id="top" class="hero portfolio-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">AI SOFTWARE QA PORTFOLIO</p>
+        <h1>AI 서비스의 품질을<br><span>평가하고, 개선하고, 운영까지 관측합니다</span></h1>
+        <p class="hero-lead">RAG 챗봇 답변 자동 평가·수정과 AI Agent 기능·성능·운영 모니터링을 연결한 실무형 QA 포트폴리오입니다.</p>
+        <div class="hero-actions"><a class="button primary" href="#projects">프로젝트 보기</a><a class="button secondary" href="#downloads">자료 다운로드</a><a class="button secondary" href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank">이력서 보기</a></div>
+        <div class="hero-tags"><span>RAG</span><span>LLM-as-a-Judge</span><span>Correction Agent</span><span>pytest</span><span>k6</span><span>Grafana</span></div>
+      </div>
+      <div class="hero-visual cover-stack">
+        <img class="cover-main" src="assets/rag-orange/page-1.webp" alt="RAG 챗봇 자동 품질 평가 및 답변 개선 포트폴리오 표지">
+        <img class="cover-back" src="assets/page-1.webp" alt="AI Agent 품질관리 운영 모니터링 프로젝트 요약">
+      </div>
+    </div>
+  </section>
+
+
+  <section id="about" class="section about-section">
+    <div class="container about-layout">
+      <div>
+        <p class="eyebrow">About Me</p>
+        <h2>결과를 검증하고,<br>문제를 개선하는 AI QA 실무자</h2>
+        <p class="about-lead">AI 서비스가 실제로 잘 작동하는지 평가 기준부터 설계하고, 실패 원인을 찾아 개선까지 연결합니다. RAG 챗봇 자동 평가·답변 수정 파이프라인과 AI Agent 운영 모니터링을 직접 구현하며, 단순 기능 확인을 넘어 품질 루프 전체를 설계하는 QA 실무자입니다.</p>
+        <div class="contact-links">
+          <a href="mailto:aa01057559209@gmail.com" class="contact-btn" aria-label="이메일 보내기">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m2 7 10 7 10-7"/>
+            </svg>
+            <span>aa01057559209@gmail.com</span>
+          </a>
+          <a href="https://github.com/dreamguswn-cmd" target="_blank" rel="noopener noreferrer" class="contact-btn" aria-label="GitHub 프로필 새 창에서 열기">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+      <div class="profile-panel">
+        <div><span>FOCUS</span><strong>AI QA · Python Automation</strong></div>
+        <div><span>EXPERIENCE</span><strong>RAG · LLM Judge · Agent Monitoring</strong></div>
+        <div><span>COLLABORATION</span><strong>4인 팀 프로젝트 발표·시연</strong></div>
+        <div><span>STATUS</span><strong>AI Software QA 취업 준비</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <div class="section-heading"><p class="eyebrow">Selected Projects</p><h2>대표 AI 품질관리 프로젝트 3종</h2><p>평가 자동화, 실패 답변 개선, 성능 테스트와 운영 모니터링까지 단계적으로 확장한 프로젝트입니다.</p></div>
+      <div class="project-grid">
+        <article class="project-card orange"><img src="assets/rag-orange/page-1.webp" alt="RAG 답변 개선 프로젝트 표지"><div><span class="project-no">01</span><h3>RAG 챗봇 자동 품질 평가 및 답변 개선</h3><p>Judge Agent 평가 결과를 Correction Agent에 다시 입력해 실패 답변을 모범답안으로 자동 수정하는 피드백 루프입니다.</p><div class="mini-tags"><span>Judge Agent</span><span>Correction Agent</span><span>JSON·Markdown</span></div><a href="#rag-orange">자세히 보기 →</a></div></article>
+        <article class="project-card blue"><img src="assets/rag-blue/page-1.webp" alt="RAG 자동 품질 평가 프로젝트 표지"><div><span class="project-no">02</span><h3>RAG 챗봇 자동 품질 평가 시스템</h3><p>Two-Stage Evaluation으로 루브릭 평가와 감점 평가를 분리하고 품질 리포트를 자동 생성했습니다.</p><div class="mini-tags"><span>RAG</span><span>LLM Judge</span><span>TSE</span></div><a href="#rag-blue">자세히 보기 →</a></div></article>
+        <article class="project-card teal"><img src="assets/page-1.webp" alt="AI Agent 운영 모니터링 프로젝트 요약"><div><span class="project-no">03</span><h3>AI Agent 품질관리·운영 모니터링</h3><p>pytest, k6, Prometheus, Grafana를 활용해 기능·성능·장애·운영 지표를 통합 검증했습니다.</p><div class="mini-tags"><span>FastAPI</span><span>k6</span><span>Grafana</span></div><a href="#agent">자세히 보기 →</a></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="rag-orange" class="section rag-feature orange-theme">
+    <div class="container">
+      <div class="section-heading"><p class="eyebrow">Project 01 · Feedback Loop</p><h2>RAG 챗봇 자동 품질 평가 및<br>답변 개선 시스템</h2><p>평가에서 끝나지 않고, 낮은 점수의 답변을 자동으로 수정해 다시 활용 가능한 모범답안으로 만드는 QA 자동화 시스템입니다.</p></div>
+      <div class="metrics-grid light-metrics"><article class="metric"><strong>5건</strong><span>자동 테스트</span></article><article class="metric"><strong>4.20</strong><span>평균 점수 / 5.00</span></article><article class="metric"><strong>9단계</strong><span>검색→평가→수정→보고</span></article><article class="metric"><strong>100%</strong><span>평가·리포트 자동화</span></article></div>
+      <div class="split-showcase"><img src="assets/rag-orange/page-4.webp" alt="RAG 챗봇 답변 개선 시스템 아키텍처"><div><h3>Evaluation → Correction → Reporting</h3><p>ChromaDB 검색과 GPT 답변 생성 후 Judge Agent가 Two-Stage 방식으로 평가합니다. 평가 JSON은 Correction Agent의 입력으로 재사용되어 수정된 모범답안을 생성하고, 최종 결과는 Markdown 보고서로 정리됩니다.</p><ul><li>이해도·정확성·관련성·표현성 루브릭 평가</li><li>출처 미기재·근거 미사용 등 감점 규칙 적용</li><li>실패 답변과 감점 원인을 분석해 모범답안 자동 생성</li></ul></div></div>
+      <div class="preview-grid portrait"><a class="lightbox-link" href="assets/rag-orange/page-5.webp"><img src="assets/rag-orange/page-5.webp" alt="담당 역할과 기술 스택"><span>담당 역할·기술 스택</span></a><a class="lightbox-link" href="assets/rag-orange/page-7.webp"><img src="assets/rag-orange/page-7.webp" alt="RAG QA 주요 기능"><span>주요 기능</span></a><a class="lightbox-link" href="assets/rag-orange/page-8.webp"><img src="assets/rag-orange/page-8.webp" alt="Two-Stage Evaluation과 Correction Agent"><span>평가 방식·Correction Agent</span></a><a class="lightbox-link" href="assets/rag-orange/page-9.webp"><img src="assets/rag-orange/page-9.webp" alt="RAG QA 테스트 결과"><span>테스트 결과</span></a></div>
+      <div class="center-action"><a class="button orange-button" href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank">PDF 보기</a><a class="button secondary" href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx">DOCX 다운로드</a></div>
+    </div>
+  </section>
+
+  <section id="rag-blue" class="section rag-feature blue-theme">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Project 02 · Evaluation</p>
+        <h2>Two-Stage Evaluation 기반<br>RAG 챗봇 자동 품질 평가</h2>
+        <p>RAG 챗봇의 검색·생성 결과를 사람마다 다른 감각으로 평가하지 않고, 명확한 기준과 감점 규칙으로 자동 검증하는 품질평가 시스템입니다.</p>
+      </div>
+      <div class="project02-overview">
+        <article><span>문제 정의</span><h3>수작업 평가의 주관성과 반복 비용</h3><p>평가자마다 점수가 흔들리고 테스트가 늘어날수록 검토 시간이 커지는 문제를 해결하고자 했습니다.</p></article>
+        <article><span>핵심 설계</span><h3>루브릭과 감점을 분리</h3><p>이해도·정확성·관련성·표현성은 루브릭으로 평가하고, 출처 미기재·근거 미사용은 별도 감점했습니다.</p></article>
+        <article><span>자동화 결과</span><h3>진단 가능한 품질 리포트</h3><p>점수뿐 아니라 감점 이유와 개선 코멘트를 Markdown 보고서로 자동 생성해 결과 추적성을 높였습니다.</p></article>
+      </div>
+      <div class="split-showcase reverse project02-main">
+        <a class="lightbox-link image-frame" href="assets/rag-blue/page-8.webp" data-caption="Project 02 테스트 결과와 점수 인플레이션 보정 사례">
+          <img src="assets/rag-blue/page-8.webp" alt="RAG 자동 품질 평가 테스트 결과">
+        </a>
+        <div>
+          <h3>제가 담당한 역할</h3>
+          <ul class="role-list">
+            <li>Judge Agent와 Two-Stage Evaluation 평가 흐름 설계</li>
+            <li>이해도·정확성·관련성·표현성 루브릭 기준 정의</li>
+            <li>출처 미기재·정의만 제공·근거 미사용 감점 규칙 구현</li>
+            <li>점수 인플레이션 사례 분석 및 루브릭 기준 보정</li>
+            <li>항목별 점수·진단·개선 코멘트가 포함된 Markdown 리포트 자동화</li>
+          </ul>
+          <div class="stat-row"><div><strong>5건</strong><span>자동 테스트</span></div><div><strong>4.30</strong><span>평균 점수 / 5.00</span></div><div><strong>4개</strong><span>루브릭 항목</span></div></div>
+        </div>
+      </div>
+      <div class="project02-process">
+        <div><b>01</b><strong>RAG 검색</strong><span>ChromaDB에서 유사 문서 검색</span></div>
+        <div><b>02</b><strong>답변 생성</strong><span>검색 문서를 근거로 GPT 답변 생성</span></div>
+        <div><b>03</b><strong>Judge 평가</strong><span>4개 루브릭 항목 자동 채점</span></div>
+        <div><b>04</b><strong>감점 적용</strong><span>명시적 규칙 위반 자동 감점</span></div>
+        <div><b>05</b><strong>리포트</strong><span>점수·진단·개선 의견 자동 문서화</span></div>
+      </div>
+      <div class="preview-grid project02-gallery">
+        <a class="lightbox-link" href="assets/rag-blue/page-4.webp" data-caption="시스템 아키텍처"><img src="assets/rag-blue/page-4.webp" alt="RAG 평가 시스템 아키텍처"><span>시스템 아키텍처</span></a>
+        <a class="lightbox-link" href="assets/rag-blue/page-6.webp" data-caption="평가 프로세스"><img src="assets/rag-blue/page-6.webp" alt="RAG 평가 프로세스"><span>평가 프로세스</span></a>
+        <a class="lightbox-link" href="assets/rag-blue/page-7.webp" data-caption="Two-Stage Evaluation 기준"><img src="assets/rag-blue/page-7.webp" alt="Two-Stage Evaluation 평가 기준"><span>평가 기준</span></a>
+        <a class="lightbox-link" href="assets/rag-blue/page-10.webp" data-caption="프로젝트 성과"><img src="assets/rag-blue/page-10.webp" alt="RAG 평가 프로젝트 성과"><span>프로젝트 성과</span></a>
+      </div>
+      <div class="center-action"><a class="button primary" href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank">PDF 보기</a><a class="button secondary" href="downloads/RAG_챗봇_품질평가_포트폴리오.docx">DOCX 다운로드</a></div>
+    </div>
+  </section>
+
+  <section id="agent" class="section dark-section">
+    <div class="container case-grid"><div><p class="eyebrow">Project 03 · Operations</p><h2>AI Agent 품질관리·<br>운영 모니터링 플랫폼</h2><p>기능 테스트 25건, 품질 파이프라인 7건, k6 성능 테스트와 Grafana 실시간 모니터링을 통합했습니다. VUS 10,000 오설정으로 발생한 오류율 100% 장애를 분석하고 VUS 3으로 수정해 오류율 0.00%, p95 2.3ms를 확인했습니다.</p><div class="before-after"><div><small>기능 테스트</small><strong>25/25</strong><span>전체 PASS</span></div><div class="change">·</div><div><small>성능 개선</small><strong>0.00%</strong><span>p95 2.3ms</span></div></div><div class="button-row"><a class="button mint-button" href="portfolio.pdf" target="_blank">최종 PDF 보기</a></div></div><img src="assets/page-7.webp" alt="k6 성능 테스트 개선 전후 비교"></div>
+  </section>
+
+
+  <section id="more-projects" class="section more-projects-section">
+    <div class="container">
+      <div class="section-heading"><p class="eyebrow">More Projects</p><h2>기존 프로젝트와 실습 경험</h2><p>카드를 클릭하면 문제, 해결 과정, 결과를 자세히 볼 수 있습니다.</p></div>
+      <div class="more-grid">
+        <details class="more-card" open>
+          <summary><img src="assets/final_pipeline_dashboard.png" alt="Rule 기반과 API 기반 챗봇 비교 대시보드"><div><span>TEAM FINAL · PROJECT 07</span><h3>Rule 기반 vs API 기반 챗봇 동시 비교 QA</h3><p>같은 테스트 케이스로 두 챗봇을 동시에 평가하고, 검증기 오탐을 개선해 합격률을 14.3%에서 100%로 높였습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>문제</h4><p>비싼 API가 꼭 필요한지, Rule 기반으로 충분한지 객관적인 비교 근거가 필요했습니다. 발표 전날에는 검증기 과잉 설계로 7건 중 6건이 FAIL 처리되는 문제도 발견했습니다.</p><h4>해결 과정</h4><ul><li>같은 루프 안에서 Rule/API 답변을 동시에 생성·검증·평가</li><li>완전일치 중심 검증기를 케이스별 기대 키워드 검사로 재설계</li><li>Streamlit·Altair로 모델별 점수, 장단점, 상세 비교 대시보드 구현</li><li>발표자와 조작자를 분리한 2인 라이브 시연 큐시트 설계</li></ul><h4>결과</h4><div class="result-chips"><span>Rule 7/7 PASS</span><span>API 7/7 PASS</span><span>평균 4.82</span><span>14.3% → 100%</span></div></div>
+        </details>
+        <details class="more-card">
+          <summary><div class="visual-box score-visual">0.9812<small>BERTScore</small></div><div><span>PROJECT 02</span><h3>BERTScore 기반 AI 답변 품질 평가</h3><p>문자열 일치가 아닌 의미적 유사도로 AI 답변을 자동 채점하고 모델별 결과를 비교했습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>핵심 내용</h4><ul><li>Golden Answer와 모델 답변 사이의 의미적 유사도 계산</li><li>Model A/B 케이스별 Winner 자동 판정</li><li>CSV 저장과 pandas 기반 평균 성능 분석</li></ul><h4>배운 점</h4><p>자동 평가지표의 신뢰도는 Golden Answer 설계에 크게 좌우되며, 의미 기반 지표도 사람 검토와 함께 사용해야 한다는 점을 확인했습니다.</p></div>
+        </details>
+        <details class="more-card">
+          <summary><div class="visual-box regression-visual">0.797<small>평균 F1</small></div><div><span>PROJECT 03</span><h3>기준 모델 기반 BERTScore 회귀 평가</h3><p>새 모델이 기존 모델의 응답 특성을 유지하는지 배포 전에 자동 점검했습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>평가 기준</h4><ul><li>F1 0.95 이상: 안정적 유지</li><li>F1 0.85 이상: 검토 필요</li><li>F1 0.85 미만: 성능 저하 의심</li></ul><h4>결과</h4><p>10개 케이스 평균 F1은 0.797이었으며, 표현 차이만으로 의미가 비슷한 답변도 낮게 평가될 수 있다는 BERTScore의 한계를 발견했습니다.</p></div>
+        </details>
+        <details class="more-card">
+          <summary><img src="assets/confusion_matrix.png" alt="Routing Classifier 혼동행렬"><div><span>PROJECT 04</span><h3>Routing Classifier 자동 분류 품질평가</h3><p>질문을 스포츠·타이머·주문·일반대화 Agent로 연결하는 분류기의 정확도와 오분류 원인을 분석했습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>해결 과정</h4><ul><li>TF-IDF 문자 2~5-gram + Logistic Regression 분류기 구현</li><li>Accuracy, Precision, Recall, F1과 혼동행렬 분석</li><li>오타·복합 의도·짧은 문장 등 Edge Case 8건 별도 테스트</li></ul><h4>결과</h4><div class="result-chips"><span>정상 93.75%</span><span>Edge 87.5%</span><span>4개 Agent</span></div><p>“결제 방법 알려줘”가 sports_agent로 오분류된 사례를 통해 데이터 다양성과 문맥 정보의 중요성을 확인했습니다.</p></div>
+        </details>
+        <details class="more-card">
+          <summary><img src="assets/edu_chatbot_qa_dashboard.png" alt="교육과정 안내 챗봇 QA 대시보드"><div><span>PROJECT 05</span><h3>교육과정 안내 챗봇 QA 자동화 파이프라인</h3><p>Rule Validator와 Judge Agent를 결합하고 테스트·리포트·대시보드·모니터링을 연결했습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>구성</h4><ul><li>FastAPI: /health, /evaluate, /pipeline/run, /metrics</li><li>Rule Validator 1차 검증 + Judge Agent 2차 평가</li><li>API 실패 시 규칙 기반 폴백 평가</li><li>테스트 결과 CSV·Markdown 리포트와 Streamlit 대시보드</li></ul><h4>QA 포인트</h4><p>규칙과 AI 평가가 서로 다른 판단을 내리는 사례를 비교해 검증기 자체도 테스트 대상이라는 점을 확인했습니다.</p></div>
+        </details>
+        <details class="more-card">
+          <summary><div class="visual-box web-visual">WEB<small>Mobile First</small></div><div><span>PROJECT 06</span><h3>모바일 청첩장 웹페이지</h3><p>모바일 우선 반응형 UI와 사진 슬라이드, 전화·위치·계좌 복사 기능을 구현했습니다.</p><b>클릭해서 자세히 보기</b></div></summary>
+          <div class="detail-body"><h4>주요 기능</h4><div class="result-chips"><span>반응형 UI</span><span>사진 슬라이드</span><span>스크롤 애니메이션</span><span>전화 연결</span><span>위치 안내</span><span>계좌 복사</span><span>방명록</span></div><p>다양한 화면 크기에서 레이아웃과 터치 기능을 테스트하며 모바일 UX 중심의 웹 구현 경험을 쌓았습니다.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <div class="section-heading"><p class="eyebrow">Skills</p><h2>사용 기술과 QA 역량</h2></div>
+      <div class="skills-grid">
+        <article><h3>AI · LLM</h3><p>RAG, LangChain, OpenAI API, LLM-as-a-Judge, Correction Agent, Prompt Engineering, ChromaDB, BERTScore</p></article>
+        <article><h3>QA · Testing</h3><p>테스트 케이스 설계, pytest, 회귀 테스트, Negative/Edge Case, k6 부하 테스트, 결함 분석, 재테스트</p></article>
+        <article><h3>Monitoring</h3><p>FastAPI, Prometheus, Grafana, Health Check, 응답시간·오류율·처리량 관측, Streamlit 대시보드</p></article>
+        <article><h3>Development</h3><p>Python, pandas, HTML, CSS, JavaScript, Docker Compose, GitHub Pages, JSON, CSV, Markdown 자동 보고서</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads" class="section downloads-section">
+    <div class="container"><div class="section-heading"><p class="eyebrow">Downloads</p><h2>포트폴리오 자료 다운로드</h2><p>GitHub Pages에 함께 업로드하면 각 버튼으로 PDF와 DOCX를 바로 열거나 내려받을 수 있습니다.</p></div>
+      <div class="download-grid"><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank"><strong>RAG 답변 개선 포트폴리오</strong><span>PDF · 13페이지</span></a><a href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank"><strong>RAG 품질평가 포트폴리오</strong><span>PDF · 11페이지</span></a><a href="portfolio.pdf" target="_blank"><strong>AI Agent 운영 모니터링</strong><span>PDF · 9페이지</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx"><strong>RAG 답변 개선 원본</strong><span>DOCX</span></a><a href="downloads/기존_AI_QA_Python_포트폴리오.pdf" target="_blank"><strong>기존 AI QA · Python 포트폴리오</strong><span>PDF · 기존 프로젝트 전체</span></a><a href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank"><strong>이력서</strong><span>PDF</span></a><a href="downloads/Yoo_Hyunju_Resume.docx"><strong>이력서 원본</strong><span>DOCX</span></a></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container footer-wrap">
+    <div><strong>AI Software QA Portfolio</strong><p>RAG 품질평가 · 답변 개선 · Agent 운영 모니터링</p>
+      <div class="footer-contact">
+        <a href="mailto:aa01057559209@gmail.com" aria-label="이메일 보내기">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 7 10-7"/>
+          </svg>
+          <span>aa01057559209@gmail.com</span>
+        </a>
+        <a href="https://github.com/dreamguswn-cmd" target="_blank" rel="noopener noreferrer" aria-label="GitHub 프로필 새 창에서 열기">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div><a href="#top">맨 위로 ↑</a>
+  </div>
+</footer>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 확대 보기" hidden>
+  <button class="lightbox-close" type="button" aria-label="닫기">×</button>
+  <button class="lightbox-prev" type="button" aria-label="이전 이미지">‹</button>
+  <figure><img src="" alt=""><figcaption></figcaption></figure>
+  <button class="lightbox-next" type="button" aria-label="다음 이미지">›</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
