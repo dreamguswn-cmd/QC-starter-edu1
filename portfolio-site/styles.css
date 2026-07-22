@@ -42,3 +42,6 @@
 .quality-downloads{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.quality-downloads a{display:flex;justify-content:space-between;gap:16px;padding:18px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 22px rgba(13,27,61,.05)}.quality-downloads strong{color:var(--navy)}.quality-downloads span{font-size:12px;color:#ef5b5b;font-weight:900}
 @media(max-width:1000px){.quality-flow{grid-template-columns:repeat(3,1fr)}.quality-flow>b{display:none}.quality-detail-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.ai-quality-intro,.lab-gallery{grid-template-columns:1fr}.quality-flow,.quality-detail-grid,.quality-downloads{grid-template-columns:1fr}.ai-score-panel{grid-template-columns:1fr}.lab-gallery a{grid-template-rows:260px auto}}
+
+/* Project 06 · Mobile Invitation */
+.project-card.rose .project-no{color:#9b6d73}.project-card.rose img{object-fit:cover;object-position:center 35%;background:#f8f1ee}.project-card.rose a{color:#8b5962}
