@@ -20,7 +20,38 @@
   </div>
 </header>
 <main id="main">
-  <section id="top" class="hero portfolio-hero">
+  <section id="top" class="hero portfolio-hero profile-hero">
+    <div class="container profile-hero-grid">
+      <div class="profile-photo-card">
+        <img src="assets/profile-photo.jpg" alt="AI 소프트웨어 QA 실무 과정을 수료 중인 유현주">
+        <div class="profile-name">
+          <strong>유현주</strong>
+          <span>AI Software QA · Monitoring</span>
+        </div>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">AI SOFTWARE QA PORTFOLIO</p>
+        <h1>품질을 확인하고<br><span>서비스의 안정적인 운영을 지원합니다</span></h1>
+        <p class="hero-lead">안녕하세요. 소프트웨어의 기능과 품질을 꼼꼼하게 검증하고, IT 인프라의 상태를 지속적으로 관찰하며 문제를 빠르게 발견하는 QA 테스터를 준비하고 있는 <strong>유현주</strong>입니다.</p>
+        <div class="training-card">
+          <p class="training-label">현재 수료 중인 과정</p>
+          <h2>AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정</h2>
+          <p>대우능력개발원 · 2026.05.27 ~ 2026.08.07</p>
+        </div>
+        <div class="career-focus" aria-label="희망 직무">
+          <div><small>01</small><strong>QA 테스터</strong><span>기능·품질 검증</span></div>
+          <div><small>02</small><strong>품질관리</strong><span>결함 분석·개선</span></div>
+          <div><small>03</small><strong>IT 운영 지원</strong><span>인프라 운영·장애 대응</span></div>
+          <div><small>04</small><strong>모니터링</strong><span>서비스 상태 관찰</span></div>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">프로젝트 보기</a>
+          <a class="button secondary" href="#about">교육 목표 보기</a>
+          <a class="button secondary" href="#downloads">자료 다운로드</a>
+        </div>
+      </div>
+    </div>
+    <div class="legacy-hero-content" aria-hidden="true">
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">AI SOFTWARE QA PORTFOLIO</p>
@@ -33,6 +64,7 @@
         <img class="cover-main" src="assets/rag-orange/page-1.webp" alt="RAG 챗봇 자동 품질 평가 및 답변 개선 포트폴리오 표지">
         <img class="cover-back" src="assets/page-1.webp" alt="AI Agent 품질관리 운영 모니터링 프로젝트 요약">
       </div>
+    </div>
     </div>
   </section>
 
@@ -65,7 +97,7 @@
 
   <section id="projects" class="section projects-section">
     <div class="container">
-      <div class="section-heading"><p class="eyebrow">Selected Projects</p><h2>대표 AI 품질관리 프로젝트 6종</h2><p>평가 자동화, 실패 답변 개선, 운영 모니터링, 멀티 에이전트 VOC 품질검증까지 단계적으로 확장한 프로젝트입니다.</p></div>
+      <div class="section-heading"><p class="eyebrow">Selected Projects</p><h2>대표 AI 품질관리·클라우드 운영 프로젝트 7종</h2><p>평가 자동화, 실패 답변 개선, 운영 모니터링, 멀티 에이전트 VOC 품질검증과 AWS 장애복구까지 단계적으로 확장한 프로젝트입니다.</p></div>
       <div class="project-grid">
         <article class="project-card orange"><img src="assets/rag-orange/page-1.webp" alt="RAG 답변 개선 프로젝트 표지"><div><span class="project-no">01</span><h3>RAG 챗봇 자동 품질 평가 및 답변 개선</h3><p>Judge Agent 평가 결과를 Correction Agent에 다시 입력해 실패 답변을 모범답안으로 자동 수정하는 피드백 루프입니다.</p><div class="mini-tags"><span>Judge Agent</span><span>Correction Agent</span><span>JSON·Markdown</span></div><a href="#rag-orange">자세히 보기 →</a></div></article>
         <article class="project-card blue"><img src="assets/rag-blue/page-1.webp" alt="RAG 자동 품질 평가 프로젝트 표지"><div><span class="project-no">02</span><h3>RAG 챗봇 자동 품질 평가 시스템</h3><p>Two-Stage Evaluation으로 루브릭 평가와 감점 평가를 분리하고 품질 리포트를 자동 생성했습니다.</p><div class="mini-tags"><span>RAG</span><span>LLM Judge</span><span>TSE</span></div><a href="#rag-blue">자세히 보기 →</a></div></article>
@@ -73,6 +105,7 @@
         <article class="project-card violet"><img src="assets/voc-improve-cover.svg" alt="VOC Improve 멀티 에이전트 QA 프로젝트 요약"><div><span class="project-no">04</span><h3>VOC Improve 멀티 에이전트 QA</h3><p>6개 AI Agent와 독립 LLM Judge로 VOC 분석·개선·품질평가·배포 판정을 자동화했습니다.</p><div class="mini-tags"><span>Multi-Agent</span><span>LLM Judge</span><span>Release Gate</span></div><a href="#voc-improve">자세히 보기 →</a></div></article>
         <article class="project-card coral"><img src="assets/ai-quality-streamlit.png" alt="AI 서비스 품질평가 Streamlit 실습 화면"><div><span class="project-no">05</span><h3>Fake Judge 기반 AI 서비스 품질평가 실습</h3><p>고객 VOC와 AI 개선안을 5개 품질항목으로 자동 평가하고, PASS·FAIL 판정과 보고서 생성을 Jupyter·Streamlit으로 구현했습니다.</p><div class="mini-tags"><span>Fake Judge</span><span>Jupyter</span><span>Streamlit</span></div><a href="#ai-quality-lab">자세히 보기 →</a></div></article>
         <article class="project-card rose"><img src="assets/invitation/couple-wedding.png" alt="모바일 청첩장 프로젝트 대표 화면"><div><span class="project-no">06</span><h3>모바일 청첩장 웹페이지</h3><p>웨딩 사진과 초대 문구를 활용해 모바일 우선 반응형 청첩장, 갤러리, 연락·계좌 복사 기능을 구현했습니다.</p><div class="mini-tags"><span>Mobile First</span><span>Responsive</span><span>JavaScript</span></div><a href="invitation.html" target="_blank">청첩장 보기 →</a></div></article>
+        <article class="project-card aws"><img src="assets/aws-project/07_웹서버_정상화면.png" alt="AWS EC2에서 정상 실행된 VOC Improve 웹 서비스"><div><span class="project-no">07</span><h3>AWS 웹 서버 구축·장애복구</h3><p>EC2와 Apache 웹 서버를 구축하고 IAM·보안 그룹·S3를 점검한 뒤, 장애 재현부터 복구와 자원 정리까지 검증했습니다.</p><div class="mini-tags"><span>AWS EC2</span><span>Apache</span><span>S3·CloudTrail</span></div><a href="#aws-operations">자세히 보기 →</a></div></article>
       </div>
     </div>
   </section>
@@ -202,6 +235,52 @@
     </div>
   </section>
 
+  <section id="aws-operations" class="section aws-operations-section">
+    <div class="container">
+      <div class="aws-intro">
+        <div>
+          <p class="eyebrow">Project 07 · AWS Cloud Operations</p>
+          <h2>웹 서버 구축부터<br>장애복구·정리까지</h2>
+          <p>서울 리전에 Amazon Linux 2023 기반 EC2와 Apache 웹 서버를 구축했습니다. IAM 사용자와 MFA, 최소 포트 보안 그룹, S3 퍼블릭 차단·암호화, CloudTrail 감사 기록을 확인하고 실제 서비스 중단 장애를 재현해 4분 57초 만에 복구했습니다.</p>
+          <div class="button-row">
+            <a class="button aws-button" href="downloads/AWS_VOC_Improve_Team4_Final.zip">최종 결과물 ZIP</a>
+            <a class="button secondary" href="assets/aws-project/12_장애복구_정상화면_정보가림.png" target="_blank">복구 화면 보기</a>
+          </div>
+        </div>
+        <div class="aws-score-panel" aria-label="AWS 프로젝트 핵심 성과">
+          <div><strong>3/3</strong><span>EC2 상태 검사 통과</span></div>
+          <div><strong>4:57</strong><span>장애 확인→복구</span></div>
+          <div><strong>8개</strong><span>S3 결과물 업로드</span></div>
+          <div><strong>0개</strong><span>종료 후 EBS 볼륨</span></div>
+        </div>
+      </div>
+
+      <div class="aws-flow" aria-label="AWS 실습 진행 흐름">
+        <div><small>01</small><strong>Build</strong><span>EC2 · Apache</span></div><b>→</b>
+        <div><small>02</small><strong>Secure</strong><span>IAM · MFA · SG</span></div><b>→</b>
+        <div><small>03</small><strong>Fail</strong><span>httpd 중지</span></div><b>→</b>
+        <div><small>04</small><strong>Recover</strong><span>서비스 정상화</span></div><b>→</b>
+        <div><small>05</small><strong>Audit</strong><span>S3 · CloudTrail</span></div><b>→</b>
+        <div><small>06</small><strong>Clean up</strong><span>EC2 · EBS 정리</span></div>
+      </div>
+
+      <div class="aws-gallery">
+        <a href="assets/aws-project/08_EC2_보안그룹_정보가림.png" target="_blank"><img src="assets/aws-project/08_EC2_보안그룹_정보가림.png" alt="SSH와 HTTP만 허용한 EC2 보안 그룹"><span><b>최소 권한 네트워크</b>SSH 22번은 사용자 IP/32, HTTP 80번만 허용</span></a>
+        <a href="assets/aws-project/11_장애발생_접속실패_정보가림.png" target="_blank"><img src="assets/aws-project/11_장애발생_접속실패_정보가림.png" alt="Apache 중지 후 브라우저 접속 실패"><span><b>장애 재현</b>httpd inactive와 ERR_CONNECTION_REFUSED 동시 확인</span></a>
+        <a href="assets/aws-project/12_장애복구_정상화면_정보가림.png" target="_blank"><img src="assets/aws-project/12_장애복구_정상화면_정보가림.png" alt="Apache 복구 후 웹페이지 정상 접속"><span><b>복구 검증</b>active(running)과 브라우저 정상 화면 확인</span></a>
+        <a href="assets/aws-project/14_S3_8개파일_업로드성공_정보가림.png" target="_blank"><img src="assets/aws-project/14_S3_8개파일_업로드성공_정보가림.png" alt="S3 결과 파일 8개 업로드 성공"><span><b>결과물 보관</b>S3 암호화·퍼블릭 차단 후 8개 파일 업로드</span></a>
+        <a href="assets/aws-project/18_CloudTrail_CreateBucket_이벤트.png" target="_blank"><img src="assets/aws-project/18_CloudTrail_CreateBucket_이벤트.png" alt="CloudTrail CreateBucket 감사 이벤트"><span><b>감사 추적</b>CloudTrail에서 S3 생성 이벤트 확인</span></a>
+        <a href="assets/aws-project/20_EC2_종료완료_정보가림.png" target="_blank"><img src="assets/aws-project/20_EC2_종료완료_정보가림.png" alt="실습 종료 후 EC2 종료 완료"><span><b>비용·자원 정리</b>EC2 종료, EBS 0개, 예산 사용량 확인</span></a>
+      </div>
+
+      <div class="aws-learning">
+        <article><span>문제 해결</span><h3>화면 오류와 서비스 상태를 함께 비교</h3><p>브라우저 증상만 보지 않고 systemctl 결과와 시간을 대조해 장애 원인을 httpd 중지로 좁혔습니다.</p></article>
+        <article><span>보안 검증</span><h3>만드는 것만큼 닫는 것도 확인</h3><p>MFA, 최소 인바운드 포트, S3 퍼블릭 차단과 암호화를 증빙 화면으로 남겼습니다.</p></article>
+        <article><span>운영 관점</span><h3>복구 뒤 비용과 자원까지 마무리</h3><p>CloudTrail과 Budget을 확인하고 EC2와 EBS를 정리해 실습의 전체 운영 수명주기를 완결했습니다.</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="more-projects" class="section more-projects-section">
     <div class="container">
       <div class="section-heading"><p class="eyebrow">More Projects</p><h2>기존 프로젝트와 실습 경험</h2><p>카드를 클릭하면 문제, 해결 과정, 결과를 자세히 볼 수 있습니다.</p></div>
@@ -248,7 +327,7 @@
 
   <section id="downloads" class="section downloads-section">
     <div class="container"><div class="section-heading"><p class="eyebrow">Downloads</p><h2>포트폴리오 자료 다운로드</h2><p>GitHub Pages에 함께 업로드하면 각 버튼으로 PDF와 DOCX를 바로 열거나 내려받을 수 있습니다.</p></div>
-      <div class="download-grid"><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank"><strong>RAG 답변 개선 포트폴리오</strong><span>PDF · 13페이지</span></a><a href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank"><strong>RAG 품질평가 포트폴리오</strong><span>PDF · 11페이지</span></a><a href="portfolio.pdf" target="_blank"><strong>AI Agent 운영 모니터링</strong><span>PDF · 9페이지</span></a><a href="downloads/VOC_Presentation_v1.8.pptx"><strong>VOC Improve 발표자료</strong><span>PPTX · 실시간 시뮬레이션</span></a><a href="downloads/VOC_Quality_Report_Team4.docx"><strong>VOC Improve 종합 품질보고서</strong><span>DOCX · 테스트·결함·배포 판정</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx"><strong>RAG 답변 개선 원본</strong><span>DOCX</span></a><a href="downloads/기존_AI_QA_Python_포트폴리오.pdf" target="_blank"><strong>기존 AI QA · Python 포트폴리오</strong><span>PDF · 기존 프로젝트 전체</span></a><a href="downloads/AI_Service_Quality_Portfolio.pdf" target="_blank"><strong>AI 서비스 품질평가 실습</strong><span>PDF · Fake Judge·Jupyter·Streamlit</span></a><a href="downloads/fake_judge_lab_source.zip"><strong>Fake Judge 실습 소스</strong><span>ZIP · Python 프로젝트</span></a><a href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank"><strong>이력서</strong><span>PDF</span></a><a href="downloads/Yoo_Hyunju_Resume.docx"><strong>이력서 원본</strong><span>DOCX</span></a></div>
+      <div class="download-grid"><a href="downloads/AWS_VOC_Improve_Team4_Final.zip"><strong>AWS 웹 서버·장애복구 프로젝트</strong><span>ZIP · 보고서·증빙·동영상·S3 결과물</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf" target="_blank"><strong>RAG 답변 개선 포트폴리오</strong><span>PDF · 13페이지</span></a><a href="downloads/RAG_챗봇_품질평가_포트폴리오.pdf" target="_blank"><strong>RAG 품질평가 포트폴리오</strong><span>PDF · 11페이지</span></a><a href="portfolio.pdf" target="_blank"><strong>AI Agent 운영 모니터링</strong><span>PDF · 9페이지</span></a><a href="downloads/VOC_Presentation_v1.8.pptx"><strong>VOC Improve 발표자료</strong><span>PPTX · 실시간 시뮬레이션</span></a><a href="downloads/VOC_Quality_Report_Team4.docx"><strong>VOC Improve 종합 품질보고서</strong><span>DOCX · 테스트·결함·배포 판정</span></a><a href="downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx"><strong>RAG 답변 개선 원본</strong><span>DOCX</span></a><a href="downloads/기존_AI_QA_Python_포트폴리오.pdf" target="_blank"><strong>기존 AI QA · Python 포트폴리오</strong><span>PDF · 기존 프로젝트 전체</span></a><a href="downloads/AI_Service_Quality_Portfolio.pdf" target="_blank"><strong>AI 서비스 품질평가 실습</strong><span>PDF · Fake Judge·Jupyter·Streamlit</span></a><a href="downloads/fake_judge_lab_source.zip"><strong>Fake Judge 실습 소스</strong><span>ZIP · Python 프로젝트</span></a><a href="downloads/Yoo_Hyunju_Resume.pdf" target="_blank"><strong>이력서</strong><span>PDF</span></a><a href="downloads/Yoo_Hyunju_Resume.docx"><strong>이력서 원본</strong><span>DOCX</span></a></div>
     </div>
   </section>
 </main>
