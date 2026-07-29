@@ -28,11 +28,28 @@ function Portfolio({ data, openAdmin }) {
     ['Evidence', '재현 절차·스크린샷·결과 보고'],
     ['Collaboration', '팀 발표·시연·품질 판정'],
   ]
+  const supplementalProjects = [
+    { title: 'BERTScore 기반 AI 답변 품질평가', subtitle: '문자열 일치가 아닌 의미적 유사도로 AI 답변을 자동 채점하고 모델별 결과를 비교했습니다.', stack: 'BERTScore · NLP', image: 'assets/rag_chatbot_ui.png' },
+    { title: '기준 모델 기반 BERTScore 회귀평가', subtitle: '새 모델이 기존 모델의 응답 특성을 유지하는지 배포 전에 자동 점검했습니다.', stack: 'Regression · F1', image: 'assets/page-4.webp' },
+    { title: 'Routing Classifier 자동 분류 품질평가', subtitle: '질문을 담당 Agent로 연결하는 분류기의 정확도와 오분류 원인을 분석했습니다.', stack: 'Classifier · Confusion Matrix', image: 'assets/confusion_matrix.png' },
+    { title: '교육과정 안내 챗봇 QA 자동화', subtitle: 'Rule Validator와 Judge Agent를 결합해 테스트·리포트·대시보드·모니터링을 연결했습니다.', stack: 'Validator · Dashboard', image: 'assets/edu_chatbot_qa_dashboard.png' },
+  ]
+  const downloads = [
+    ['AWS 웹 서버·장애복구 프로젝트', 'ZIP · 보고서·증빙·S3 결과물', 'downloads/AWS_VOC_Improve_Team4_Final.zip'],
+    ['RAG 답변 개선 포트폴리오', 'PDF · 자동 평가와 답변 개선', 'downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf'],
+    ['RAG 품질평가 포트폴리오', 'PDF · Two-Stage Evaluation', 'downloads/RAG_챗봇_품질평가_포트폴리오.pdf'],
+    ['AI Agent 운영 모니터링', 'PDF · 기능·성능·장애·운영', 'portfolio.pdf'],
+    ['VOC Improve 발표자료', 'PPTX · 멀티 에이전트 QA', 'downloads/VOC_Presentation_v1.8.pptx'],
+    ['VOC Improve 종합 품질보고서', 'DOCX · 테스트·결함·배포 판정', 'downloads/VOC_Quality_Report_Team4.docx'],
+    ['AI 서비스 품질평가 실습', 'PDF · Fake Judge·Jupyter·Streamlit', 'downloads/AI_Service_Quality_Portfolio.pdf'],
+    ['기존 AI QA · Python 포트폴리오', 'PDF · 추가 프로젝트 전체', 'downloads/기존_AI_QA_Python_포트폴리오.pdf'],
+    ['이력서', 'PDF', 'downloads/Yoo_Hyunju_Resume.pdf'],
+  ]
   return <>
     <header className="site-header">
       <a className="brand" href="#home"><b>YOO <i>HYUNJU</i></b><small>AI Software QA Portfolio</small></a>
       <nav className={menu ? 'open' : ''}>
-        {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item) =>
+        {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'DOWNLOADS', 'CONTACT'].map((item) =>
           <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenu(false)}>{item}</a>)}
         <a className="invitation-nav" href={local('invitation.html')} target="_blank" rel="noreferrer">모바일 청첩장</a>
         <button className="admin-link" onClick={openAdmin}><Settings size={15}/>관리</button>
@@ -83,6 +100,25 @@ function Portfolio({ data, openAdmin }) {
       <section id="skills">
         <p className="eyebrow">CORE CAPABILITIES</p><h2>품질과 운영을 연결하는 역량</h2>
         <div className="skills">{skills.map(([title, text], index) => <article key={title}><b>0{index + 1}</b><h3>{title}</h3><p>{text}</p></article>)}</div>
+      </section>
+
+      <section id="more-projects">
+        <p className="eyebrow">MORE PROJECTS · RESTORED</p><h2>추가 AI 품질평가 프로젝트</h2>
+        <div className="projects supplemental-projects">
+          {supplementalProjects.map((project, index) => <article key={project.title}>
+            <a href={local('downloads/기존_AI_QA_Python_포트폴리오.pdf')} target="_blank" rel="noreferrer">
+              <div className="project-image"><img src={local(project.image)} alt=""/><strong>{String(index + 1).padStart(2, '0')}</strong></div>
+              <div className="project-body"><span>ADDITIONAL PROJECT</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>자료 보기 →</small></footer></div>
+            </a>
+          </article>)}
+        </div>
+      </section>
+
+      <section id="downloads">
+        <p className="eyebrow">PORTFOLIO ARCHIVE</p><h2>프로젝트 자료 다운로드</h2>
+        <div className="download-grid">
+          {downloads.map(([title, description, href]) => <a href={local(href)} target="_blank" rel="noreferrer" key={title}><span><b>{title}</b><small>{description}</small></span><Download/></a>)}
+        </div>
       </section>
 
       <section className="training">
