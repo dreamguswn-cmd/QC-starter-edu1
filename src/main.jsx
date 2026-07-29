@@ -34,6 +34,7 @@ function Portfolio({ data, openAdmin }) {
       <nav className={menu ? 'open' : ''}>
         {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item) =>
           <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenu(false)}>{item}</a>)}
+        <a className="invitation-nav" href={local('invitation.html')} target="_blank" rel="noreferrer">모바일 청첩장</a>
         <button className="admin-link" onClick={openAdmin}><Settings size={15}/>관리</button>
       </nav>
       <button className="menu" aria-label="메뉴" onClick={() => setMenu(!menu)}>{menu ? <X/> : <Menu/>}</button>
@@ -70,6 +71,12 @@ function Portfolio({ data, openAdmin }) {
               <div className="project-body"><span>{project.role}</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>자세히 보기 →</small></footer></div>
             </a>
           </article>)}
+          <article className="invitation-project">
+            <a href={local('invitation.html')} target="_blank" rel="noreferrer">
+              <div className="project-image"><img src={local('assets/invitation/couple-wedding.png')} alt="모바일 청첩장 프로젝트 대표 화면"/><strong>♥</strong></div>
+              <div className="project-body"><span>WEB PROJECT</span><h3>모바일 청첩장 웹페이지</h3><p>모바일 우선 반응형 청첩장과 갤러리, 연락·계좌 복사 기능을 구현했습니다.</p><footer><b>Mobile First · JavaScript</b><small>청첩장 보기 →</small></footer></div>
+            </a>
+          </article>
         </div>
       </section>
 
