@@ -40,18 +40,12 @@ function Portfolio({ data, openAdmin }) {
     </header>
 
     <main>
-      <section id="home" className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">{settings.hero.eyebrow}</p>
-          <h1>{settings.hero.title.split('\n').map((line, index) => <React.Fragment key={line}>{index === 1 ? <span>{line}</span> : line}{index === 0 && <br/>}</React.Fragment>)}</h1>
-          <p className="lead">{settings.hero.description}</p>
-          <div className="tags"><em>Software QA</em><em>AI Quality</em><em>Monitoring</em><em>AWS</em></div>
-          <div className="actions">
-            <a className="primary" href={resume} target="_blank" rel="noreferrer"><Download/>이력서 보기</a>
-            <a href="#projects"><ArrowDown/>프로젝트 보기</a>
-          </div>
-        </div>
-        <div className="portrait"><div className="portrait-frame"><img src={portrait} alt="유현주 프로필"/></div></div>
+      <section id="home" className="hero hero-cover">
+        <img className="hero-cover-image" src={local('assets/hyunju-hero.png')} alt="유현주 QA 엔지니어 포트폴리오"/>
+        <div className="hero-light" aria-hidden="true"/>
+        <a className="hero-scroll" href="#about" aria-label="포트폴리오 내용 보기">
+          <span>SCROLL</span><ArrowDown/>
+        </a>
       </section>
 
       <section className="stats" aria-label="핵심 역량">
