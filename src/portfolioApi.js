@@ -1,6 +1,7 @@
 import { supabase, supabaseConfigured } from './supabase'
 
 export const STORAGE_BUCKET = 'portfolio-public'
+export const CARE_BUCKET = 'care-private'
 
 export const fallbackSettings = {
   hero: {
@@ -114,4 +115,33 @@ export async function uploadAsset(assetKey, file, previousPath) {
   fail(assetError)
   if (previousPath) await supabase.storage.from(STORAGE_BUCKET).remove([previousPath])
   return { asset_key: assetKey, path, original_name: file.name }
+}
+
+export async function listCareFiles() {
+  const { data, error } = await supabase.storage.from(CARE_BUCKET)
+    .list('uploads', { limit: 200, sortBy: { column: 'created_at', order: 'desc' } })
+  fail(error)
+  return data || []
+}
+
+export async function uploadCareFiles(files) {
+  for (const file of files) {
+    const safeName = file.name.normalize('NFC').replace(/[^\p{L}\p{N}._()-]+/gu, '_')
+    const path = `uploads/${Date.now()}-${crypto.randomUUID()}-${safeName}`
+    const { error } = await supabase.storage.from(CARE_BUCKET)
+      .upload(path, file, { contentType: file.type || undefined, upsert: false })
+    fail(error)
+  }
+}
+
+export async function openCareFile(name) {
+  const { data, error } = await supabase.storage.from(CARE_BUCKET)
+    .createSignedUrl(`uploads/${name}`, 60)
+  fail(error)
+  return data.signedUrl
+}
+
+export async function deleteCareFile(name) {
+  const { error } = await supabase.storage.from(CARE_BUCKET).remove([`uploads/${name}`])
+  fail(error)
 }

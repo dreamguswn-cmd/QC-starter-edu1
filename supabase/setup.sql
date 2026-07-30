@@ -52,6 +52,26 @@ insert into storage.buckets(id, name, public, file_size_limit)
 values ('portfolio-public', 'portfolio-public', true, 52428800)
 on conflict (id) do update set public = true, file_size_limit = 52428800;
 
+insert into storage.buckets(id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'care-private',
+  'care-private',
+  false,
+  52428800,
+  array[
+    'image/jpeg','image/png','image/webp','image/heic','image/heif',
+    'application/pdf','application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/x-hwp','application/haansofthwp'
+  ]
+)
+on conflict (id) do update
+set public = false, file_size_limit = 52428800, allowed_mime_types = excluded.allowed_mime_types;
+
 create policy "public download portfolio files" on storage.objects for select to anon, authenticated
 using (bucket_id = 'portfolio-public');
 create policy "admin upload portfolio files" on storage.objects for insert to authenticated
@@ -60,6 +80,21 @@ create policy "admin update portfolio files" on storage.objects for update to au
 using (bucket_id = 'portfolio-public' and public.is_admin()) with check (bucket_id = 'portfolio-public' and public.is_admin());
 create policy "admin delete portfolio files" on storage.objects for delete to authenticated
 using (bucket_id = 'portfolio-public' and public.is_admin());
+
+drop policy if exists "admin read care files" on storage.objects;
+drop policy if exists "admin upload care files" on storage.objects;
+drop policy if exists "admin update care files" on storage.objects;
+drop policy if exists "admin delete care files" on storage.objects;
+
+create policy "admin read care files" on storage.objects for select to authenticated
+using (bucket_id = 'care-private' and public.is_admin());
+create policy "admin upload care files" on storage.objects for insert to authenticated
+with check (bucket_id = 'care-private' and public.is_admin());
+create policy "admin update care files" on storage.objects for update to authenticated
+using (bucket_id = 'care-private' and public.is_admin())
+with check (bucket_id = 'care-private' and public.is_admin());
+create policy "admin delete care files" on storage.objects for delete to authenticated
+using (bucket_id = 'care-private' and public.is_admin());
 
 -- Supabase Authentication에서 관리자 사용자를 만든 다음 이메일을 바꾸어 실행하세요.
 -- insert into public.admin_users(user_id)

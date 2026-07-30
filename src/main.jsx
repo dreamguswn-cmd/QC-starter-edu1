@@ -7,7 +7,8 @@ import {
 import './styles.css'
 import {
   currentSession, fallbackAssets, fallbackProjects, fallbackSettings, loadPortfolio,
-  publicUrl, savePortfolio, signIn, signOut, uploadAsset
+  publicUrl, savePortfolio, signIn, signOut, uploadAsset,
+  deleteCareFile, listCareFiles, openCareFile, uploadCareFiles
 } from './portfolioApi'
 import { supabaseConfigured } from './supabase'
 
@@ -211,17 +212,90 @@ function Admin({ data, close, saved }) {
   </div>
 }
 
+function CareAdmin({ close }) {
+  const [session, setSession] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [files, setFiles] = useState([])
+  const [message, setMessage] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const refresh = async () => {
+    try { setFiles(await listCareFiles()) }
+    catch (error) { setMessage(error.message) }
+  }
+  useEffect(() => {
+    currentSession().then((value) => {
+      setSession(value)
+      if (value) refresh()
+    })
+  }, [])
+  const login = async () => {
+    try {
+      setBusy(true); setMessage('')
+      const value = await signIn(email, password)
+      setSession(value); await refresh()
+    } catch (error) { setMessage(error.message) } finally { setBusy(false) }
+  }
+  const upload = async (selected) => {
+    if (!selected.length) return
+    try {
+      setBusy(true); setMessage(`${selected.length}개 파일을 올리는 중입니다.`)
+      await uploadCareFiles(selected)
+      await refresh(); setMessage('자료 업로드가 완료되었습니다.')
+    } catch (error) { setMessage(error.message) } finally { setBusy(false) }
+  }
+  const openFile = async (name) => {
+    try { window.open(await openCareFile(name), '_blank', 'noopener,noreferrer') }
+    catch (error) { setMessage(error.message) }
+  }
+  const removeFile = async (name) => {
+    if (!confirm('이 자료를 삭제할까요? 삭제 후에는 복구할 수 없습니다.')) return
+    try { setBusy(true); await deleteCareFile(name); await refresh(); setMessage('삭제했습니다.') }
+    catch (error) { setMessage(error.message) } finally { setBusy(false) }
+  }
+
+  if (!supabaseConfigured) return <div className="admin-shell"><div className="login-card"><ShieldCheck size={42}/><h1>비공개 자료실 설정이 필요합니다</h1><p>Supabase 연결 후 사용할 수 있습니다.</p><button onClick={close}>돌아가기</button></div></div>
+  if (!session) return <div className="care-admin-shell"><div className="care-login">
+    <ShieldCheck size={46}/><p className="eyebrow">PRIVATE CARE CLASS</p><h1>초등돌봄교실 자료관리</h1><p>관리자만 들어갈 수 있는 비공개 자료실입니다.</p>
+    <input type="email" autoComplete="username" placeholder="관리자 이메일" value={email} onChange={(event) => setEmail(event.target.value)}/>
+    <input type="password" autoComplete="current-password" placeholder="비밀번호" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()}/>
+    <button disabled={busy} onClick={login}><LogIn/>로그인</button>{message && <p className="error">{message}</p>}<button className="care-ghost" onClick={close}>공개용 입구로 돌아가기</button>
+  </div></div>
+
+  return <div className="care-admin-page">
+    <header><div><p>PRIVATE EDUCATION OPERATIONS</p><h1>초등돌봄교실 자료관리</h1></div><div><button onClick={close}>공개용 입구</button><button onClick={async () => { await signOut(); setSession(null) }}><LogOut/>로그아웃</button></div></header>
+    <main>
+      <section className="care-upload-panel">
+        <div><p className="eyebrow">MOBILE UPLOAD</p><h2>휴대폰에서 바로 자료 올리기</h2><p>사진, PDF, 워드, 엑셀 파일을 선택하면 비공개 저장공간에 보관됩니다.</p></div>
+        <label className={busy ? 'care-upload-button disabled' : 'care-upload-button'}><Upload/><span>{busy ? '처리 중…' : '파일 선택 및 업로드'}</span><input disabled={busy} multiple type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp" onChange={(event) => { const selected = [...event.target.files]; event.target.value = ''; upload(selected) }}/></label>
+      </section>
+      {message && <div className="care-message">{message}</div>}
+      <section className="care-file-panel">
+        <div className="panel-title"><div><p className="eyebrow">PRIVATE FILES</p><h2>내 자료 <small>{files.length}개</small></h2></div><button onClick={refresh}>새로고침</button></div>
+        {!files.length ? <div className="care-empty"><Upload/><b>아직 올린 자료가 없습니다.</b><span>위 버튼으로 첫 자료를 올려보세요.</span></div> :
+          <div className="care-file-list">{files.map((file) => <article key={file.name}><div><b>{file.name.replace(/^\d+-[0-9a-f-]+-/i, '')}</b><small>{file.metadata?.size ? `${(file.metadata.size / 1024 / 1024).toFixed(1)} MB` : '자료'} · {file.created_at ? new Date(file.created_at).toLocaleDateString('ko-KR') : ''}</small></div><div><button onClick={() => openFile(file.name)}>열기</button><button className="danger" disabled={busy} onClick={() => removeFile(file.name)}><Trash2/>삭제</button></div></article>)}</div>}
+      </section>
+    </main>
+  </div>
+}
+
 function App() {
   const [data, setData] = useState({ settings: fallbackSettings, projects: fallbackProjects, assets: fallbackAssets })
   const [loading, setLoading] = useState(true)
   const [admin, setAdmin] = useState(location.hash === '#/admin')
+  const [careAdmin, setCareAdmin] = useState(location.hash === '#/care-admin')
   useEffect(() => { loadPortfolio().then(setData).finally(() => setLoading(false)) }, [])
   useEffect(() => {
-    const handler = () => setAdmin(location.hash === '#/admin')
+    const handler = () => {
+      setAdmin(location.hash === '#/admin')
+      setCareAdmin(location.hash === '#/care-admin')
+    }
     addEventListener('hashchange', handler)
     return () => removeEventListener('hashchange', handler)
   }, [])
   if (loading) return <div className="loading">포트폴리오를 불러오는 중입니다.</div>
+  if (careAdmin) return <CareAdmin close={() => { location.href = local('care-class-entrance.html') }}/>
   return admin
     ? <Admin data={data} saved={setData} close={() => { location.hash = ''; setAdmin(false) }}/>
     : <Portfolio data={data} openAdmin={() => { location.hash = '/admin'; setAdmin(true) }}/>
