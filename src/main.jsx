@@ -103,7 +103,7 @@ function Portfolio({ data, openAdmin }) {
       </section>
 
       <section id="more-projects">
-        <p className="eyebrow">MORE PROJECTS · RESTORED</p><h2>추가 AI 품질평가 프로젝트</h2>
+        <p className="eyebrow">MORE PROJECTS · EDUCATION & QA</p><h2>추가 프로젝트</h2>
         <div className="projects supplemental-projects">
           {supplementalProjects.map((project, index) => <article key={project.title}>
             <a href={local('downloads/기존_AI_QA_Python_포트폴리오.pdf')} target="_blank" rel="noreferrer">
@@ -111,6 +111,14 @@ function Portfolio({ data, openAdmin }) {
               <div className="project-body"><span>ADDITIONAL PROJECT</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>자료 보기 →</small></footer></div>
             </a>
           </article>)}
+          <article className="education-project maeme-project">
+            <div className="project-image"><img src={local('assets/maeme-cover.png')} alt="우리 동네 매미 탐험대 참매미"/><strong>07</strong></div>
+            <div className="project-body"><span>PERSONAL PROJECT · EDUCATION WEB</span><h3>우리 동네 매미 탐험대</h3><p>초등학생이 우리나라 매미 7종의 모습과 울음소리, 기온에 따른 활동 변화를 직접 탐구하는 체험형 자연 학습 웹사이트입니다.</p><div className="feature-chips"><em>매미 7종 도감</em><em>울음소리</em><em>온도 실험</em><em>퀴즈</em></div><footer className="project-buttons"><a href="https://dreamguswn-cmd.github.io/maeme/" target="_blank" rel="noopener noreferrer">사이트 보기</a><a href="https://github.com/dreamguswn-cmd/maeme" target="_blank" rel="noopener noreferrer">GitHub</a></footer></div>
+          </article>
+          <article className="education-project care-project">
+            <div className="care-cover" aria-label="초등돌봄교실 자료관리 시스템 공개용 입구"><ShieldCheck/><span>PRIVATE CARE CLASS</span><b>보호된 자료관리 공간</b><small>아동 개인정보 비공개</small></div>
+            <div className="project-body"><span>EDUCATION OPERATIONS · PRIVATE SYSTEM</span><h3>초등돌봄교실 자료관리 시스템</h3><p>돌봄교실 운영 자료를 업로드하고 분류·관리할 수 있도록 만든 비공개 운영 시스템입니다. 아동 사진과 내부 자료는 공개하지 않습니다.</p><div className="feature-chips"><em>자료 업로드</em><em>분류·검색</em><em>운영 관리</em><em>접근 제한</em></div><footer className="project-buttons"><a href={local('care-class-entrance.html')} target="_blank" rel="noreferrer">공개용 입구 보기</a><span><ShieldCheck/> 내부 자료 비공개</span></footer></div>
+          </article>
         </div>
       </section>
 
