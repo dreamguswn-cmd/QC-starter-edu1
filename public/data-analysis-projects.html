@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python EDA & R 데이터 조작 | 유현주 포트폴리오</title>
+  <style>
+    :root{--navy:#071a2d;--card:#0d2943;--line:#244866;--orange:#ffb000;--text:#edf6ff;--muted:#afc4d8}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;line-height:1.7}
+    header{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:18px max(5vw,24px);background:#071a2df2;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    header a{color:var(--text);text-decoration:none;font-weight:800}nav{display:flex;gap:18px}nav a{color:var(--muted);font-size:14px}.back{color:var(--orange)}
+    main{width:min(1080px,90vw);margin:auto;padding:64px 0 96px}.intro{margin-bottom:54px}.eyebrow{color:var(--orange);font-weight:800;letter-spacing:.12em}.intro h1{font-size:clamp(34px,6vw,64px);line-height:1.15;margin:12px 0}.intro p{max-width:760px;color:var(--muted);font-size:18px}
+    article{scroll-margin-top:92px;background:linear-gradient(145deg,#0d2943,#091f35);border:1px solid var(--line);border-radius:24px;padding:clamp(24px,5vw,52px);margin:30px 0 48px;box-shadow:0 22px 50px #020b1444}
+    h2{font-size:clamp(28px,4vw,44px);margin:4px 0 12px}.summary{color:var(--muted);font-size:17px}.meta,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0}.meta div,.grid section{background:#071a2d;border:1px solid var(--line);border-radius:14px;padding:18px}.meta b,.grid h3{display:block;color:var(--orange);margin-bottom:5px}.grid h3{margin-top:0}
+    h3{margin-top:32px}ul{padding-left:20px}code{font-family:"Cascadia Code",Consolas,monospace}pre{overflow:auto;background:#04111e;border:1px solid var(--line);border-radius:14px;padding:20px;color:#cbe7ff}.result{border-left:4px solid var(--orange);padding:16px 20px;background:#071a2d;border-radius:0 12px 12px 0}.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.button{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--orange);color:#071a2d;text-decoration:none;font-weight:900}.button.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
+    footer{text-align:center;color:var(--muted);padding:0 20px 46px}@media(max-width:620px){nav a:not(.back){display:none}}
+  </style>
+</head>
+<body>
+  <header><a href="./">YOO <span style="color:#ffb000">HYUNJU</span></a><nav><a href="#python-eda">Python EDA</a><a href="#r-data">R 데이터 조작</a><a class="back" href="./#more-projects">포트폴리오로 돌아가기</a></nav></header>
+  <main>
+    <section class="intro"><p class="eyebrow">DATA ANALYSIS PRACTICE PORTFOLIO</p><h1>Python EDA &amp;<br>R 데이터 조작</h1><p>데이터를 불러와 구조를 이해하고, 품질을 점검하며, 분석 가능한 형태로 가공하는 데이터 분석의 기본 흐름을 두 가지 언어로 수행했습니다.</p></section>
+
+    <article id="python-eda">
+      <p class="eyebrow">PROJECT 01 · EXPLORATORY DATA ANALYSIS</p><h2>Python 탐색적 데이터 분석(EDA)</h2>
+      <p class="summary">고객 데이터의 구조·분포·결측값을 확인하고 IQR과 Z-score로 이상 고객을 탐지하여 멤버십, 만족도, 이탈 여부까지 함께 분석했습니다.</p>
+      <div class="meta"><div><b>Language</b>Python</div><div><b>Environment</b>JupyterLab</div><div><b>Libraries</b>pandas · matplotlib</div><div><b>Dataset</b>customer.csv</div></div>
+      <div class="grid"><section><h3>데이터 이해</h3><p>head, tail, shape, columns, info로 행·열 수, 자료형, 결측값과 메모리 사용량을 확인했습니다.</p></section><section><h3>품질 점검</h3><p>age 20건, monthly_spend 15건, satisfaction_score 10건의 결측값을 탐지하고 삭제·평균·중앙값 대체를 비교했습니다.</p></section><section><h3>분포 분석</h3><p>히스토그램과 Box Plot으로 나이와 월 지출액의 분포, 왜도, 중앙값, 사분위수와 이상값을 확인했습니다.</p></section><section><h3>이상 고객 분석</h3><p>IQR 및 |Z| &gt; 3 기준으로 이상값을 찾고 Customer ID, Membership, Satisfaction Score, Churn을 함께 검토했습니다.</p></section></div>
+      <h3>핵심 분석 코드</h3><pre><code>df = pd.read_csv("customer.csv")
+df.info()
+df.describe()
+df.isnull().sum()
+
+q1 = df["age"].quantile(0.25)
+q3 = df["age"].quantile(0.75)
+iqr = q3 - q1
+outliers = df[(df["age"] &lt; q1 - 1.5 * iqr) |
+              (df["age"] &gt; q3 + 1.5 * iqr)]</code></pre>
+      <p class="result"><b>분석 결과</b><br>나이에서는 96·103·120세, 월 지출액에서는 582.5·545·507.5·470·432.5 등의 이상값을 확인했습니다. 단순 제거가 아니라 고객 특성과 이탈 여부를 함께 살펴 데이터의 의미를 보존하는 분석 관점을 익혔습니다.</p>
+      <div class="buttons"><a class="button" href="downloads/customer_eda_portfolio.py" download>Python 코드 다운로드</a><a class="button secondary" href="./#more-projects">포트폴리오로 돌아가기</a></div>
+    </article>
+
+    <article id="r-data">
+      <p class="eyebrow">PROJECT 02 · DATA MANIPULATION</p><h2>R 기초 및 데이터 조작</h2>
+      <p class="summary">R의 자료형과 자료구조부터 Data Frame 생성, 파생변수 계산, 조건부 고객등급 생성, CSV 저장과 행 결합까지 실습했습니다.</p>
+      <div class="meta"><div><b>Language</b>R</div><div><b>Environment</b>RStudio</div><div><b>Package</b>dplyr</div><div><b>Focus</b>Data Manipulation</div></div>
+      <div class="grid"><section><h3>기초 문법</h3><p>사칙연산, 변수 생성, as.numeric·as.character 자료형 변환과 class·typeof 계열 함수를 실습했습니다.</p></section><section><h3>자료구조</h3><p>Vector, Array, List, Factor, Data Frame의 구조와 용도를 비교했습니다.</p></section><section><h3>파생변수</h3><p>quantity × price로 총 구매금액 amount를 만들고, ifelse로 10만원 이상 고객을 ‘우수’ 등급으로 분류했습니다.</p></section><section><h3>저장·결합</h3><p>write.csv로 결과를 저장하고 rbind로 동일 구조의 판매 데이터를 행 단위로 결합했습니다.</p></section></div>
+      <h3>핵심 데이터 조작 코드</h3><pre><code>sales$amount &lt;- sales$quantity * sales$price
+sales$grade &lt;- ifelse(
+  sales$amount &gt;= 100000,
+  "우수",
+  "일반"
+)
+
+combined_sales &lt;- rbind(sales, new_sales)
+write.csv(combined_sales, "sales_result.csv", row.names = FALSE)</code></pre>
+      <p class="result"><b>프로젝트 결과</b><br>R의 핵심 자료구조를 이해하고, 분석 목적에 맞는 파생변수와 범주형 등급을 생성했습니다. 생성한 데이터를 CSV로 저장하고 추가 데이터를 결합하는 기본 데이터 처리 흐름을 완성했습니다.</p>
+      <div class="buttons"><a class="button" href="downloads/r_data_manipulation_portfolio.R" download>R 코드 다운로드</a><a class="button secondary" href="./#more-projects">포트폴리오로 돌아가기</a></div>
+    </article>
+  </main>
+  <footer>© 2026 YOO HYUNJU · AI Software QA Portfolio</footer>
+</body>
+</html>
