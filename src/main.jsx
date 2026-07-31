@@ -54,6 +54,7 @@ function Portfolio({ data, openAdmin }) {
       <nav className={menu ? 'open' : ''}>
         {['HOME', 'ABOUT', 'PROJECTS', 'SKILLS', 'DOWNLOADS', 'CONTACT'].map((item) =>
           <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenu(false)}>{item}</a>)}
+        <a className="invitation-nav" href="https://dreamguswn-cmd.github.io/play-and-learn/" target="_blank" rel="noreferrer">교육 게임 LAB</a>
         <a className="invitation-nav" href={local('invitation.html')} target="_blank" rel="noreferrer">모바일 청첩장</a>
         <button className="admin-link" onClick={openAdmin}><Settings size={15}/>관리</button>
       </nav>
@@ -70,7 +71,7 @@ function Portfolio({ data, openAdmin }) {
       </section>
 
       <section className="stats" aria-label="핵심 역량">
-        <article><CheckCircle2/><div><b>9+</b><small>대표 프로젝트</small></div></article>
+        <article><CheckCircle2/><div><b>10+</b><small>대표 프로젝트</small></div></article>
         <article><Gauge/><div><b>기능·성능</b><small>통합 품질검증</small></div></article>
         <article><ShieldCheck/><div><b>재현·증빙</b><small>근거 기반 보고</small></div></article>
         <article><Cloud/><div><b>AWS</b><small>구축·장애복구</small></div></article>
@@ -114,8 +115,12 @@ function Portfolio({ data, openAdmin }) {
               <div className="project-body"><span>{project.label || 'ADDITIONAL PROJECT'}</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>자료 보기 →</small></footer></div>
             </a>
           </article>)}
+          <article className="education-project game-lab-project">
+            <div className="project-image"><img src={local('assets/game-lab-cover.svg')} alt="유현주 교육용 웹게임 LAB 대표 화면"/><strong>07</strong></div>
+            <div className="project-body"><span>EDUCATIONAL WEB GAME · JAVASCRIPT</span><h3>유현주 교육용 웹게임 LAB</h3><p>맞춤법, 수학 연산, 기억력 훈련을 게임으로 학습하는 반응형 웹사이트입니다. 점수 계산, 정답 판정, 진행 상태와 재시작 기능을 구현했습니다.</p><div className="feature-chips"><em>맞춤법 게임</em><em>연산 게임</em><em>카드 매칭</em><em>반응형 웹</em></div><footer className="project-buttons"><a href="https://dreamguswn-cmd.github.io/play-and-learn/" target="_blank" rel="noopener noreferrer">게임 사이트 보기</a><a href="https://github.com/dreamguswn-cmd/play-and-learn" target="_blank" rel="noopener noreferrer">GitHub</a></footer></div>
+          </article>
           <article className="education-project maeme-project">
-            <div className="project-image"><img src={local('assets/maeme-cover.png')} alt="우리 동네 매미 탐험대 참매미"/><strong>07</strong></div>
+            <div className="project-image"><img src={local('assets/maeme-cover.png')} alt="우리 동네 매미 탐험대 참매미"/><strong>08</strong></div>
             <div className="project-body"><span>PERSONAL PROJECT · EDUCATION WEB</span><h3>우리 동네 매미 탐험대</h3><p>초등학생이 우리나라 매미 7종의 모습과 울음소리, 기온에 따른 활동 변화를 직접 탐구하는 체험형 자연 학습 웹사이트입니다.</p><div className="feature-chips"><em>매미 7종 도감</em><em>울음소리</em><em>온도 실험</em><em>퀴즈</em></div><footer className="project-buttons"><a href="https://dreamguswn-cmd.github.io/maeme/" target="_blank" rel="noopener noreferrer">사이트 보기</a><a href="https://github.com/dreamguswn-cmd/maeme" target="_blank" rel="noopener noreferrer">GitHub</a></footer></div>
           </article>
           <article className="education-project care-project">
