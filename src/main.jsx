@@ -24,16 +24,18 @@ function Portfolio({ data, openAdmin }) {
   const skills = [
     ['QA Strategy', '기능·회귀·성능 테스트 설계'],
     ['AI Quality', 'RAG·LLM Judge 품질평가'],
+    ['Data Analysis', 'Python EDA·R 데이터 조작'],
     ['Monitoring', 'pytest·k6·Prometheus·Grafana'],
     ['Cloud Ops', 'AWS EC2·S3·CloudTrail'],
     ['Evidence', '재현 절차·스크린샷·결과 보고'],
-    ['Collaboration', '팀 발표·시연·품질 판정'],
   ]
   const supplementalProjects = [
     { title: 'BERTScore 기반 AI 답변 품질평가', subtitle: '문자열 일치가 아닌 의미적 유사도로 AI 답변을 자동 채점하고 모델별 결과를 비교했습니다.', stack: 'BERTScore · NLP', image: 'assets/rag_chatbot_ui.png' },
     { title: '기준 모델 기반 BERTScore 회귀평가', subtitle: '새 모델이 기존 모델의 응답 특성을 유지하는지 배포 전에 자동 점검했습니다.', stack: 'Regression · F1', image: 'assets/page-4.webp' },
     { title: 'Routing Classifier 자동 분류 품질평가', subtitle: '질문을 담당 Agent로 연결하는 분류기의 정확도와 오분류 원인을 분석했습니다.', stack: 'Classifier · Confusion Matrix', image: 'assets/confusion_matrix.png' },
     { title: '교육과정 안내 챗봇 QA 자동화', subtitle: 'Rule Validator와 Judge Agent를 결합해 테스트·리포트·대시보드·모니터링을 연결했습니다.', stack: 'Validator · Dashboard', image: 'assets/edu_chatbot_qa_dashboard.png' },
+    { title: 'Python 탐색적 데이터 분석(EDA)', subtitle: '고객 데이터의 구조와 기술통계를 확인하고 결측값 처리, 분포 분석, IQR·Z-score 기반 이상 고객 탐지까지 수행했습니다.', stack: 'Python · pandas · matplotlib · EDA', image: 'assets/ai-quality-jupyter.png', label: 'DATA ANALYSIS PROJECT', href: '#python-eda' },
+    { title: 'R 기초 및 데이터 조작', subtitle: 'R 자료형과 자료구조를 익히고 Data Frame 생성, 파생변수·고객등급 생성, CSV 저장과 행 결합을 실습했습니다.', stack: 'R · RStudio · dplyr · Data Frame', image: 'assets/page-3.webp', label: 'DATA MANIPULATION PROJECT', href: '#r-data' },
   ]
   const downloads = [
     ['AWS 웹 서버·장애복구 프로젝트', 'ZIP · 보고서·증빙·S3 결과물', 'downloads/AWS_VOC_Improve_Team4_Final.zip'],
@@ -68,7 +70,7 @@ function Portfolio({ data, openAdmin }) {
       </section>
 
       <section className="stats" aria-label="핵심 역량">
-        <article><CheckCircle2/><div><b>7+</b><small>대표 프로젝트</small></div></article>
+        <article><CheckCircle2/><div><b>9+</b><small>대표 프로젝트</small></div></article>
         <article><Gauge/><div><b>기능·성능</b><small>통합 품질검증</small></div></article>
         <article><ShieldCheck/><div><b>재현·증빙</b><small>근거 기반 보고</small></div></article>
         <article><Cloud/><div><b>AWS</b><small>구축·장애복구</small></div></article>
@@ -106,10 +108,10 @@ function Portfolio({ data, openAdmin }) {
       <section id="more-projects">
         <p className="eyebrow">MORE PROJECTS · EDUCATION & QA</p><h2>추가 프로젝트</h2>
         <div className="projects supplemental-projects">
-          {supplementalProjects.map((project, index) => <article key={project.title}>
-            <a href={local('downloads/기존_AI_QA_Python_포트폴리오.pdf')} target="_blank" rel="noreferrer">
+          {supplementalProjects.map((project, index) => <article id={project.href?.slice(1)} key={project.title}>
+            <a href={project.href || local('downloads/기존_AI_QA_Python_포트폴리오.pdf')} target={project.href ? undefined : '_blank'} rel={project.href ? undefined : 'noreferrer'}>
               <div className="project-image"><img src={local(project.image)} alt=""/><strong>{String(index + 1).padStart(2, '0')}</strong></div>
-              <div className="project-body"><span>ADDITIONAL PROJECT</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>자료 보기 →</small></footer></div>
+              <div className="project-body"><span>{project.label || 'ADDITIONAL PROJECT'}</span><h3>{project.title}</h3><p>{project.subtitle}</p><footer><b>{project.stack}</b><small>{project.href ? '프로젝트 요약' : '자료 보기 →'}</small></footer></div>
             </a>
           </article>)}
           <article className="education-project maeme-project">
