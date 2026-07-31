@@ -117,7 +117,7 @@ function Portfolio({ data, openAdmin }) {
           </article>)}
           <article className="education-project game-lab-project">
             <div className="project-image"><img src={local('assets/game-lab-cover.svg')} alt="유현주 교육용 웹게임 LAB 대표 화면"/><strong>07</strong></div>
-            <div className="project-body"><span>EDUCATIONAL WEB GAME · JAVASCRIPT</span><h3>유현주 교육용 웹게임 LAB</h3><p>맞춤법, 수학 연산, 기억력 훈련을 게임으로 학습하는 반응형 웹사이트입니다. 점수 계산, 정답 판정, 진행 상태와 재시작 기능을 구현했습니다.</p><div className="feature-chips"><em>맞춤법 게임</em><em>연산 게임</em><em>카드 매칭</em><em>반응형 웹</em></div><footer className="project-buttons"><a href="https://dreamguswn-cmd.github.io/play-and-learn/" target="_blank" rel="noopener noreferrer">게임 사이트 보기</a><a href="https://github.com/dreamguswn-cmd/play-and-learn" target="_blank" rel="noopener noreferrer">GitHub</a></footer></div>
+            <div className="project-body"><span>EDUCATIONAL WEB GAME · JAVASCRIPT</span><h3>유현주 교육용 웹게임 LAB</h3><p>수학, 영어, 타자를 모험형 게임으로 학습하는 반응형 웹사이트입니다. Canvas 게임 루프, 학년·단계별 문제, 점수와 기록 저장 기능을 구현했습니다.</p><div className="feature-chips"><em>수학 탐험</em><em>영어 학습</em><em>타자 연습</em><em>Canvas 게임</em></div><footer className="project-buttons"><a href="https://dreamguswn-cmd.github.io/play-and-learn/" target="_blank" rel="noopener noreferrer">게임 사이트 보기</a><a href="https://github.com/dreamguswn-cmd/play-and-learn" target="_blank" rel="noopener noreferrer">GitHub</a></footer></div>
           </article>
           <article className="education-project maeme-project">
             <div className="project-image"><img src={local('assets/maeme-cover.png')} alt="우리 동네 매미 탐험대 참매미"/><strong>08</strong></div>
