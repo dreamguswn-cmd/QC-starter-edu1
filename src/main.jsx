@@ -118,7 +118,7 @@ function Portfolio({ data, openAdmin }) {
           </article>
           <article className="education-project care-project">
             <div className="care-cover" aria-label="초등돌봄교실 자료관리 시스템 공개용 입구"><ShieldCheck/><span>PRIVATE CARE CLASS</span><b>보호된 자료관리 공간</b><small>아동 개인정보 비공개</small></div>
-            <div className="project-body"><span>EDUCATION OPERATIONS · PRIVATE SYSTEM</span><h3>초등돌봄교실 자료관리 시스템</h3><p>돌봄교실 운영 자료를 업로드하고 분류·관리할 수 있도록 만든 비공개 운영 시스템입니다. 아동 사진과 내부 자료는 공개하지 않습니다.</p><div className="feature-chips"><em>자료 업로드</em><em>분류·검색</em><em>운영 관리</em><em>접근 제한</em></div><footer className="project-buttons"><a href={local('care-class-entrance.html')} target="_blank" rel="noreferrer">공개용 입구 보기</a><span><ShieldCheck/> 내부 자료 비공개</span></footer></div>
+            <div className="project-body"><span>EDUCATION OPERATIONS · PRIVATE SYSTEM</span><h3>초등돌봄교실 자료관리 시스템</h3><p>돌봄교실 운영 자료를 업로드하고 분류·관리할 수 있도록 만든 비공개 운영 시스템입니다. 아동 사진과 내부 자료는 공개하지 않습니다.</p><div className="feature-chips"><em>자료 업로드</em><em>분류·검색</em><em>운영 관리</em><em>접근 제한</em></div><footer className="project-buttons"><a href="https://neulbom-class-portfolio.dreamguswn161822.chatgpt.site/" target="_blank" rel="noreferrer">초등돌봄 포트폴리오 보기</a><span><ShieldCheck/> 내부 자료 비공개</span></footer></div>
           </article>
         </div>
       </section>
