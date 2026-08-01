@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import {
-  ArrowRight, CheckCircle2, Download, ExternalLink, Github, Mail,
+  ArrowRight, Download, ExternalLink, Github, Mail,
   Menu, ShieldCheck, X
 } from 'lucide-react'
 import { publicUrl } from './portfolioApi'
 
-const qaProjects = [
+export const qaProjects = [
   {
     id: 'voc', number: '01', label: '대표 프로젝트',
     title: 'VOC Improve 멀티 에이전트 QA',
     summary: '6개 AI Agent의 VOC 분석 결과를 독립 Judge로 평가하고, 배포 가능 여부까지 판정한 팀 프로젝트입니다.',
-    role: '테스트 실행 · AWS 운영 검증 · 장애 재현 및 복구 · 결과 증빙',
+    role: '테스트 케이스 실행부터 Apache 장애 재현, 원인 확인, 복구 후 재테스트와 결과 증빙을 담당했습니다.',
     metrics: [['자동화 테스트', '5건'], ['테스트 결과', '5 PASS'], ['품질 평균', '99점'], ['실패', '0건']],
     tags: ['pytest', 'LLM Judge', 'AWS EC2', 'S3', 'Release Gate'],
     issue: 'Apache 서비스를 의도적으로 중지해 접속 장애를 재현하고, 상태와 원인을 확인했습니다.',
@@ -24,7 +24,7 @@ const qaProjects = [
     id: 'rag', number: '02', label: 'AI 응답 품질',
     title: 'RAG 챗봇 자동 평가 및 답변 개선',
     summary: '답변 생성에서 끝내지 않고 Judge 평가 결과를 Correction Agent에 연결해 실패 답변을 개선하는 품질 루프입니다.',
-    role: '평가 기준 설계 · AI 응답 평가 · 감점 원인 분석 · 개선 답변 검증',
+    role: 'AI 응답 평가 기준을 설계하고 품질 저하 원인을 식별한 뒤, 개선 답변을 같은 기준으로 재검증했습니다.',
     metrics: [['평가 항목', '4개'], ['자동 테스트', '5건'], ['평균 점수', '4.20/5'], ['자동화', '100%']],
     tags: ['RAG', 'LLM-as-a-Judge', 'Two-Stage Evaluation', 'Correction Agent'],
     issue: '근거 미사용, 출처 누락 등 낮은 품질의 응답을 평가 점수와 감점 사유로 식별했습니다.',
@@ -38,7 +38,7 @@ const qaProjects = [
     id: 'monitoring', number: '03', label: '성능 · 모니터링',
     title: 'AI Agent 품질관리·운영 모니터링',
     summary: '기능, 성능, 장애, 운영 지표를 하나의 검증 흐름으로 연결해 서비스 상태를 관찰했습니다.',
-    role: '기능 테스트 · 부하 테스트 · 지표 설계 · 대시보드 모니터링',
+    role: 'pytest 기능 테스트와 k6 부하 테스트를 수행하고, 운영 지표 수집과 Grafana 대시보드 검증을 담당했습니다.',
     metrics: [['기능 검증', 'pytest'], ['성능 검증', 'k6'], ['지표 수집', 'Prometheus'], ['시각화', 'Grafana']],
     tags: ['FastAPI', 'pytest', 'k6', 'Prometheus', 'Grafana'],
     issue: '기능 성공 여부만으로는 지연과 운영 이상을 설명하기 어려운 문제를 정의했습니다.',
@@ -50,7 +50,7 @@ const qaProjects = [
     id: 'aws', number: '04', label: '장애 복구',
     title: 'AWS 웹 서버 장애 재현 및 복구 검증',
     summary: 'EC2와 Apache 서비스의 정상 상태부터 장애 발생, 원인 확인, 복구와 자원 정리까지 검증했습니다.',
-    role: '환경 점검 · 보안 설정 확인 · 장애 시나리오 실행 · 복구 재테스트',
+    role: 'AWS 환경과 보안 설정을 점검하고 장애 시나리오 실행, 원인 확인, 복구 후 재테스트를 담당했습니다.',
     metrics: [['복구 평가', '100점'], ['장애 탐지', '95점'], ['보안 점검', 'PASS'], ['리전', '서울']],
     tags: ['AWS EC2', 'Apache', 'S3', 'CloudTrail', 'MFA'],
     issue: '웹 서버 중지 시 접속 실패가 발생하는 상황을 재현하고 원인을 Apache 상태로 좁혔습니다.',
@@ -63,7 +63,7 @@ const qaProjects = [
     id: 'judge', number: '05', label: '평가 자동화',
     title: 'Fake Judge 기반 AI 서비스 품질평가',
     summary: '고객 VOC와 AI 개선안을 정해진 품질 기준으로 평가하고 PASS·FAIL 판정과 보고서를 생성했습니다.',
-    role: '평가 로직 구현 · pytest 자동화 · 결과 시각화 · 판정 보고서 작성',
+    role: 'AI 응답 평가 로직을 구현하고 pytest 자동화, 결과 시각화, PASS·FAIL 판정 보고서 작성을 담당했습니다.',
     metrics: [['평가 기준', '5개'], ['자동화', 'pytest'], ['분석', 'Jupyter'], ['시각화', 'Streamlit']],
     tags: ['Python', 'pytest', 'Jupyter', 'Streamlit'],
     issue: '평가자에 따라 달라질 수 있는 AI 응답 판정을 동일한 기준으로 반복할 필요가 있었습니다.',
@@ -84,6 +84,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
+  copyRevision: 2,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -107,10 +108,10 @@ export const portfolioV2Defaults = {
     topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
   },
   achievements: [
-    { value: '5건', label: 'VOC/AWS 자동화 테스트' },
-    { value: '100%', label: '자동화 테스트 통과율' },
-    { value: '99점', label: 'VOC/AWS 품질 평균' },
-    { value: '5개', label: '대표 QA 프로젝트' },
+    { value: '5건', label: 'VOC/AWS 자동화 테스트 실행' },
+    { value: '100%', label: '테스트 케이스 통과율' },
+    { value: '99점', label: 'VOC/AWS 품질평가 평균' },
+    { value: '5개', label: '검증 과정이 기록된 대표 QA 프로젝트' },
   ],
   projects: qaProjects,
   capabilities,
@@ -131,14 +132,20 @@ export default function PortfolioV2({ data, openAdmin }) {
   const portraitUrl = publicUrl(data?.assets?.portrait?.path) || local(data?.assets?.portrait?.fallback || 'assets/profile-photo.jpg')
   const resumeUrl = publicUrl(data?.assets?.resume?.path) || local(data?.assets?.resume?.fallback || 'downloads/Yoo_Hyunju_Resume.pdf')
   const savedContent = data?.settings?.v2 || {}
+  const refreshedProjects = savedContent.projects?.length
+    ? savedContent.projects.map((project) => {
+        const revised = qaProjects.find((item) => item.id === project.id)
+        return savedContent.copyRevision >= 2 || !revised ? project : { ...project, role: revised.role }
+      })
+    : portfolioV2Defaults.projects
   const content = {
     ...portfolioV2Defaults,
     ...savedContent,
     hero: { ...portfolioV2Defaults.hero, ...savedContent.hero },
     about: { ...portfolioV2Defaults.about, ...savedContent.about },
     education: { ...portfolioV2Defaults.education, ...savedContent.education },
-    achievements: savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
-    projects: savedContent.projects?.length ? savedContent.projects : portfolioV2Defaults.projects,
+    achievements: savedContent.copyRevision >= 2 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
+    projects: refreshedProjects,
     capabilities: savedContent.capabilities?.length ? savedContent.capabilities : portfolioV2Defaults.capabilities,
     sites: savedContent.sites?.length ? savedContent.sites : portfolioV2Defaults.sites,
   }
@@ -161,7 +168,6 @@ export default function PortfolioV2({ data, openAdmin }) {
       <section id="home" className="qa-hero">
         <div className="qa-hero-profile">
           <div className="qa-photo-wrap">
-            <img src={portraitUrl} alt="AI Software QA Engineer 유현주 프로필"/>
             <div className="qa-photo-copy">
               <small>{content.hero.eyebrow}</small>
               <b>{content.hero.name} <i>|</i> <strong>{content.hero.role}</strong></b>
@@ -172,14 +178,8 @@ export default function PortfolioV2({ data, openAdmin }) {
                 <a href={github} target="_blank" rel="noreferrer"><Github/> GitHub 보기</a>
               </div>
             </div>
+            <img src={portraitUrl} alt="AI Software QA Engineer 유현주 프로필"/>
           </div>
-          <aside className="qa-proof-card" aria-label="대표 QA 검증 결과">
-            <p>VERIFIED QA RESULT</p>
-            <strong>5 / 5</strong><span>자동화 테스트 통과</span>
-            <div><b>99점</b><small>VOC/AWS 품질 평균</small></div>
-            <div><b>0건</b><small>실패 테스트</small></div>
-            <footer><CheckCircle2/> 실제 결과 파일 기준</footer>
-          </aside>
         </div>
       </section>
 

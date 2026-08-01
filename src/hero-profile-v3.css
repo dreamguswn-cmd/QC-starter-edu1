@@ -5,25 +5,22 @@
 }
 
 .qa-hero-profile {
-  width: min(100%, 920px);
+  width: min(100%, 1120px);
   margin: 0 auto;
 }
 
 .qa-photo-wrap {
-  grid-template-columns: 48% 52%;
-}
-
-.qa-photo-wrap {
   display: grid;
-  grid-template-columns: 46% 54%;
-  min-height: 430px;
+  grid-template-columns: minmax(0, 58%) minmax(300px, 42%);
+  min-height: 520px;
   background: #0b1728;
+  box-shadow: 22px 22px 0 rgba(18,104,232,.1);
 }
 
 .qa-photo-wrap > img {
   width: 100%;
   height: 100%;
-  min-height: 430px;
+  min-height: 520px;
   object-fit: cover;
   object-position: center top;
 }
@@ -37,7 +34,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 34px 28px;
+  padding: clamp(38px, 6vw, 76px);
   color: #fff;
 }
 
@@ -50,42 +47,45 @@
 }
 
 .qa-photo-copy b {
-  margin-top: 21px;
-  font-size: 24px;
-  line-height: 1.28;
+  margin-top: 20px;
+  font-size: clamp(30px, 3.8vw, 48px);
+  line-height: 1.18;
+  letter-spacing: -.045em;
 }
 
 .qa-photo-copy b i {
-  padding: 0 3px;
+  padding: 0 5px;
   color: #0dd3c4;
   font-style: normal;
   font-weight: 400;
 }
 
 .qa-photo-copy b strong {
-  color: #bdc9d6;
-  font-size: 10px;
-  line-height: 1.4;
+  color: #fff;
+  font-size: .58em;
+  line-height: 1.25;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .qa-photo-copy span {
-  margin-top: 14px;
+  margin-top: 24px;
   color: #d9e2eb;
-  font-size: 11px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.75;
 }
 
 .qa-photo-actions {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 24px;
 }
 
 .qa-photo-actions a {
-  width: 100%;
-  min-height: 42px;
+  width: auto;
+  min-height: 46px;
+  padding: 0 16px;
 }
 
 .qa-photo-actions a:last-child {
@@ -94,16 +94,9 @@
   color: #fff;
 }
 
-@media (max-width: 1050px) {
-  .qa-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .qa-hero-profile {
-    max-width: 680px;
-    width: 100%;
-    margin: 0 auto;
-  }
+@media (max-width: 900px) {
+  .qa-photo-wrap { grid-template-columns: 1fr; }
+  .qa-photo-wrap > img { min-height: 430px; max-height: 560px; }
 }
 
 @media (max-width: 620px) {
@@ -119,4 +112,21 @@
   .qa-photo-copy {
     padding: 28px 22px;
   }
+
+  .qa-photo-copy b { font-size: 32px; }
+
+  .qa-photo-copy b strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .qa-photo-copy b i { display: none; }
+
+  .qa-photo-copy span { font-size: 14px; }
+
+  .qa-photo-actions { flex-direction: column; }
+
+  .qa-photo-actions a { width: 100%; }
 }
