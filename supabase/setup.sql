@@ -5,10 +5,24 @@ create table if not exists public.admin_users (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.care_viewers (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
 create or replace function public.is_admin()
 returns boolean language sql stable security definer set search_path = public
 as $$ select exists(select 1 from public.admin_users where user_id = auth.uid()); $$;
 grant execute on function public.is_admin() to anon, authenticated;
+
+create or replace function public.can_read_care_files()
+returns boolean language sql stable security definer set search_path = public
+as $$
+  select public.is_admin() or exists(
+    select 1 from public.care_viewers where user_id = auth.uid()
+  );
+$$;
+grant execute on function public.can_read_care_files() to anon, authenticated;
 
 create table if not exists public.site_settings (
   id integer primary key check (id = 1),
@@ -37,6 +51,7 @@ create table if not exists public.site_assets (
 );
 
 alter table public.admin_users enable row level security;
+alter table public.care_viewers enable row level security;
 alter table public.site_settings enable row level security;
 alter table public.projects enable row level security;
 alter table public.site_assets enable row level security;
@@ -82,12 +97,13 @@ create policy "admin delete portfolio files" on storage.objects for delete to au
 using (bucket_id = 'portfolio-public' and public.is_admin());
 
 drop policy if exists "admin read care files" on storage.objects;
+drop policy if exists "authorized read care files" on storage.objects;
 drop policy if exists "admin upload care files" on storage.objects;
 drop policy if exists "admin update care files" on storage.objects;
 drop policy if exists "admin delete care files" on storage.objects;
 
-create policy "admin read care files" on storage.objects for select to authenticated
-using (bucket_id = 'care-private' and public.is_admin());
+create policy "authorized read care files" on storage.objects for select to authenticated
+using (bucket_id = 'care-private' and public.can_read_care_files());
 create policy "admin upload care files" on storage.objects for insert to authenticated
 with check (bucket_id = 'care-private' and public.is_admin());
 create policy "admin update care files" on storage.objects for update to authenticated
@@ -99,4 +115,10 @@ using (bucket_id = 'care-private' and public.is_admin());
 -- Supabase Authentication에서 관리자 사용자를 만든 다음 이메일을 바꾸어 실행하세요.
 -- insert into public.admin_users(user_id)
 -- select id from auth.users where email = 'YOUR_ADMIN_EMAIL'
+-- on conflict (user_id) do nothing;
+
+-- 열람 전용 사용자를 Authentication에서 만든 다음 등록하세요.
+-- 이 계정은 care-private 자료를 열람할 수 있지만 업로드·수정·삭제할 수 없습니다.
+-- insert into public.care_viewers(user_id)
+-- select id from auth.users where email = 'YOUR_CARE_VIEWER_EMAIL'
 -- on conflict (user_id) do nothing;

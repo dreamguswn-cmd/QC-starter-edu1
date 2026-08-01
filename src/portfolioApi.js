@@ -2,6 +2,7 @@ import { supabase, supabaseConfigured } from './supabase'
 
 export const STORAGE_BUCKET = 'portfolio-public'
 export const CARE_BUCKET = 'care-private'
+export const CARE_VIEWER_EMAIL = import.meta.env.VITE_CARE_VIEWER_EMAIL || ''
 
 export const fallbackSettings = {
   hero: {
@@ -74,10 +75,41 @@ export async function signIn(email, password) {
   return data.session
 }
 
+export async function signInCareViewer(password) {
+  if (!CARE_VIEWER_EMAIL) throw new Error('열람용 계정 설정이 필요합니다.')
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: CARE_VIEWER_EMAIL,
+    password,
+  })
+  fail(error)
+  const { data: allowed, error: accessError } = await supabase.rpc('can_read_care_files')
+  fail(accessError)
+  if (!allowed) {
+    await supabase.auth.signOut()
+    throw new Error('자료 열람 권한이 없는 계정입니다.')
+  }
+  return data.session
+}
+
+export async function canReadCareFiles() {
+  if (!supabaseConfigured) return false
+  const { data, error } = await supabase.rpc('can_read_care_files')
+  fail(error)
+  return Boolean(data)
+}
+
 export async function currentSession() {
   if (!supabaseConfigured) return null
   const { data } = await supabase.auth.getSession()
   return data.session
+}
+
+export async function currentAdminSession() {
+  const session = await currentSession()
+  if (!session) return null
+  const { data, error } = await supabase.rpc('is_admin')
+  fail(error)
+  return data ? session : null
 }
 
 export async function signOut() {
