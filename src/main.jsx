@@ -5,6 +5,10 @@ import {
   LogOut, Mail, Menu, Plus, Save, Settings, ShieldCheck, Trash2, Upload, X
 } from 'lucide-react'
 import './styles.css'
+import './portfolio-v2.css'
+import './hero-profile-v3.css'
+import './education-sites.css'
+import PortfolioV2 from './PortfolioV2'
 import {
   currentSession, fallbackAssets, fallbackProjects, fallbackSettings, loadPortfolio,
   publicUrl, savePortfolio, signIn, signOut, uploadAsset,
@@ -305,7 +309,7 @@ function App() {
   if (careAdmin) return <CareAdmin close={() => { location.href = local('care-class-entrance.html') }}/>
   return admin
     ? <Admin data={data} saved={setData} close={() => { location.hash = ''; setAdmin(false) }}/>
-    : <Portfolio data={data} openAdmin={() => { location.hash = '/admin'; setAdmin(true) }}/>
+    : <PortfolioV2 data={data} openAdmin={() => { location.hash = '/admin'; setAdmin(true) }}/>
 }
 
 createRoot(document.getElementById('root')).render(<App/>)
