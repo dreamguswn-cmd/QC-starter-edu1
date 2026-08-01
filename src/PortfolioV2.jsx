@@ -3,6 +3,7 @@ import {
   ArrowRight, CheckCircle2, Download, ExternalLink, Github, Mail,
   Menu, ShieldCheck, X
 } from 'lucide-react'
+import { publicUrl } from './portfolioApi'
 
 const qaProjects = [
   {
@@ -82,12 +83,64 @@ const capabilities = [
   ['Cloud & Ops', 'AWS EC2 · S3 · CloudTrail · Docker'],
 ]
 
+export const portfolioV2Defaults = {
+  hero: {
+    eyebrow: 'AI SOFTWARE QA PORTFOLIO',
+    name: '유현주',
+    role: 'AI Software QA Engineer',
+    summary: '기능 테스트부터 AI 응답 품질평가, 성능 검증, 모니터링과 장애복구까지 수행하는 QA 엔지니어입니다.',
+    evidence: '테스트 결과를 수치와 증빙으로 기록하고, 발견된 문제를 재현 가능한 개선 과정으로 연결합니다.',
+  },
+  about: {
+    title: '안녕하세요,\nQA 엔지니어 유현주입니다.',
+    paragraphs: [
+      '테스트 기준을 세우고, 기대 결과와 실제 결과의 차이를 찾습니다. 결함은 재현 조건과 원인을 기록하고, 개선 후 같은 조건으로 다시 검증합니다.',
+      'AI 응답의 정확성과 근거성부터 API 기능, 부하 성능, 운영 지표와 클라우드 장애 복구까지 하나의 QA 흐름으로 연결해 왔습니다.',
+    ],
+  },
+  education: {
+    institution: '대우능력개발원',
+    course: 'AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정',
+    period: '2026.05.27 – 2026.08.07',
+    status: '수강 중',
+    description: '아래 QA 성과와 대표 프로젝트는 이 교육 과정에서 직접 실행하고 결과를 기록한 실습입니다.',
+    topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
+  },
+  achievements: [
+    { value: '5건', label: 'VOC/AWS 자동화 테스트' },
+    { value: '100%', label: '자동화 테스트 통과율' },
+    { value: '99점', label: 'VOC/AWS 품질 평균' },
+    { value: '5개', label: '대표 QA 프로젝트' },
+  ],
+  projects: qaProjects,
+  capabilities,
+  sites: [
+    { title: '유현주 교육 게임 LAB', category: 'EDUCATIONAL WEB GAME', summary: '수학, 영어, 타자 연습을 게임으로 학습하는 반응형 교육 사이트입니다.', image: 'assets/game-lab-cover.svg', live: 'https://dreamguswn-cmd.github.io/play-and-learn/', github: 'https://github.com/dreamguswn-cmd/play-and-learn' },
+    { title: '우리 동네 매미 자연학습', category: 'NATURE LEARNING WEB', summary: '매미의 모습과 울음소리, 기온에 따른 활동을 체험하는 자연학습 사이트입니다.', image: 'assets/maeme-cover.png', live: 'https://dreamguswn-cmd.github.io/maeme/', github: 'https://github.com/dreamguswn-cmd/maeme' },
+    { title: '모바일 청첩장', category: 'MOBILE FIRST WEB', summary: '모바일 우선 반응형 구성과 갤러리, 연락처·계좌 복사 기능을 구현한 웹사이트입니다.', image: 'assets/invitation/couple-wedding.png', live: 'invitation.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
+  ],
+}
+
 export default function PortfolioV2({ data, openAdmin }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const email = data?.settings?.contact?.email || 'aa01057559209@gmail.com'
   const github = data?.settings?.contact?.github || 'https://github.com/dreamguswn-cmd'
   const base = import.meta.env.BASE_URL
   const local = (path) => `${base}${path}`
+  const portraitUrl = publicUrl(data?.assets?.portrait?.path) || local(data?.assets?.portrait?.fallback || 'assets/profile-photo.jpg')
+  const resumeUrl = publicUrl(data?.assets?.resume?.path) || local(data?.assets?.resume?.fallback || 'downloads/Yoo_Hyunju_Resume.pdf')
+  const savedContent = data?.settings?.v2 || {}
+  const content = {
+    ...portfolioV2Defaults,
+    ...savedContent,
+    hero: { ...portfolioV2Defaults.hero, ...savedContent.hero },
+    about: { ...portfolioV2Defaults.about, ...savedContent.about },
+    education: { ...portfolioV2Defaults.education, ...savedContent.education },
+    achievements: savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
+    projects: savedContent.projects?.length ? savedContent.projects : portfolioV2Defaults.projects,
+    capabilities: savedContent.capabilities?.length ? savedContent.capabilities : portfolioV2Defaults.capabilities,
+    sites: savedContent.sites?.length ? savedContent.sites : portfolioV2Defaults.sites,
+  }
 
   return <div className="qa-site">
     <header className="qa-header">
@@ -107,14 +160,14 @@ export default function PortfolioV2({ data, openAdmin }) {
       <section id="home" className="qa-hero">
         <div className="qa-hero-profile">
           <div className="qa-photo-wrap">
-            <img src={local('assets/profile-photo.jpg')} alt="AI Software QA Engineer 유현주 프로필"/>
+            <img src={portraitUrl} alt="AI Software QA Engineer 유현주 프로필"/>
             <div className="qa-photo-copy">
-              <small>AI SOFTWARE QA PORTFOLIO</small>
-              <b>유현주 <i>|</i> <strong>AI Software QA Engineer</strong></b>
-              <span>기능 테스트부터 AI 응답 품질평가, 성능 검증, 모니터링과 장애복구까지 수행하는 QA 엔지니어입니다.<br/><br/>테스트 결과를 수치와 증빙으로 기록하고, 발견된 문제를 재현 가능한 개선 과정으로 연결합니다.</span>
+              <small>{content.hero.eyebrow}</small>
+              <b>{content.hero.name} <i>|</i> <strong>{content.hero.role}</strong></b>
+              <span>{content.hero.summary}<br/><br/>{content.hero.evidence}</span>
               <div className="qa-photo-actions">
                 <a href="#projects">대표 프로젝트 보기 <ArrowRight/></a>
-                <a href={local('downloads/Yoo_Hyunju_Resume.pdf')} target="_blank" rel="noreferrer"><Download/> 이력서 다운로드</a>
+                <a href={resumeUrl} target="_blank" rel="noreferrer"><Download/> 이력서 다운로드</a>
                 <a href={github} target="_blank" rel="noreferrer"><Github/> GitHub 보기</a>
               </div>
             </div>
@@ -130,44 +183,32 @@ export default function PortfolioV2({ data, openAdmin }) {
       </section>
 
       <section id="about" className="qa-section qa-about">
-        <div><h2>안녕하세요,<br/>QA 엔지니어 유현주입니다.</h2></div>
-        <div><p>테스트 기준을 세우고, 기대 결과와 실제 결과의 차이를 찾습니다. 결함은 재현 조건과 원인을 기록하고, 개선 후 같은 조건으로 다시 검증합니다.</p><p>AI 응답의 정확성과 근거성부터 API 기능, 부하 성능, 운영 지표와 클라우드 장애 복구까지 하나의 QA 흐름으로 연결해 왔습니다.</p></div>
+        <div><h2>{content.about.title.split('\n').map((line, index) => <React.Fragment key={line}>{index > 0 && <br/>}{line}</React.Fragment>)}</h2></div>
+        <div>{content.about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
       </section>
 
       <section id="education" className="qa-section qa-education">
         <div className="qa-education-intro">
           <p className="qa-kicker">EDUCATION & TRAINING</p>
-          <h2>대우능력개발원</h2>
-          <p>AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정</p>
-          <div><b>2026.05.27 – 2026.08.07</b><span>수강 중</span></div>
+          <h2>{content.education.institution}</h2>
+          <p>{content.education.course}</p>
+          <div><b>{content.education.period}</b><span>{content.education.status}</span></div>
         </div>
         <div className="qa-education-detail">
-          <p>아래 QA 성과와 대표 프로젝트는 이 교육 과정에서 직접 실행하고 결과를 기록한 실습입니다.</p>
-          <ul>
-            <li>기능·API·회귀 테스트와 테스트 케이스 작성</li>
-            <li>pytest 자동화 및 k6 성능 검증</li>
-            <li>AI 응답 품질평가와 RAG 검증</li>
-            <li>Prometheus·Grafana 운영 모니터링</li>
-            <li>AWS 보안 점검, 장애 재현과 복구</li>
-            <li>팀 프로젝트 결과 보고와 증빙 관리</li>
-          </ul>
+          <p>{content.education.description}</p>
+          <ul>{content.education.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
         </div>
       </section>
 
       <section id="achievements" className="qa-section">
         <div className="qa-heading"><p className="qa-kicker">QA ACHIEVEMENTS</p><h2>증빙으로 확인되는 결과</h2><p>확인되지 않은 합산 수치는 부풀리지 않고, 실제 제출 결과에서 검증된 대표 수치만 표시했습니다.</p></div>
-        <div className="qa-stats">
-          <article><b>5건</b><span>VOC/AWS 자동화 테스트</span></article>
-          <article><b>100%</b><span>자동화 테스트 통과율</span></article>
-          <article><b>99점</b><span>VOC/AWS 품질 평균</span></article>
-          <article><b>5개</b><span>대표 QA 프로젝트</span></article>
-        </div>
+        <div className="qa-stats">{content.achievements.map((item) => <article key={`${item.value}-${item.label}`}><b>{item.value}</b><span>{item.label}</span></article>)}</div>
       </section>
 
       <section id="projects" className="qa-section qa-project-section">
         <div className="qa-heading"><p className="qa-kicker">SELECTED QA PROJECTS</p><h2>테스트 → 결함 → 개선 → 결과 → 증빙</h2><p>각 프로젝트에서 제가 맡은 QA 역할과 검증 과정을 같은 형식으로 정리했습니다.</p></div>
         <div className="qa-projects">
-          {qaProjects.map((project) => <article className="qa-project" id={project.id} key={project.id}>
+          {content.projects.map((project) => <article className="qa-project" id={project.id} key={project.id}>
             <div className="qa-project-visual"><img src={local(project.image)} alt={`${project.title} 결과 화면`}/><span>{project.number}</span></div>
             <div className="qa-project-content">
               <p className="qa-project-label">{project.label}</p><h3>{project.title}</h3><p className="qa-project-summary">{project.summary}</p>
@@ -187,7 +228,7 @@ export default function PortfolioV2({ data, openAdmin }) {
 
       <section id="skills" className="qa-section">
         <div className="qa-heading"><p className="qa-kicker">CORE CAPABILITIES</p><h2>QA 업무 기준으로 재분류한 기술</h2></div>
-        <div className="qa-capabilities">{capabilities.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+        <div className="qa-capabilities">{content.capabilities.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
       </section>
 
       <section className="qa-section qa-github">
@@ -197,25 +238,15 @@ export default function PortfolioV2({ data, openAdmin }) {
 
       <section id="sites" className="qa-section qa-made-sites">
         <div className="qa-heading"><p className="qa-kicker">WEB SITES BY YOO HYUNJU</p><h2>직접 만든 웹사이트</h2><p>QA 교육 프로젝트와 별도로 사용자 관점에서 직접 기획하고 구현한 웹사이트입니다.</p></div>
-        <div className="qa-site-cards">
-          <article>
-            <img src={local('assets/game-lab-cover.svg')} alt="유현주 교육 게임 LAB 대표 화면"/>
-            <div><small>EDUCATIONAL WEB GAME</small><h3>유현주 교육 게임 LAB</h3><p>수학, 영어, 타자 연습을 게임으로 학습하는 반응형 교육 사이트입니다.</p><div><a href="https://dreamguswn-cmd.github.io/play-and-learn/" target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href="https://github.com/dreamguswn-cmd/play-and-learn" target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
-          </article>
-          <article>
-            <img src={local('assets/maeme-cover.png')} alt="우리 동네 매미 자연학습 사이트 대표 화면"/>
-            <div><small>NATURE LEARNING WEB</small><h3>우리 동네 매미 자연학습</h3><p>매미의 모습과 울음소리, 기온에 따른 활동을 체험하는 자연학습 사이트입니다.</p><div><a href="https://dreamguswn-cmd.github.io/maeme/" target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href="https://github.com/dreamguswn-cmd/maeme" target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
-          </article>
-          <article>
-            <img src={local('assets/invitation/couple-wedding.png')} alt="모바일 청첩장 웹사이트 대표 화면"/>
-            <div><small>MOBILE FIRST WEB</small><h3>모바일 청첩장</h3><p>모바일 우선 반응형 구성과 갤러리, 연락처·계좌 복사 기능을 구현한 웹사이트입니다.</p><div><a href={local('invitation.html')} target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href="https://github.com/dreamguswn-cmd/QC-starter-edu1" target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
-          </article>
-        </div>
+        <div className="qa-site-cards">{content.sites.map((site) => <article key={site.title}>
+          <img src={site.image?.startsWith('http') ? site.image : local(site.image)} alt={`${site.title} 대표 화면`}/>
+          <div><small>{site.category}</small><h3>{site.title}</h3><p>{site.summary}</p><div><a href={site.live?.startsWith('http') ? site.live : local(site.live)} target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href={site.github} target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
+        </article>)}</div>
       </section>
 
       <section id="contact" className="qa-contact">
         <p className="qa-kicker">CONTACT</p><h2>품질을 근거로 설명하는<br/>QA 엔지니어 유현주입니다.</h2>
-        <div><a href={`mailto:${email}`}><Mail/> {email}</a><a href={github} target="_blank" rel="noreferrer"><Github/> GitHub</a><a href={local('downloads/Yoo_Hyunju_Resume.pdf')} target="_blank" rel="noreferrer"><Download/> Resume</a></div>
+        <div><a href={`mailto:${email}`}><Mail/> {email}</a><a href={github} target="_blank" rel="noreferrer"><Github/> GitHub</a><a href={resumeUrl} target="_blank" rel="noreferrer"><Download/> Resume</a></div>
         <button className="qa-admin-link" onClick={openAdmin}>Portfolio Admin</button>
       </section>
     </main>

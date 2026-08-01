@@ -102,6 +102,13 @@ export async function savePortfolio(settings, projects) {
   }
 }
 
+export async function saveSettings(settings) {
+  const { error } = await supabase
+    .from('site_settings')
+    .upsert({ id: 1, content: settings, updated_at: new Date().toISOString() })
+  fail(error)
+}
+
 export async function uploadAsset(assetKey, file, previousPath) {
   const extension = (file.name.split('.').pop() || 'bin').replace(/[^a-z0-9]/gi, '')
   const path = `${assetKey}/${Date.now()}.${extension}`

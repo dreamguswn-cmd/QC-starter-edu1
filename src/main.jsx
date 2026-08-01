@@ -8,7 +8,9 @@ import './styles.css'
 import './portfolio-v2.css'
 import './hero-profile-v3.css'
 import './education-sites.css'
+import './admin-v2.css'
 import PortfolioV2 from './PortfolioV2'
+import AdminV2 from './AdminV2'
 import {
   currentSession, fallbackAssets, fallbackProjects, fallbackSettings, loadPortfolio,
   publicUrl, savePortfolio, signIn, signOut, uploadAsset,
@@ -308,7 +310,7 @@ function App() {
   if (loading) return <div className="loading">포트폴리오를 불러오는 중입니다.</div>
   if (careAdmin) return <CareAdmin close={() => { location.href = local('care-class-entrance.html') }}/>
   return admin
-    ? <Admin data={data} saved={setData} close={() => { location.hash = ''; setAdmin(false) }}/>
+    ? <AdminV2 data={data} saved={setData} close={() => { location.hash = ''; setAdmin(false) }}/>
     : <PortfolioV2 data={data} openAdmin={() => { location.hash = '/admin'; setAdmin(true) }}/>
 }
 
