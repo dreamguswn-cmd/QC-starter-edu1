@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ArrowLeft, LogIn, LogOut, Plus, Save, Trash2, Upload } from 'lucide-react'
-import { currentSession, loadPortfolio, saveSettings, signIn, signOut, uploadAsset, uploadCareFiles } from './portfolioApi'
+import { currentAdminSession, loadPortfolio, saveSettings, signIn, signOut, uploadAsset, uploadCareFiles } from './portfolioApi'
 import { supabaseConfigured } from './supabase'
 import { portfolioV2Defaults } from './PortfolioV2'
 
@@ -38,7 +38,7 @@ export default function AdminV2({ data, close, saved }) {
     sites: stored.sites?.length ? stored.sites : portfolioV2Defaults.sites,
   }))
 
-  useEffect(() => { currentSession().then(setSession) }, [])
+  useEffect(() => { currentAdminSession().then(setSession).catch(() => setSession(null)) }, [])
 
   const login = async () => {
     try {
