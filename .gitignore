@@ -4,3 +4,9 @@ dist/
 .env
 .env.local
 .env.production
+portfolio-site/
+portfolio.pdf
+invitation.html
+script.js
+styles.css
+.DS_Store

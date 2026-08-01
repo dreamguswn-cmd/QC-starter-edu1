@@ -10,6 +10,15 @@
 - GitHub: <https://github.com/dreamguswn-cmd>
 - 지원 직무: AI Software QA Engineer
 
+## Quick Navigation
+
+- [QA 목표와 범위](docs/qa/README.md)
+- [테스트 케이스](docs/qa/test-cases.md)
+- [품질 발견사항과 개선 기록](docs/qa/quality-findings.md)
+- [테스트 결과](docs/qa/test-results.md)
+- [QA 증빙 색인](docs/qa/evidence-index.md)
+- [시스템 구조와 공개·비공개 경계](docs/architecture.md)
+
 ## QA Summary
 
 | 항목 | 검증 결과 |
@@ -133,6 +142,15 @@ src/
 public/
 ├─ assets/               # 프로젝트 이미지와 증빙 화면
 └─ downloads/            # 이력서와 프로젝트 결과물
+
+docs/
+├─ qa/                   # 테스트·결함·결과·증빙 문서
+└─ architecture.md       # 공개 화면과 관리자 구조
+
+.github/
+├─ workflows/            # GitHub Pages 자동 배포
+├─ ISSUE_TEMPLATE/       # 재현 가능한 결함 보고 양식
+└─ pull_request_template.md
 ```
 
 ## Local Development
