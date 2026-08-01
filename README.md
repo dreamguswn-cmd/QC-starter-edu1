@@ -117,6 +117,7 @@ QA 교육 프로젝트 외에 직접 기획하고 구현한 웹사이트입니�
 | 유현주 교육 게임 LAB | 수학·영어·타자 학습 게임 | [사이트](https://dreamguswn-cmd.github.io/play-and-learn/) | [GitHub](https://github.com/dreamguswn-cmd/play-and-learn) |
 | 우리 동네 매미 자연학습 | 매미 생태 체험형 학습 사이트 | [사이트](https://dreamguswn-cmd.github.io/maeme/) | [GitHub](https://github.com/dreamguswn-cmd/maeme) |
 | 모바일 청첩장 | 모바일 우선 반응형 웹페이지 | [포트폴리오에서 보기](https://dreamguswn-cmd.github.io/QC-starter-edu1/invitation.html) | [GitHub](https://github.com/dreamguswn-cmd/QC-starter-edu1) |
+| 초등돌봄교실 자료관리 | 아동 개인정보를 보호하는 비공개 운영 자료관리 시스템 | [공개 소개](https://dreamguswn-cmd.github.io/QC-starter-edu1/care-class-entrance.html) | [GitHub](https://github.com/dreamguswn-cmd/QC-starter-edu1) |
 
 ## Project Structure
 

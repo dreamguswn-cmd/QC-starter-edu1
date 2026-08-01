@@ -118,6 +118,7 @@ export const portfolioV2Defaults = {
     { title: '유현주 교육 게임 LAB', category: 'EDUCATIONAL WEB GAME', summary: '수학, 영어, 타자 연습을 게임으로 학습하는 반응형 교육 사이트입니다.', image: 'assets/game-lab-cover.svg', live: 'https://dreamguswn-cmd.github.io/play-and-learn/', github: 'https://github.com/dreamguswn-cmd/play-and-learn' },
     { title: '우리 동네 매미 자연학습', category: 'NATURE LEARNING WEB', summary: '매미의 모습과 울음소리, 기온에 따른 활동을 체험하는 자연학습 사이트입니다.', image: 'assets/maeme-cover.png', live: 'https://dreamguswn-cmd.github.io/maeme/', github: 'https://github.com/dreamguswn-cmd/maeme' },
     { title: '모바일 청첩장', category: 'MOBILE FIRST WEB', summary: '모바일 우선 반응형 구성과 갤러리, 연락처·계좌 복사 기능을 구현한 웹사이트입니다.', image: 'assets/invitation/couple-wedding.png', live: 'invitation.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
+    { title: '초등돌봄교실 자료관리', category: 'PRIVATE EDUCATION OPERATIONS', summary: '돌봄교실 운영 자료를 정리하고 관리자만 내부 자료를 확인할 수 있도록 만든 비공개 관리 시스템입니다.', image: '', live: 'care-class-entrance.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
   ],
 }
 
@@ -239,7 +240,7 @@ export default function PortfolioV2({ data, openAdmin }) {
       <section id="sites" className="qa-section qa-made-sites">
         <div className="qa-heading"><p className="qa-kicker">WEB SITES BY YOO HYUNJU</p><h2>직접 만든 웹사이트</h2><p>QA 교육 프로젝트와 별도로 사용자 관점에서 직접 기획하고 구현한 웹사이트입니다.</p></div>
         <div className="qa-site-cards">{content.sites.map((site) => <article key={site.title}>
-          <img src={site.image?.startsWith('http') ? site.image : local(site.image)} alt={`${site.title} 대표 화면`}/>
+          {site.image ? <img src={site.image.startsWith('http') ? site.image : local(site.image)} alt={`${site.title} 대표 화면`}/> : <div className="qa-site-placeholder"><ShieldCheck/><span>PRIVATE CARE CLASS</span><b>아동 개인정보 보호</b></div>}
           <div><small>{site.category}</small><h3>{site.title}</h3><p>{site.summary}</p><div><a href={site.live?.startsWith('http') ? site.live : local(site.live)} target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href={site.github} target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
         </article>)}</div>
       </section>
