@@ -1,0 +1,57 @@
+.admin-v2-care-shortcut {
+  position: fixed;
+  right: 22px;
+  bottom: 76px;
+  z-index: 40;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid #a5ead1 !important;
+  border-radius: 999px;
+  background: #17634f !important;
+  color: #fff !important;
+  box-shadow: 0 12px 30px rgba(13, 62, 67, .25);
+}
+
+@media (max-width: 620px) {
+  .admin-v2-care-shortcut {
+    right: 12px;
+    bottom: 72px;
+  }
+}
+
+.admin-v2-care-upload > label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border: 2px dashed #8bbcab;
+  background: #effaf6;
+  cursor: pointer;
+}
+
+.admin-v2-care-upload > label svg {
+  width: 28px;
+  height: 28px;
+  color: #17634f;
+}
+
+.admin-v2-care-upload > label span {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-v2-care-upload > label small {
+  color: #60736d;
+}
+
+.admin-v2-care-upload > label input {
+  display: none;
+}
+
+.admin-v2-care-upload .care-view-button {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid #17634f;
+  background: #fff;
+  color: #17634f;
+}

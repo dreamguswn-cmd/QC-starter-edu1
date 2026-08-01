@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ArrowLeft, LogIn, LogOut, Plus, Save, Trash2, Upload } from 'lucide-react'
-import { currentSession, loadPortfolio, saveSettings, signIn, signOut, uploadAsset } from './portfolioApi'
+import { currentSession, loadPortfolio, saveSettings, signIn, signOut, uploadAsset, uploadCareFiles } from './portfolioApi'
 import { supabaseConfigured } from './supabase'
 import { portfolioV2Defaults } from './PortfolioV2'
 
@@ -68,6 +68,15 @@ export default function AdminV2({ data, close, saved }) {
     } catch (error) { setMessage(error.message) } finally { setBusy(false) }
   }
 
+  const uploadCare = async (selected) => {
+    if (!selected.length) return
+    try {
+      setBusy(true); setMessage(`${selected.length}개 초등돌봄 자료를 보호 저장소에 올리는 중입니다.`)
+      await uploadCareFiles(selected)
+      setMessage(`${selected.length}개 초등돌봄 자료 업로드를 완료했습니다. 자료 열람은 보호 화면에서만 가능합니다.`)
+    } catch (error) { setMessage(error.message) } finally { setBusy(false) }
+  }
+
   const setSection = (section, key, value) => setContent((current) => ({ ...current, [section]: { ...current[section], [key]: value } }))
   const setAchievement = (index, key, value) => setContent((current) => ({ ...current, achievements: current.achievements.map((item, i) => i === index ? { ...item, [key]: value } : item) }))
   const setProject = (index, key, value) => setContent((current) => ({ ...current, projects: current.projects.map((item, i) => i === index ? { ...item, [key]: value } : item) }))
@@ -79,6 +88,7 @@ export default function AdminV2({ data, close, saved }) {
   if (!session) return <div className="admin-v2-login"><div><p>PORTFOLIO ADMIN</p><h1>유현주 QA 포트폴리오 관리</h1><input type="email" placeholder="관리자 이메일" value={email} onChange={(event) => setEmail(event.target.value)}/><input type="password" placeholder="비밀번호" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()}/><button disabled={busy} onClick={login}><LogIn/> 로그인</button>{message && <span>{message}</span>}<button className="ghost" onClick={close}><ArrowLeft/> 공개 포트폴리오</button></div></div>
 
   return <div className="admin-v2">
+    <button className="admin-v2-care-shortcut" onClick={() => { location.hash = '/care-admin' }}>보호 자료 열람</button>
     <header><div><p>AI SOFTWARE QA PORTFOLIO</p><h1>콘텐츠 관리자</h1></div><div><button className="ghost" onClick={close}><ArrowLeft/> 공개 화면</button><button disabled={busy} onClick={save}><Save/> 전체 저장</button><button className="ghost" onClick={async () => { await signOut(); setSession(null) }}><LogOut/> 로그아웃</button></div></header>
     {message && <div className="admin-v2-message">{message}</div>}
     <main>
@@ -113,6 +123,7 @@ export default function AdminV2({ data, close, saved }) {
       <section><div className="section-title"><span>06</span><div><h2>기술 역량</h2><p>QA 기술 분류와 설명을 수정합니다.</p></div></div><div className="admin-v2-repeat small">{content.capabilities.map(([title, text], index) => <article key={index}><b>역량 {index + 1}</b><Field label="분류"><input value={title} onChange={(event) => setCapability(index, 0, event.target.value)}/></Field><Field label="기술"><textarea rows="2" value={text} onChange={(event) => setCapability(index, 1, event.target.value)}/></Field></article>)}</div></section>
 
       <section><div className="section-title"><span>07</span><div><h2>직접 만든 사이트</h2><p>마지막 사이트 카드의 설명과 연결 주소를 관리합니다.</p></div></div><div className="admin-v2-repeat projects">{content.sites.map((site, index) => <article key={index}><div className="repeat-title"><b>{site.title}</b><button onClick={() => setContent((current) => ({ ...current, sites: current.sites.filter((_, i) => i !== index) }))}><Trash2/> 삭제</button></div><div className="admin-v2-grid">{['title','category','summary','image','live','github'].map((key) => <Field key={key} label={{title:'사이트명',category:'분류',summary:'설명',image:'대표 이미지',live:'공개 주소',github:'GitHub 주소'}[key]}>{key === 'summary' ? <textarea rows="3" value={site[key]} onChange={(event) => setSite(index, key, event.target.value)}/> : <input value={site[key]} onChange={(event) => setSite(index, key, event.target.value)}/>}</Field>)}</div></article>)}<button className="admin-v2-add" onClick={() => setContent((current) => ({ ...current, sites: [...current.sites, { title: '새 사이트', category: 'WEB SITE', summary: '', image: 'assets/page-1.webp', live: '', github: '' }] }))}><Plus/> 사이트 추가</button></div></section>
+      <section className="admin-v2-care-upload"><div className="section-title"><span>08</span><div><h2>초등돌봄 자료 업로드</h2><p>관리자 화면에서는 자료를 올릴 수 있고, 파일 목록과 내용 열람은 보호된 화면에서만 가능합니다.</p></div></div><label><Upload/><span><b>{busy ? '업로드 처리 중' : '초등돌봄 자료 선택'}</b><small>사진, PDF, 문서, 엑셀, 프레젠테이션 파일을 여러 개 선택할 수 있습니다.</small></span><input disabled={busy} multiple type="file" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp" onChange={(event) => { const selected = [...event.target.files]; event.target.value = ''; uploadCare(selected) }}/></label><button className="care-view-button" onClick={() => { location.hash = '/care-admin' }}>비밀번호 보호 자료 열람</button></section>
     </main>
     <div className="admin-v2-savebar"><span>{message || '수정 후 전체 저장 버튼을 눌러주세요.'}</span><button disabled={busy} onClick={save}><Save/> {busy ? '저장 중' : '전체 저장'}</button></div>
   </div>
