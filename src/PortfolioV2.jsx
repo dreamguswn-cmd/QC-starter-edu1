@@ -84,7 +84,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 2,
+  copyRevision: 3,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -93,7 +93,7 @@ export const portfolioV2Defaults = {
     evidence: '테스트 결과를 수치와 증빙으로 기록하고, 발견된 문제를 재현 가능한 개선 과정으로 연결합니다.',
   },
   about: {
-    title: '안녕하세요,\nQA 엔지니어 유현주입니다.',
+    title: '문제를 재현하고,\n개선 결과를 다시 검증합니다.',
     paragraphs: [
       '테스트 기준을 세우고, 기대 결과와 실제 결과의 차이를 찾습니다. 결함은 재현 조건과 원인을 기록하고, 개선 후 같은 조건으로 다시 검증합니다.',
       'AI 응답의 정확성과 근거성부터 API 기능, 부하 성능, 운영 지표와 클라우드 장애 복구까지 하나의 QA 흐름으로 연결해 왔습니다.',
@@ -138,11 +138,18 @@ export default function PortfolioV2({ data, openAdmin }) {
         return savedContent.copyRevision >= 2 || !revised ? project : { ...project, role: revised.role }
       })
     : portfolioV2Defaults.projects
+  const refreshedAbout = {
+    ...portfolioV2Defaults.about,
+    ...savedContent.about,
+    title: savedContent.copyRevision >= 3 && savedContent.about?.title
+      ? savedContent.about.title
+      : portfolioV2Defaults.about.title,
+  }
   const content = {
     ...portfolioV2Defaults,
     ...savedContent,
     hero: { ...portfolioV2Defaults.hero, ...savedContent.hero },
-    about: { ...portfolioV2Defaults.about, ...savedContent.about },
+    about: refreshedAbout,
     education: { ...portfolioV2Defaults.education, ...savedContent.education },
     achievements: savedContent.copyRevision >= 2 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
     projects: refreshedProjects,
@@ -213,7 +220,7 @@ export default function PortfolioV2({ data, openAdmin }) {
             <div className="qa-project-visual"><img src={local(project.image)} alt={`${project.title} 결과 화면`}/><span>{project.number}</span></div>
             <div className="qa-project-content">
               <p className="qa-project-label">{project.label}</p><h3>{project.title}</h3><p className="qa-project-summary">{project.summary}</p>
-              <div className="qa-role"><b>개인 기여</b><span>{project.role}</span></div>
+              <div className="qa-role"><b>내 기여</b><span>{project.role}</span></div>
               <div className="qa-project-metrics">{project.metrics.map(([key, value]) => <div key={key}><small>{key}</small><b>{value}</b></div>)}</div>
               <div className="qa-improvement">
                 <div><span>01 · 문제 정의</span><p>{project.issue}</p></div>
