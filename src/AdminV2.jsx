@@ -30,7 +30,13 @@ export default function AdminV2({ data, close, saved }) {
     ...portfolioV2Defaults,
     ...stored,
     hero: { ...portfolioV2Defaults.hero, ...stored.hero },
-    about: { ...portfolioV2Defaults.about, ...stored.about },
+    about: {
+      ...portfolioV2Defaults.about,
+      ...stored.about,
+      title: stored.copyRevision >= 3 && stored.about?.title
+        ? stored.about.title
+        : portfolioV2Defaults.about.title,
+    },
     education: { ...portfolioV2Defaults.education, ...stored.education },
     achievements: stored.copyRevision >= 2 && stored.achievements?.length ? stored.achievements : portfolioV2Defaults.achievements,
     projects: stored.projects?.length ? stored.projects.map((project) => {
