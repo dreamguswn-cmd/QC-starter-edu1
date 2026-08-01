@@ -41,7 +41,11 @@ export default function AdminV2({ data, close, saved }) {
     achievements: stored.copyRevision >= 2 && stored.achievements?.length ? stored.achievements : portfolioV2Defaults.achievements,
     projects: stored.projects?.length ? stored.projects.map((project) => {
       const revised = qaProjects.find((item) => item.id === project.id)
-      return stored.copyRevision >= 2 || !revised ? project : { ...project, role: revised.role }
+      if (!revised) return project
+      if (stored.copyRevision < 4 && ['rag', 'aws'].includes(project.id)) {
+        return { ...project, label: revised.label, summary: revised.summary, role: revised.role }
+      }
+      return stored.copyRevision >= 2 ? project : { ...project, role: revised.role }
     }) : portfolioV2Defaults.projects,
     capabilities: stored.capabilities?.length ? stored.capabilities : portfolioV2Defaults.capabilities,
     sites: stored.sites?.length ? stored.sites : portfolioV2Defaults.sites,
