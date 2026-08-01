@@ -6,4 +6,52 @@
 @media(max-width:900px){.qa-header nav{display:none;position:absolute;top:78px;left:0;right:0;background:#fff;padding:25px;box-shadow:0 15px 30px rgba(11,23,40,.12);flex-direction:column}.qa-header nav.is-open{display:flex}.qa-menu{display:block}.qa-hero{grid-template-columns:1fr;min-height:auto}.qa-proof-card{max-width:500px}.qa-about,.qa-github{grid-template-columns:1fr}.qa-stats{grid-template-columns:repeat(2,1fr)}.qa-stats article:nth-child(2){border-right:0}.qa-project{grid-template-columns:1fr}.qa-project-visual{min-height:330px}.qa-capabilities{grid-template-columns:repeat(2,1fr)}.qa-capabilities article:nth-child(3n){border-right:1px solid var(--line)}.qa-capabilities article:nth-child(2n){border-right:0}}
 @media(max-width:620px){.qa-header{height:66px}.qa-header nav{top:66px}.qa-brand span{display:none}.qa-hero{padding:62px 22px}.qa-hero h1{font-size:42px}.qa-actions{flex-direction:column}.qa-button{width:100%}.qa-proof-card{padding:30px}.qa-section{padding:75px 22px}.qa-about>div:last-child,.qa-github>div:last-child{padding-top:0}.qa-stats{grid-template-columns:1fr}.qa-stats article,.qa-stats article:first-child{padding:24px 0;border-right:0}.qa-project-visual{min-height:245px}.qa-project-content{padding:26px 20px}.qa-role{flex-direction:column;gap:4px}.qa-project-metrics{grid-template-columns:repeat(2,1fr);gap:16px 0}.qa-project-metrics div:nth-child(2){border-right:0}.qa-improvement{grid-template-columns:1fr}.qa-project-actions{flex-direction:column}.qa-project-actions a{justify-content:center}.qa-capabilities{grid-template-columns:1fr}.qa-capabilities article,.qa-capabilities article:nth-child(3n){border-right:0}.qa-contact h2{font-size:34px}}
 
+@media(max-width:620px){
+  .qa-stats{gap:12px;border:0}
+  .qa-stats article,
+  .qa-stats article:first-child{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    width:100%;
+    min-width:0;
+    padding:22px 20px;
+    border:1px solid var(--line);
+    background:#fff;
+    box-sizing:border-box;
+  }
+  .qa-stats b{
+    flex:0 0 auto;
+    font-size:clamp(30px,10vw,42px);
+    line-height:1;
+    white-space:nowrap;
+  }
+  .qa-stats span{
+    min-width:0;
+    margin:0;
+    font-size:12px;
+    line-height:1.45;
+    text-align:right;
+    overflow-wrap:anywhere;
+  }
+}
+
+@media(max-width:420px){
+  .qa-project-metrics{grid-template-columns:1fr;gap:0;margin:20px 0}
+  .qa-project-metrics div,
+  .qa-project-metrics div:first-child{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:12px 0;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .qa-project-metrics div:last-child{border-bottom:0}
+  .qa-project-metrics small,.qa-project-metrics b{min-width:0}
+  .qa-project-metrics b{flex:0 0 auto;font-size:16px;white-space:nowrap}
+}
+
 .qa-hero-profile{display:grid;gap:16px;align-self:center}.qa-photo-wrap{position:relative;min-height:500px;background:#dfe8ee;overflow:hidden;box-shadow:22px 22px 0 rgba(18,104,232,.1)}.qa-photo-wrap>img{width:100%;height:100%;min-height:500px;object-fit:cover;object-position:center top;display:block}.qa-photo-wrap:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(5,16,30,.95) 82%)}.qa-photo-copy{position:absolute;left:28px;right:24px;bottom:25px;color:#fff;z-index:2}.qa-photo-copy small{display:block;color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:.18em;margin-bottom:6px}.qa-photo-copy b{display:block;font-size:32px;line-height:1.2;letter-spacing:-.04em}.qa-photo-copy span{display:block;margin-top:7px;color:#d9e2eb;font-size:11px;line-height:1.65}.qa-photo-actions{display:flex;gap:7px;margin-top:15px}.qa-photo-actions a{min-height:37px;padding:0 11px;display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;color:var(--ink);font-size:10px;font-weight:800}.qa-photo-actions a:first-child{background:var(--cyan)}.qa-photo-actions svg{width:13px}.qa-hero-profile .qa-proof-card{padding:30px 38px}.qa-hero-profile .qa-proof-card>strong{font-size:54px}.qa-hero-profile .qa-proof-card>div{padding:12px 0}.qa-hero-profile .qa-proof-card footer{margin-top:17px}@media(max-width:900px){.qa-hero-profile{max-width:560px;width:100%}}@media(max-width:620px){.qa-photo-wrap,.qa-photo-wrap>img{min-height:440px}.qa-photo-copy{left:22px;bottom:20px}.qa-photo-copy b{font-size:28px}.qa-photo-actions{flex-direction:column}.qa-photo-actions a{width:100%}.qa-hero-profile .qa-proof-card{padding:27px 30px}}
