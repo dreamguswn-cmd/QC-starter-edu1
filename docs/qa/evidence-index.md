@@ -8,7 +8,7 @@
 | VOC Improve 멀티 에이전트 QA | 발표 자료 | [`public/downloads/VOC_Presentation_v1.8.pptx`](../../public/downloads/VOC_Presentation_v1.8.pptx) |
 | RAG 답변 평가·개선 | QA 포트폴리오 PDF | [`public/downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf`](../../public/downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf) |
 | AI Agent 운영 모니터링 | 통합 포트폴리오 PDF | [`public/portfolio.pdf`](../../public/portfolio.pdf) |
-| AWS 장애복구 | 결과물 ZIP | [`public/downloads/AWS_VOC_Improve_Team4_Final.zip`](../../public/downloads/AWS_VOC_Improve_Team4_Final.zip) |
+| AWS 장애복구 개인 과제 | 프로젝트별 QA 기록 | [`docs/projects/aws-recovery/README.md`](../projects/aws-recovery/README.md) |
 | Fake Judge 품질평가 | 결과 포트폴리오 PDF | [`public/downloads/AI_Service_Quality_Portfolio.pdf`](../../public/downloads/AI_Service_Quality_Portfolio.pdf) |
 | Fake Judge 품질평가 | 실행 소스 ZIP | [`public/downloads/fake_judge_lab_source.zip`](../../public/downloads/fake_judge_lab_source.zip) |
 

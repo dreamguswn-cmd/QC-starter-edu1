@@ -10,14 +10,14 @@ export const qaProjects = [
     id: 'voc', number: '01', label: '대표 프로젝트',
     title: 'VOC Improve 멀티 에이전트 QA',
     summary: '6개 AI Agent의 VOC 분석 결과를 독립 Judge로 평가하고, 배포 가능 여부까지 판정한 팀 프로젝트입니다.',
-    role: '테스트 케이스 실행부터 Apache 장애 재현, 원인 확인, 복구 후 재테스트와 결과 증빙을 담당했습니다.',
-    metrics: [['자동화 테스트', '5건'], ['테스트 결과', '5 PASS'], ['품질 평균', '99점'], ['실패', '0건']],
+    role: '팀 프로젝트에서 테스트 실행, AI 품질 결과 검토, 배포 판정 자료와 최종 증빙 정리를 담당했습니다.',
+    metrics: [['분석 Agent', '6개'], ['품질 평가', 'LLM Judge'], ['배포 판정', 'Release Gate'], ['유형', '팀 프로젝트']],
     tags: ['pytest', 'LLM Judge', 'AWS EC2', 'S3', 'Release Gate'],
-    issue: 'Apache 서비스를 의도적으로 중지해 접속 장애를 재현하고, 상태와 원인을 확인했습니다.',
-    test: '자동화 테스트 5건을 실행하고, 장애 전·후의 접속 상태와 AI 품질평가 결과를 같은 기준으로 비교했습니다.',
-    action: '서비스 재시작 후 정상 접속을 재검증하고 S3 보안 설정과 결과물 업로드까지 확인했습니다.',
-    result: '장애 복구 100점 · 전체 품질 평균 99점 · 자동화 테스트 5/5 통과',
-    proof: '팀 품질보고서와 발표자료에서 테스트 결과, 장애 복구 과정, 최종 판정을 확인할 수 있습니다.',
+    issue: '여러 Agent가 만든 VOC 분석 결과를 일관된 기준으로 평가하고 배포 가능 여부를 판단해야 했습니다.',
+    test: 'Agent별 결과를 독립 Judge의 품질 기준으로 비교하고 PASS·FAIL 및 배포 판정 흐름을 확인했습니다.',
+    action: '평가 결과와 실패 사유를 팀 보고서에 정리하고 최종 발표자료와 배포 판정 증빙을 교차 확인했습니다.',
+    result: '6개 Agent 분석부터 독립 평가와 Release Gate까지 이어지는 팀 QA 흐름 정리',
+    proof: '팀 품질보고서와 발표자료에서 AI 평가 흐름, 역할, 최종 판정을 확인할 수 있습니다.',
     image: 'assets/voc-improve-cover.svg',
     evidence: 'downloads/VOC_Quality_Report_Team4.docx',
     detail: 'downloads/VOC_Presentation_v1.8.pptx',
@@ -65,7 +65,7 @@ export const qaProjects = [
     result: '장애 탐지 95점 · 장애 복구 및 S3 보안 설정 각 100점',
     proof: '개인 수행 화면 증빙에서 장애 발생, 원인 확인, 정상 복구, S3·CloudTrail 보안 점검을 확인할 수 있습니다.',
     image: 'assets/aws-project/12_장애복구_정상화면_정보가림.png',
-    evidence: 'downloads/AWS_VOC_Improve_Team4_Final.zip', detail: 'downloads/VOC_Quality_Report_Team4.docx',
+    evidence: 'assets/aws-project/11_장애발생_접속실패_정보가림.png', detail: 'assets/aws-project/12_장애복구_정상화면_정보가림.png',
   },
   {
     id: 'judge', number: '05', label: '평가 자동화',
@@ -94,7 +94,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 5,
+  copyRevision: 6,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -118,9 +118,9 @@ export const portfolioV2Defaults = {
     topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
   },
   achievements: [
-    { value: '5건', label: 'VOC/AWS 자동화 테스트 실행' },
+    { value: '5건', label: 'AWS 개인 과제 테스트 실행' },
     { value: '100%', label: '테스트 케이스 통과율' },
-    { value: '99점', label: 'VOC/AWS 품질평가 평균' },
+    { value: '99점', label: 'AWS 개인 과제 품질평가 평균' },
     { value: '5개', label: '검증 과정이 기록된 대표 QA 프로젝트' },
   ],
   projects: qaProjects,
@@ -146,8 +146,8 @@ export default function PortfolioV2({ data, openAdmin }) {
     ? savedContent.projects.map((project) => {
         const revised = qaProjects.find((item) => item.id === project.id)
         if (!revised) return project
-        if (savedContent.copyRevision < 5) {
-          return { ...project, label: revised.label, summary: revised.summary, role: revised.role, issue: revised.issue, test: revised.test, action: revised.action, result: revised.result, proof: revised.proof }
+        if (savedContent.copyRevision < 6) {
+          return { ...project, ...revised }
         }
         return savedContent.copyRevision >= 2 ? project : { ...project, role: revised.role }
       })
@@ -165,7 +165,7 @@ export default function PortfolioV2({ data, openAdmin }) {
     hero: { ...portfolioV2Defaults.hero, ...savedContent.hero },
     about: refreshedAbout,
     education: { ...portfolioV2Defaults.education, ...savedContent.education },
-    achievements: savedContent.copyRevision >= 2 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
+    achievements: savedContent.copyRevision >= 6 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
     projects: refreshedProjects,
     capabilities: savedContent.capabilities?.length ? savedContent.capabilities : portfolioV2Defaults.capabilities,
     sites: savedContent.sites?.length ? savedContent.sites : portfolioV2Defaults.sites,
