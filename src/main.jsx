@@ -15,7 +15,7 @@ import PortfolioV2 from './PortfolioV2'
 import AdminV2 from './AdminV2'
 import {
   currentSession, fallbackAssets, fallbackProjects, fallbackSettings, loadPortfolio,
-  publicUrl, savePortfolio, signIn, signInCareViewer, canReadCareFiles, signOut, uploadAsset,
+  publicUrl, savePortfolio, signIn, signInCareViewer, signOut, uploadAsset,
   listCareFiles, openCareFile
 } from './portfolioApi'
 import { supabaseConfigured } from './supabase'
@@ -228,7 +228,7 @@ function Admin({ data, close, saved }) {
 }
 
 function CareAdmin({ close }) {
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState(undefined)
   const [password, setPassword] = useState('')
   const [files, setFiles] = useState([])
   const [message, setMessage] = useState('')
@@ -239,14 +239,9 @@ function CareAdmin({ close }) {
     catch (error) { setMessage(error.message) }
   }
   useEffect(() => {
-    currentSession().then(async (value) => {
-      if (value && await canReadCareFiles()) {
-        setSession(value)
-        refresh()
-      } else {
-        setSession(null)
-      }
-    }).catch((error) => setMessage(error.message))
+    // 자료실은 저장된 로그인 정보를 재사용하지 않습니다.
+    // 페이지에 들어올 때마다 기존 세션을 종료해 반드시 비밀번호를 다시 받습니다.
+    signOut().then(() => setSession(null)).catch((error) => setMessage(error.message))
   }, [])
   const login = async () => {
     try {
@@ -261,6 +256,7 @@ function CareAdmin({ close }) {
   }
 
   if (!supabaseConfigured) return <div className="admin-shell"><div className="login-card"><ShieldCheck size={42}/><h1>비공개 자료실 설정이 필요합니다</h1><p>Supabase 연결 후 사용할 수 있습니다.</p><button onClick={close}>돌아가기</button></div></div>
+  if (session === undefined) return <div className="care-admin-shell"><div className="care-login"><ShieldCheck size={46}/><h1>보호 상태를 확인하고 있습니다.</h1></div></div>
   if (!session) return <div className="care-admin-shell"><div className="care-login">
     <ShieldCheck size={46}/><p className="eyebrow">PRIVATE CARE CLASS</p><h1>초등돌봄교실 자료 열람</h1><p>열람용 비밀번호를 아는 사람만 자료를 볼 수 있습니다.</p>
     <input type="password" autoComplete="current-password" placeholder="비밀번호" value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => event.key === 'Enter' && login()}/>
@@ -295,7 +291,7 @@ function App() {
     return () => removeEventListener('hashchange', handler)
   }, [])
   if (loading) return <div className="loading">포트폴리오를 불러오는 중입니다.</div>
-  if (careAdmin) return <CareAdmin close={() => { location.href = local('care-class-entrance.html') }}/>
+  if (careAdmin) return <CareAdmin close={async () => { await signOut(); location.href = local('care-class-entrance.html') }}/>
   return admin
     ? <AdminV2 data={data} saved={setData} close={() => { location.hash = ''; setAdmin(false) }}/>
     : <PortfolioV2 data={data} openAdmin={() => { location.hash = '/admin'; setAdmin(true) }}/>
