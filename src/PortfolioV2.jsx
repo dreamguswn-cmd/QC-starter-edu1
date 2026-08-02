@@ -14,8 +14,10 @@ export const qaProjects = [
     metrics: [['자동화 테스트', '5건'], ['테스트 결과', '5 PASS'], ['품질 평균', '99점'], ['실패', '0건']],
     tags: ['pytest', 'LLM Judge', 'AWS EC2', 'S3', 'Release Gate'],
     issue: 'Apache 서비스를 의도적으로 중지해 접속 장애를 재현하고, 상태와 원인을 확인했습니다.',
+    test: '자동화 테스트 5건을 실행하고, 장애 전·후의 접속 상태와 AI 품질평가 결과를 같은 기준으로 비교했습니다.',
     action: '서비스 재시작 후 정상 접속을 재검증하고 S3 보안 설정과 결과물 업로드까지 확인했습니다.',
     result: '장애 복구 100점 · 전체 품질 평균 99점 · 자동화 테스트 5/5 통과',
+    proof: '팀 품질보고서와 발표자료에서 테스트 결과, 장애 복구 과정, 최종 판정을 확인할 수 있습니다.',
     image: 'assets/voc-improve-cover.svg',
     evidence: 'downloads/VOC_Quality_Report_Team4.docx',
     detail: 'downloads/VOC_Presentation_v1.8.pptx',
@@ -28,8 +30,10 @@ export const qaProjects = [
     metrics: [['평가 항목', '4개'], ['자동 테스트', '5건'], ['평균 점수', '4.20/5'], ['자동화', '100%']],
     tags: ['RAG', 'LLM-as-a-Judge', 'Two-Stage Evaluation', 'Correction Agent'],
     issue: '근거 미사용, 출처 누락 등 낮은 품질의 응답을 평가 점수와 감점 사유로 식별했습니다.',
+    test: '정확성·근거성·관련성·표현 품질 기준으로 응답 5건을 자동 평가하고 감점 사유를 JSON으로 기록했습니다.',
     action: '평가 JSON을 Correction Agent 입력으로 재사용해 개선 답변과 보고서를 자동 생성했습니다.',
     result: '검색→생성→평가→수정→보고의 9단계 품질 검증 흐름 완성',
+    proof: '개인 QA 포트폴리오에서 평가 기준, 실행 결과, 개선 전·후 답변과 재검증 기록을 확인할 수 있습니다.',
     image: 'assets/rag-orange/page-1.webp',
     evidence: 'downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf',
     detail: 'downloads/RAG_챗봇_QA_포트폴리오_오렌지.docx',
@@ -42,8 +46,10 @@ export const qaProjects = [
     metrics: [['기능 검증', 'pytest'], ['성능 검증', 'k6'], ['지표 수집', 'Prometheus'], ['시각화', 'Grafana']],
     tags: ['FastAPI', 'pytest', 'k6', 'Prometheus', 'Grafana'],
     issue: '기능 성공 여부만으로는 지연과 운영 이상을 설명하기 어려운 문제를 정의했습니다.',
+    test: 'pytest 기능 검증과 k6 부하 테스트를 실행하고, 응답 시간과 오류 지표가 수집되는지 확인했습니다.',
     action: '테스트 결과와 응답 시간·오류 지표를 연결하고 Grafana에서 한 화면으로 관찰했습니다.',
     result: '기능·성능·운영 상태를 함께 판단하는 통합 QA 흐름 구축',
+    proof: '대시보드 화면과 포트폴리오 보고서에서 테스트 실행 및 모니터링 결과를 확인할 수 있습니다.',
     image: 'assets/page-1.webp', evidence: 'portfolio.pdf', detail: 'portfolio.pdf',
   },
   {
@@ -54,8 +60,10 @@ export const qaProjects = [
     metrics: [['복구 평가', '100점'], ['장애 탐지', '95점'], ['보안 점검', 'PASS'], ['리전', '서울']],
     tags: ['AWS EC2', 'Apache', 'S3', 'CloudTrail', 'MFA'],
     issue: '웹 서버 중지 시 접속 실패가 발생하는 상황을 재현하고 원인을 Apache 상태로 좁혔습니다.',
+    test: '정상 접속을 기준으로 Apache 중지·접속 실패·상태 확인·재시작·복구 확인 시나리오를 순서대로 실행했습니다.',
     action: '서비스 재시작, 브라우저 정상 접속, S3 퍼블릭 차단과 암호화를 순서대로 재검증했습니다.',
     result: '장애 탐지 95점 · 장애 복구 및 S3 보안 설정 각 100점',
+    proof: '개인 수행 화면 증빙에서 장애 발생, 원인 확인, 정상 복구, S3·CloudTrail 보안 점검을 확인할 수 있습니다.',
     image: 'assets/aws-project/12_장애복구_정상화면_정보가림.png',
     evidence: 'downloads/AWS_VOC_Improve_Team4_Final.zip', detail: 'downloads/VOC_Quality_Report_Team4.docx',
   },
@@ -67,8 +75,10 @@ export const qaProjects = [
     metrics: [['평가 기준', '5개'], ['자동화', 'pytest'], ['분석', 'Jupyter'], ['시각화', 'Streamlit']],
     tags: ['Python', 'pytest', 'Jupyter', 'Streamlit'],
     issue: '평가자에 따라 달라질 수 있는 AI 응답 판정을 동일한 기준으로 반복할 필요가 있었습니다.',
+    test: '5개 품질 기준과 PASS·FAIL 분기 조건을 pytest로 반복 실행하고 Jupyter와 Streamlit에서 결과를 비교했습니다.',
     action: '5개 품질 항목과 분기 로직을 테스트하고 결과를 대시보드와 문서로 남겼습니다.',
     result: '반복 가능한 평가·판정·보고 프로세스 구축',
+    proof: '품질평가 포트폴리오와 실행 소스에서 평가 로직, 자동화 결과, 판정 보고서를 확인할 수 있습니다.',
     image: 'assets/ai-quality-streamlit.png',
     evidence: 'downloads/AI_Service_Quality_Portfolio.pdf', detail: 'downloads/fake_judge_lab_source.zip',
   },
@@ -84,7 +94,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 4,
+  copyRevision: 5,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -136,8 +146,8 @@ export default function PortfolioV2({ data, openAdmin }) {
     ? savedContent.projects.map((project) => {
         const revised = qaProjects.find((item) => item.id === project.id)
         if (!revised) return project
-        if (savedContent.copyRevision < 4 && ['rag', 'aws'].includes(project.id)) {
-          return { ...project, label: revised.label, summary: revised.summary, role: revised.role }
+        if (savedContent.copyRevision < 5) {
+          return { ...project, label: revised.label, summary: revised.summary, role: revised.role, issue: revised.issue, test: revised.test, action: revised.action, result: revised.result, proof: revised.proof }
         }
         return savedContent.copyRevision >= 2 ? project : { ...project, role: revised.role }
       })
@@ -217,7 +227,7 @@ export default function PortfolioV2({ data, openAdmin }) {
       </section>
 
       <section id="projects" className="qa-section qa-project-section">
-        <div className="qa-heading"><p className="qa-kicker">SELECTED QA PROJECTS</p><h2>테스트 → 결함 → 개선 → 결과 → 증빙</h2><p>각 프로젝트에서 제가 맡은 QA 역할과 검증 과정을 같은 형식으로 정리했습니다.</p></div>
+        <div className="qa-heading"><p className="qa-kicker">SELECTED QA PROJECTS</p><h2>문제 정의 → 테스트 → 결함·개선 → 결과 → 증빙</h2><p>각 프로젝트에서 제가 맡은 역할과 품질을 검증한 과정을 같은 형식으로 정리했습니다.</p></div>
         <div className="qa-projects">
           {content.projects.map((project) => <article className="qa-project" id={project.id} key={project.id}>
             <div className="qa-project-visual"><img src={local(project.image)} alt={`${project.title} 결과 화면`}/><span>{project.number}</span></div>
@@ -227,8 +237,10 @@ export default function PortfolioV2({ data, openAdmin }) {
               <div className="qa-project-metrics">{project.metrics.map(([key, value]) => <div key={key}><small>{key}</small><b>{value}</b></div>)}</div>
               <div className="qa-improvement">
                 <div><span>01 · 문제 정의</span><p>{project.issue}</p></div>
-                <div><span>02 · 개선 및 재검증</span><p>{project.action}</p></div>
-                <div><span>03 · 결과</span><p>{project.result}</p></div>
+                <div><span>02 · 테스트 설계·실행</span><p>{project.test}</p></div>
+                <div><span>03 · 결함·개선 및 재검증</span><p>{project.action}</p></div>
+                <div><span>04 · 검증 결과</span><p>{project.result}</p></div>
+                <div><span>05 · 증빙</span><p>{project.proof}</p></div>
               </div>
               <div className="qa-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
               <div className="qa-project-actions"><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={local(project.detail)} target="_blank" rel="noreferrer"><ExternalLink/> 상세 자료</a></div>
