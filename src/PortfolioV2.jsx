@@ -229,7 +229,7 @@ export default function PortfolioV2({ data, openAdmin }) {
       <section id="projects" className="qa-section qa-project-section">
         <div className="qa-heading"><p className="qa-kicker">SELECTED QA PROJECTS</p><h2>문제 정의 → 테스트 → 결함·개선 → 결과 → 증빙</h2><p>각 프로젝트에서 제가 맡은 역할과 품질을 검증한 과정을 같은 형식으로 정리했습니다.</p></div>
         <div className="qa-projects">
-          {content.projects.map((project) => <article className="qa-project" id={project.id} key={project.id}>
+          {content.projects.map((project) => <article className={`qa-project qa-project-${project.id}`} id={project.id} key={project.id}>
             <div className="qa-project-visual"><img src={local(project.image)} alt={`${project.title} 결과 화면`}/><span>{project.number}</span></div>
             <div className="qa-project-content">
               <p className="qa-project-label">{project.label}</p><h3>{project.title}</h3><p className="qa-project-summary">{project.summary}</p>
