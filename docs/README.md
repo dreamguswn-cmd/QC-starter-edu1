@@ -11,6 +11,7 @@
 | [품질 발견사항](qa/quality-findings.md) | 문제 정의, 원인, 개선과 재검증 |
 | [테스트 결과](qa/test-results.md) | 증빙으로 확인된 수치와 판정 |
 | [증빙 색인](qa/evidence-index.md) | 보고서, 화면, 발표 자료와 소스 위치 |
+| [프로젝트별 QA 기록](projects/README.md) | 프로젝트 유형, 개인 기여, 테스트·결함·개선·증빙 |
 | [시스템 구조](architecture.md) | 공개 화면, 관리자, 저장소와 배포 구조 |
 
 ## 기록 원칙

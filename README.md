@@ -17,16 +17,17 @@
 - [품질 발견사항과 개선 기록](docs/qa/quality-findings.md)
 - [테스트 결과](docs/qa/test-results.md)
 - [QA 증빙 색인](docs/qa/evidence-index.md)
+- [프로젝트별 QA 기록](docs/projects/README.md)
 - [시스템 구조와 공개·비공개 경계](docs/architecture.md)
 
 ## QA Summary
 
 | 항목 | 검증 결과 |
 |---|---:|
-| VOC/AWS 자동화 테스트 | 5건 |
+| AWS 개인 과제 테스트 | 5건 |
 | 자동화 테스트 통과 | 5 PASS / 0 FAIL |
 | 자동화 테스트 통과율 | 100% |
-| VOC/AWS 품질 평균 | 99점 |
+| AWS 개인 과제 품질 평균 | 99점 |
 | 대표 QA 프로젝트 | 5개 |
 
 > 위 수치는 저장소에 포함된 실제 테스트 결과와 제출 보고서에서 확인한 값만 사용했습니다.
@@ -51,37 +52,46 @@ AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정<br>
 
 ### 1. VOC Improve 멀티 에이전트 QA
 
-- 역할: 테스트 실행, AWS 운영 검증, 장애 재현·복구, 결과 증빙
-- 테스트: EC2 상태, 웹 서비스, 장애 탐지, 장애 복구, S3 보안
-- 결과: 5 PASS / 0 FAIL, 품질 평균 99점
-- 개선 과정: Apache 중지로 장애 재현 → 원인 확인 → 재시작 → 정상 접속 재검증
-- 기술: pytest, LLM Judge, AWS EC2, S3, CloudTrail
+- 유형: 팀 프로젝트
+- 개인 기여: 테스트 실행, AI 품질 결과 검토, 배포 판정 자료와 최종 증빙 정리
+- 검증: 6개 Agent의 VOC 분석 결과를 독립 Judge 기준으로 비교
+- 결과: Agent 분석 → 품질평가 → Release Gate로 이어지는 팀 QA 흐름 정리
+- 기술: pytest, LLM Judge, Release Gate
+- [상세 QA 기록](docs/projects/voc-improve/README.md)
 
 ### 2. RAG 챗봇 자동 품질평가 및 답변 개선
 
+- 유형: 개인 프로젝트
 - 역할: 평가 기준 설계, AI 응답 평가, 감점 원인 분석, 개선 답변 검증
 - 테스트: 이해도·정확성·관련성·표현성 평가와 감점 규칙
 - 개선 과정: 평가 JSON을 Correction Agent 입력으로 연결
 - 기술: RAG, LLM-as-a-Judge, Two-Stage Evaluation, Correction Agent
+- [상세 QA 기록](docs/projects/rag-chatbot-qa/README.md)
 
 ### 3. AI Agent 품질관리·운영 모니터링
 
+- 유형: 교육 실습
 - 역할: 기능 테스트, 부하 테스트, 지표 설계, 대시보드 모니터링
 - 검증: pytest 기능 테스트, k6 성능 테스트, Prometheus 지표 수집
 - 결과: 기능·성능·운영 상태를 함께 판단하는 통합 QA 흐름 구축
 - 기술: FastAPI, pytest, k6, Prometheus, Grafana
+- [상세 QA 기록](docs/projects/ai-monitoring/README.md)
 
 ### 4. AWS 웹 서버 장애 재현 및 복구 검증
 
-- 역할: 환경 점검, 보안 설정 확인, 장애 시나리오 실행, 복구 재테스트
+- 유형: 개인 프로젝트
+- 역할: 환경 구축, 시나리오 설계, 장애 재현, 원인 분석, 복구 재테스트, 보안 점검 전 과정 수행
 - 결과: 장애 탐지 95점, 장애 복구 100점, S3 보안 설정 100점
 - 기술: AWS EC2, Apache, S3, CloudTrail, MFA
+- [상세 QA 기록](docs/projects/aws-recovery/README.md)
 
 ### 5. Fake Judge 기반 AI 서비스 품질평가
 
+- 유형: 교육 실습
 - 역할: 평가 로직 구현, pytest 자동화, 결과 시각화, 판정 보고서 작성
 - 검증: 5개 품질 항목과 PASS·FAIL 분기 로직
 - 기술: Python, pytest, Jupyter, Streamlit
+- [상세 QA 기록](docs/projects/fake-judge/README.md)
 
 ## QA Workflow
 
