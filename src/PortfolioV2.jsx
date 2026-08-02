@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   ArrowRight, Download, ExternalLink, Github, Mail,
-  Menu, ShieldCheck, X
+  Menu, Music2, Pause, Play, ShieldCheck, X
 } from 'lucide-react'
 import { publicUrl } from './portfolioApi'
 
@@ -135,6 +135,8 @@ export const portfolioV2Defaults = {
 
 export default function PortfolioV2({ data, openAdmin }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [bgmPlaying, setBgmPlaying] = useState(false)
+  const audioRef = useRef(null)
   const email = data?.settings?.contact?.email || 'aa01057559209@gmail.com'
   const github = data?.settings?.contact?.github || 'https://github.com/dreamguswn-cmd'
   const base = import.meta.env.BASE_URL
@@ -170,6 +172,16 @@ export default function PortfolioV2({ data, openAdmin }) {
     capabilities: savedContent.capabilities?.length ? savedContent.capabilities : portfolioV2Defaults.capabilities,
     sites: savedContent.sites?.length ? savedContent.sites : portfolioV2Defaults.sites,
   }
+  const toggleBgm = async () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (!audio.paused) {
+      audio.pause()
+      return
+    }
+    audio.volume = 0.16
+    try { await audio.play() } catch { setBgmPlaying(false) }
+  }
 
   return <div className="qa-site">
     <header className="qa-header">
@@ -184,6 +196,11 @@ export default function PortfolioV2({ data, openAdmin }) {
       </nav>
       <button className="qa-menu" aria-label="메뉴 열기" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
     </header>
+
+    <audio ref={audioRef} src={local('audio/quality-in-motion-bgm.mp3')} loop preload="none" onPlay={() => setBgmPlaying(true)} onPause={() => setBgmPlaying(false)}/>
+    <button className={`qa-bgm ${bgmPlaying ? 'is-playing' : ''}`} onClick={toggleBgm} aria-label={bgmPlaying ? '배경음악 일시정지' : '배경음악 재생'} aria-pressed={bgmPlaying}>
+      <Music2 className="qa-bgm-note"/><span><small>QUALITY IN MOTION</small><b>{bgmPlaying ? 'BGM 일시정지' : 'BGM 재생'}</b></span>{bgmPlaying ? <Pause/> : <Play/>}
+    </button>
 
     <main>
       <section id="home" className="qa-hero">
