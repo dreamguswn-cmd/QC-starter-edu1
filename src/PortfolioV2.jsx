@@ -21,10 +21,10 @@ export const qaProjects = [
     detail: 'downloads/VOC_Presentation_v1.8.pptx',
   },
   {
-    id: 'rag', number: '02', label: 'AI 응답 품질',
+    id: 'rag', number: '02', label: '개인 프로젝트 · AI 응답 품질',
     title: 'RAG 챗봇 자동 평가 및 답변 개선',
-    summary: '답변 생성에서 끝내지 않고 Judge 평가 결과를 Correction Agent에 연결해 실패 답변을 개선하는 품질 루프입니다.',
-    role: 'AI 응답 평가 기준을 설계하고 품질 저하 원인을 식별한 뒤, 개선 답변을 같은 기준으로 재검증했습니다.',
+    summary: '평가 기준 설계부터 자동 평가, 품질 저하 원인 분석, 답변 개선과 재검증까지 혼자 수행한 개인 프로젝트입니다.',
+    role: '테스트 기준 설계, AI 응답 평가, 감점 원인 분석, Correction Agent 개선 로직, 재테스트와 결과 보고까지 전 과정을 담당했습니다.',
     metrics: [['평가 항목', '4개'], ['자동 테스트', '5건'], ['평균 점수', '4.20/5'], ['자동화', '100%']],
     tags: ['RAG', 'LLM-as-a-Judge', 'Two-Stage Evaluation', 'Correction Agent'],
     issue: '근거 미사용, 출처 누락 등 낮은 품질의 응답을 평가 점수와 감점 사유로 식별했습니다.',
@@ -47,10 +47,10 @@ export const qaProjects = [
     image: 'assets/page-1.webp', evidence: 'portfolio.pdf', detail: 'portfolio.pdf',
   },
   {
-    id: 'aws', number: '04', label: '장애 복구',
+    id: 'aws', number: '04', label: '개인 프로젝트 · 장애 복구',
     title: 'AWS 웹 서버 장애 재현 및 복구 검증',
-    summary: 'EC2와 Apache 서비스의 정상 상태부터 장애 발생, 원인 확인, 복구와 자원 정리까지 검증했습니다.',
-    role: 'AWS 환경과 보안 설정을 점검하고 장애 시나리오 실행, 원인 확인, 복구 후 재테스트를 담당했습니다.',
+    summary: 'EC2 환경 구축부터 Apache 장애 재현, 원인 확인, 복구와 보안 재검증까지 혼자 수행한 개인 프로젝트입니다.',
+    role: 'AWS 환경 구축, 테스트 시나리오 설계, 장애 재현, 원인 분석, 서비스 복구, 보안 점검과 결과 증빙까지 전 과정을 담당했습니다.',
     metrics: [['복구 평가', '100점'], ['장애 탐지', '95점'], ['보안 점검', 'PASS'], ['리전', '서울']],
     tags: ['AWS EC2', 'Apache', 'S3', 'CloudTrail', 'MFA'],
     issue: '웹 서버 중지 시 접속 실패가 발생하는 상황을 재현하고 원인을 Apache 상태로 좁혔습니다.',
@@ -84,7 +84,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 3,
+  copyRevision: 4,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -135,7 +135,11 @@ export default function PortfolioV2({ data, openAdmin }) {
   const refreshedProjects = savedContent.projects?.length
     ? savedContent.projects.map((project) => {
         const revised = qaProjects.find((item) => item.id === project.id)
-        return savedContent.copyRevision >= 2 || !revised ? project : { ...project, role: revised.role }
+        if (!revised) return project
+        if (savedContent.copyRevision < 4 && ['rag', 'aws'].includes(project.id)) {
+          return { ...project, label: revised.label, summary: revised.summary, role: revised.role }
+        }
+        return savedContent.copyRevision >= 2 ? project : { ...project, role: revised.role }
       })
     : portfolioV2Defaults.projects
   const refreshedAbout = {
@@ -185,13 +189,12 @@ export default function PortfolioV2({ data, openAdmin }) {
                 <a href={github} target="_blank" rel="noreferrer"><Github/> GitHub 보기</a>
               </div>
             </div>
-            <img src={portraitUrl} alt="AI Software QA Engineer 유현주 프로필"/>
           </div>
         </div>
       </section>
 
       <section id="about" className="qa-section qa-about">
-        <div><h2>{content.about.title.split('\n').map((line, index) => <React.Fragment key={line}>{index > 0 && <br/>}{line}</React.Fragment>)}</h2></div>
+        <div className="qa-about-identity"><img src={portraitUrl} alt="QA 엔지니어 유현주 프로필"/><h2>{content.about.title.split('\n').map((line, index) => <React.Fragment key={line}>{index > 0 && <br/>}{line}</React.Fragment>)}</h2></div>
         <div>{content.about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
       </section>
 

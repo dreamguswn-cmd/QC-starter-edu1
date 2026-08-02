@@ -5,14 +5,14 @@
 }
 
 .qa-hero-profile {
-  width: min(100%, 1120px);
+  width: min(100%, 980px);
   margin: 0 auto;
 }
 
 .qa-photo-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 58%) minmax(300px, 42%);
-  min-height: 520px;
+  grid-template-columns: 1fr;
+  min-height: 0;
   background: #0b1728;
   box-shadow: 22px 22px 0 rgba(18,104,232,.1);
 }
@@ -36,6 +36,7 @@
   justify-content: center;
   padding: clamp(38px, 6vw, 76px);
   color: #fff;
+  min-height: 500px;
 }
 
 .qa-photo-copy small {
@@ -109,7 +110,6 @@
 
 @media (max-width: 900px) {
   .qa-photo-wrap { grid-template-columns: 1fr; }
-  .qa-photo-wrap > img { min-height: 360px; max-height: 460px; }
 }
 
 @media (max-width: 620px) {
@@ -117,13 +117,9 @@
     grid-template-columns: 1fr;
   }
 
-  .qa-photo-wrap > img {
-    min-height: 340px;
-    max-height: 410px;
-  }
-
   .qa-photo-copy {
     padding: 32px 24px;
+    min-height: 0;
   }
 
   .qa-photo-copy b { font-size: 32px; }
@@ -143,5 +139,34 @@
 
   .qa-photo-actions a { width: 100%; }
 
-  .qa-photo-wrap > img { min-height: 290px; max-height: 330px; }
+}
+
+.qa-about-identity {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  align-items: center;
+  gap: 26px;
+}
+
+.qa-about-identity > img {
+  width: 130px;
+  height: 156px;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid rgba(255,255,255,.18);
+  filter: grayscale(12%);
+}
+
+@media (max-width: 620px) {
+  .qa-about-identity {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .qa-about-identity > img {
+    width: 84px;
+    height: 104px;
+  }
+
+  .qa-about-identity h2 { font-size: 29px; }
 }
