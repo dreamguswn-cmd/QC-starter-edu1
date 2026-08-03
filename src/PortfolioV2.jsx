@@ -136,7 +136,9 @@ export const portfolioV2Defaults = {
 export default function PortfolioV2({ data, openAdmin }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [bgmPlaying, setBgmPlaying] = useState(false)
+  const [learningSongPlaying, setLearningSongPlaying] = useState(false)
   const audioRef = useRef(null)
+  const learningAudioRef = useRef(null)
   const email = data?.settings?.contact?.email || 'aa01057559209@gmail.com'
   const github = data?.settings?.contact?.github || 'https://github.com/dreamguswn-cmd'
   const base = import.meta.env.BASE_URL
@@ -179,8 +181,20 @@ export default function PortfolioV2({ data, openAdmin }) {
       audio.pause()
       return
     }
+    learningAudioRef.current?.pause()
     audio.volume = 0.16
     try { await audio.play() } catch { setBgmPlaying(false) }
+  }
+  const toggleLearningSong = async () => {
+    const audio = learningAudioRef.current
+    if (!audio) return
+    if (!audio.paused) {
+      audio.pause()
+      return
+    }
+    audioRef.current?.pause()
+    audio.volume = 0.65
+    try { await audio.play() } catch { setLearningSongPlaying(false) }
   }
 
   return <div className="qa-site">
@@ -198,6 +212,7 @@ export default function PortfolioV2({ data, openAdmin }) {
     </header>
 
     <audio ref={audioRef} src={local('audio/quality-in-motion-bgm.mp3')} loop preload="none" onPlay={() => setBgmPlaying(true)} onPause={() => setBgmPlaying(false)}/>
+    <audio ref={learningAudioRef} src={local('audio/qa-terms-learning-song.mp3')} preload="none" onPlay={() => setLearningSongPlaying(true)} onPause={() => setLearningSongPlaying(false)} onEnded={() => setLearningSongPlaying(false)}/>
     <button className={`qa-bgm ${bgmPlaying ? 'is-playing' : ''}`} onClick={toggleBgm} aria-label={bgmPlaying ? '배경음악 일시정지' : '배경음악 재생'} aria-pressed={bgmPlaying}>
       <Music2 className="qa-bgm-note"/><span><small>QUALITY IN MOTION</small><b>{bgmPlaying ? 'BGM 일시정지' : 'BGM 재생'}</b></span>{bgmPlaying ? <Pause/> : <Play/>}
     </button>
@@ -282,6 +297,11 @@ export default function PortfolioV2({ data, openAdmin }) {
           {site.image ? <img src={site.image.startsWith('http') ? site.image : local(site.image)} alt={`${site.title} 대표 화면`}/> : <div className="qa-site-placeholder"><ShieldCheck/><span>PRIVATE CARE CLASS</span><b>아동 개인정보 보호</b></div>}
           <div><small>{site.category}</small><h3>{site.title}</h3><p>{site.summary}</p><div><a href={site.live?.startsWith('http') ? site.live : local(site.live)} target="_blank" rel="noreferrer">사이트 보기 <ExternalLink/></a><a href={site.github} target="_blank" rel="noreferrer"><Github/> GitHub</a></div></div>
         </article>)}</div>
+      </section>
+
+      <section className="qa-learning-song" aria-labelledby="qa-learning-song-title">
+        <div><p>AI LEARNING CONTENT</p><h2 id="qa-learning-song-title">QA 용어 학습 노래</h2><span>QA 전문용어를 쉽게 이해할 수 있도록 가사를 기획하고 생성형 AI로 제작한 학습 콘텐츠입니다.</span></div>
+        <button onClick={toggleLearningSong} aria-label={learningSongPlaying ? 'QA 용어 학습 노래 일시정지' : 'QA 용어 학습 노래 재생'} aria-pressed={learningSongPlaying}>{learningSongPlaying ? <Pause/> : <Play/>}<span>{learningSongPlaying ? '일시정지' : '노래 듣기'}</span></button>
       </section>
 
       <section id="contact" className="qa-contact">
