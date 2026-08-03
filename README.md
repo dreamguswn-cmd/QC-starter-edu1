@@ -18,6 +18,8 @@
 - [테스트 결과](docs/qa/test-results.md)
 - [QA 증빙 색인](docs/qa/evidence-index.md)
 - [프로젝트별 QA 기록](docs/projects/README.md)
+- [AI 음악 제작·사용 안내](docs/audio-content.md)
+- [저작권·출처 및 재사용 안내](COPYRIGHT.md)
 - [시스템 구조와 공개·비공개 경계](docs/architecture.md)
 
 ## QA Summary
@@ -151,12 +153,20 @@ QA 교육 프로젝트 외에 직접 기획하고 구현한 웹사이트입니�
 - 자동재생을 사용하지 않아 방문자의 선택과 열람 집중도를 우선합니다.
 - [기획 목적과 재생 정책](docs/audio-content.md)
 
+## Copyright & Reuse
+
+- AI 음악은 Suno 유료 요금제 이용 기간에 생성했으며, 제작 과정과 사용 범위를 문서에 명시했습니다.
+- 팀 프로젝트는 팀 과제 여부와 유현주의 개인 기여를 구분해 기록했습니다.
+- 이미지, 프로젝트 증빙, 오픈소스와 글꼴의 권리 기준은 [저작권 및 출처 안내](COPYRIGHT.md)에서 확인할 수 있습니다.
+- 이 저장소에는 별도의 오픈소스 라이선스를 부여하지 않았습니다. 포트폴리오 콘텐츠를 재사용하려면 저장소 소유자의 허락이 필요합니다.
+
 ## Project Structure
 
 ```text
 src/
 ├─ PortfolioV2.jsx       # 공개 포트폴리오 화면과 콘텐츠
 ├─ portfolio-v2.css      # QA 포트폴리오 공통 디자인
+├─ copyright-notice.css  # 음악 제작·권리 안내 표시
 ├─ hero-profile-v3.css   # 첫 화면 프로필 카드
 ├─ education-sites.css   # 교육 및 직접 만든 사이트 섹션
 ├─ portfolioApi.js       # 포트폴리오 데이터와 Supabase 연동
@@ -169,12 +179,16 @@ public/
 
 docs/
 ├─ qa/                   # 테스트·결함·결과·증빙 문서
+├─ projects/             # 프로젝트별 문제·테스트·개선 기록
+├─ audio-content.md      # AI 음악 제작 및 재생 정책
 └─ architecture.md       # 공개 화면과 관리자 구조
 
 .github/
 ├─ workflows/            # GitHub Pages 자동 배포
 ├─ ISSUE_TEMPLATE/       # 재현 가능한 결함 보고 양식
 └─ pull_request_template.md
+
+COPYRIGHT.md             # 저작권·출처 및 재사용 기준
 ```
 
 ## Local Development
