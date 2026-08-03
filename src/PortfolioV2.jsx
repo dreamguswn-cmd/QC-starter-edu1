@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import {
-  ArrowRight, Download, ExternalLink, Github, Mail,
+  ArrowLeft, ArrowRight, Download, ExternalLink, Github, Mail,
   Menu, Music2, Pause, Play, ShieldCheck, X
 } from 'lucide-react'
 import { publicUrl } from './portfolioApi'
@@ -85,12 +85,12 @@ export const qaProjects = [
 ]
 
 const capabilities = [
-  ['Testing', 'Test Case Design · Functional · Regression · API Testing'],
-  ['AI Quality', 'RAG · Prompt Evaluation · LLM-as-a-Judge'],
-  ['Automation', 'pytest · GitHub Actions · 결과 보고서'],
-  ['Performance', 'k6 · 응답 시간 · 오류율 검증'],
-  ['Monitoring', 'Prometheus · Grafana · 장애 관찰'],
-  ['Cloud & Ops', 'AWS EC2 · S3 · CloudTrail · Docker'],
+  ['Testing', 'Test Case Design · Functional · Regression · API Testing', 7, '교육 프로젝트에서 테스트 기준 수립과 실행·재검증을 반복했습니다.'],
+  ['AI Quality', 'RAG · Prompt Evaluation · LLM-as-a-Judge', 7, '개인 과제로 평가 기준 설계부터 답변 개선·재검증까지 수행했습니다.'],
+  ['Automation', 'pytest · GitHub Actions · 결과 보고서', 6, 'pytest 기반 반복 검증과 결과 보고를 교육 프로젝트에서 적용했습니다.'],
+  ['Performance', 'k6 · 응답 시간 · 오류율 검증', 5, 'k6로 부하 조건과 응답 지표를 검증한 실습 경험이 있습니다.'],
+  ['Monitoring', 'Prometheus · Grafana · 장애 관찰', 6, '지표 수집과 Grafana 대시보드 확인을 프로젝트에 연결했습니다.'],
+  ['Cloud & Ops', 'AWS EC2 · S3 · CloudTrail · Docker', 6, '개인 과제로 서버 구축·장애 재현·복구·보안 점검을 수행했습니다.'],
 ]
 
 export const portfolioV2Defaults = {
@@ -117,6 +117,12 @@ export const portfolioV2Defaults = {
     description: '아래 QA 성과와 대표 프로젝트는 이 교육 과정에서 직접 실행하고 결과를 기록한 실습입니다.',
     topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
   },
+  career: [
+    ['분당서울대학교병원', '2013.03 - 2015.02'],
+    ['충주건국대학교병원', '2009.11 - 2013.02'],
+    ['강릉아산병원', '2008.08 - 2009.11'],
+    ['신촌세브란스병원', '2007.03 - 2008.02'],
+  ],
   achievements: [
     { value: '5건', label: 'AWS 개인 과제 테스트 실행' },
     { value: '100%', label: '테스트 케이스 통과율' },
@@ -144,7 +150,7 @@ export default function PortfolioV2({ data, openAdmin }) {
   const base = import.meta.env.BASE_URL
   const local = (path) => `${base}${path}`
   const portraitUrl = publicUrl(data?.assets?.portrait?.path) || local(data?.assets?.portrait?.fallback || 'assets/profile-photo.jpg')
-  const resumeUrl = publicUrl(data?.assets?.resume?.path) || local(data?.assets?.resume?.fallback || 'downloads/Yoo_Hyunju_Resume.pdf')
+  const resumeUrl = local('downloads/Yoo_Hyunju_Resume.pdf')
   const savedContent = data?.settings?.v2 || {}
   const refreshedProjects = savedContent.projects?.length
     ? savedContent.projects.map((project) => {
@@ -171,9 +177,13 @@ export default function PortfolioV2({ data, openAdmin }) {
     education: { ...portfolioV2Defaults.education, ...savedContent.education },
     achievements: savedContent.copyRevision >= 6 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
     projects: refreshedProjects,
-    capabilities: savedContent.capabilities?.length ? savedContent.capabilities : portfolioV2Defaults.capabilities,
+    capabilities: savedContent.capabilities?.length
+      ? savedContent.capabilities.map((item, index) => item.length >= 4 ? item : (portfolioV2Defaults.capabilities[index] || item))
+      : portfolioV2Defaults.capabilities,
     sites: savedContent.sites?.length ? savedContent.sites : portfolioV2Defaults.sites,
   }
+  const selectedProject = content.projects.find((project) => project.id === new URLSearchParams(location.search).get('project'))
+  if (selectedProject) return <ProjectDetail project={selectedProject} local={local}/>
   const toggleBgm = async () => {
     const audio = audioRef.current
     if (!audio) return
@@ -203,6 +213,7 @@ export default function PortfolioV2({ data, openAdmin }) {
       <nav className={menuOpen ? 'is-open' : ''} aria-label="주요 메뉴">
         <a href="#about" onClick={() => setMenuOpen(false)}>소개</a>
         <a href="#education" onClick={() => setMenuOpen(false)}>교육</a>
+        <a href="#career" onClick={() => setMenuOpen(false)}>이전 경력</a>
         <a href="#achievements" onClick={() => setMenuOpen(false)}>QA 성과</a>
         <a href="#projects" onClick={() => setMenuOpen(false)}>대표 프로젝트</a>
         <a href="#skills" onClick={() => setMenuOpen(false)}>기술 역량</a>
@@ -253,6 +264,11 @@ export default function PortfolioV2({ data, openAdmin }) {
         </div>
       </section>
 
+      <section id="career" className="qa-section qa-career">
+        <div className="qa-heading"><p className="qa-kicker">PREVIOUS CAREER</p><h2>임상병리·정도관리 실무 경력</h2><p>AI Software QA 회사 경력이 아닌 이전 직무 경력입니다. 정확성·재현성·이상치 확인 경험을 QA 역량으로 연결하고 있습니다.</p></div>
+        <div className="qa-career-list">{content.career.map(([company, period]) => <article key={company}><b>{company}</b><span>{period}</span></article>)}</div>
+      </section>
+
       <section id="achievements" className="qa-section">
         <div className="qa-heading"><p className="qa-kicker">QA ACHIEVEMENTS</p><h2>증빙으로 확인되는 결과</h2><p>확인되지 않은 합산 수치는 부풀리지 않고, 실제 제출 결과에서 검증된 대표 수치만 표시했습니다.</p></div>
         <div className="qa-stats">{content.achievements.map((item) => <article key={`${item.value}-${item.label}`}><b>{item.value}</b><span>{item.label}</span></article>)}</div>
@@ -275,7 +291,7 @@ export default function PortfolioV2({ data, openAdmin }) {
                 <div><span>05 · 증빙</span><p>{project.proof}</p></div>
               </div>
               <div className="qa-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-              <div className="qa-project-actions"><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={local(project.detail)} target="_blank" rel="noreferrer"><ExternalLink/> 상세 자료</a></div>
+              <div className="qa-project-actions"><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={`${base}?project=${project.id}#overview`}><ExternalLink/> 프로젝트 자세히 보기</a></div>
             </div>
           </article>)}
         </div>
@@ -283,7 +299,7 @@ export default function PortfolioV2({ data, openAdmin }) {
 
       <section id="skills" className="qa-section">
         <div className="qa-heading"><p className="qa-kicker">CORE CAPABILITIES</p><h2>QA 업무 기준으로 재분류한 기술</h2></div>
-        <div className="qa-capabilities">{content.capabilities.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+        <div className="qa-capabilities">{content.capabilities.map(([title, text, score, note], index) => <article key={title}><span>0{index + 1}</span><div className="qa-skill-score"><b>{score}/10</b><i style={{'--score': `${score * 10}%`}}/></div><h3>{title}</h3><p>{text}</p><small>{note}</small></article>)}</div>
       </section>
 
       <section className="qa-section qa-github">
@@ -311,5 +327,18 @@ export default function PortfolioV2({ data, openAdmin }) {
       </section>
     </main>
     <footer className="qa-footer">© 2026 YOO HYUNJU · AI SOFTWARE QA ENGINEER · 포트폴리오 콘텐츠의 무단 재배포를 금합니다.</footer>
+  </div>
+}
+
+function ProjectDetail({ project, local }) {
+  return <div className="qa-site qa-detail-page">
+    <header className="qa-detail-header"><a href={import.meta.env.BASE_URL}><ArrowLeft/> 포트폴리오</a><b>{project.title}</b></header>
+    <nav className="qa-detail-nav" aria-label="프로젝트 상세 메뉴"><a href="#overview">개요</a><a href="#contribution">내 기여</a><a href="#process">검증 과정</a><a href="#evidence">결과·증빙</a></nav>
+    <main>
+      <section id="overview" className="qa-detail-hero"><p>{project.label}</p><h1>{project.title}</h1><strong>{project.summary}</strong><div>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></section>
+      <section id="contribution" className="qa-detail-section"><p className="qa-kicker">MY CONTRIBUTION</p><h2>개인 기여</h2><p>{project.role}</p><div className="qa-project-metrics">{project.metrics.map(([key, value]) => <div key={key}><small>{key}</small><b>{value}</b></div>)}</div></section>
+      <section id="process" className="qa-detail-section qa-detail-process"><p className="qa-kicker">QA PROCESS</p><h2>문제에서 재검증까지</h2><article><b>01 문제 정의</b><p>{project.issue}</p></article><article><b>02 테스트 설계·실행</b><p>{project.test}</p></article><article><b>03 결함·개선 및 재검증</b><p>{project.action}</p></article></section>
+      <section id="evidence" className="qa-detail-section qa-detail-evidence"><p className="qa-kicker">RESULT & EVIDENCE</p><h2>검증 결과와 증빙</h2><p>{project.result}</p><p>{project.proof}</p><div><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={local(project.detail)} target="_blank" rel="noreferrer"><ExternalLink/> 원본 상세 자료</a></div></section>
+    </main>
   </div>
 }

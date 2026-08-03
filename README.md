@@ -108,6 +108,8 @@ AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정<br>
 
 ## Skills
 
+사이트에서는 교육 프로젝트 수행 근거를 기준으로 각 기술을 10점 만점으로 표시합니다. 점수는 회사 실무 연차가 아니라 직접 실행하고 증빙한 범위를 나타냅니다.
+
 | 구분 | 기술 및 역량 |
 |---|---|
 | Testing | Test Case Design, Functional, Regression, API Testing |
@@ -128,6 +130,7 @@ AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정<br>
 - AWS 구축·보안 점검·장애복구 결과물
 - pytest 기반 평가 자동화 소스
 - 이력서 PDF
+- AI Software QA 실무 경력이 없음을 명확히 밝힌 교육·프로젝트 기반 지원 이력서
 
 ## Web Sites by Yoo Hyunju
 
