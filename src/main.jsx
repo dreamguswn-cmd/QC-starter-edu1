@@ -11,6 +11,7 @@ import './education-sites.css'
 import './admin-v2.css'
 import './care-site-card.css'
 import './admin-care-link.css'
+import './copyright-notice.css'
 import PortfolioV2 from './PortfolioV2'
 import AdminV2 from './AdminV2'
 import {

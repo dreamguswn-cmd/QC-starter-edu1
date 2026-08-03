@@ -300,7 +300,7 @@ export default function PortfolioV2({ data, openAdmin }) {
       </section>
 
       <section className="qa-learning-song" aria-labelledby="qa-learning-song-title">
-        <div><p>AI LEARNING CONTENT</p><h2 id="qa-learning-song-title">QA 용어 학습 노래</h2><span>QA 전문용어를 쉽게 이해할 수 있도록 가사를 기획하고 생성형 AI로 제작한 학습 콘텐츠입니다.</span></div>
+        <div><p>AI LEARNING CONTENT</p><h2 id="qa-learning-song-title">QA 용어 학습 노래</h2><span>QA 전문용어를 쉽게 이해할 수 있도록 가사를 기획하고 생성형 AI로 제작한 학습 콘텐츠입니다.</span><small>음악 기획·가사: 유현주 · 생성 도구: Suno AI · 유료 요금제 이용 기간에 생성</small></div>
         <button onClick={toggleLearningSong} aria-label={learningSongPlaying ? 'QA 용어 학습 노래 일시정지' : 'QA 용어 학습 노래 재생'} aria-pressed={learningSongPlaying}>{learningSongPlaying ? <Pause/> : <Play/>}<span>{learningSongPlaying ? '일시정지' : '노래 듣기'}</span></button>
       </section>
 
@@ -310,6 +310,6 @@ export default function PortfolioV2({ data, openAdmin }) {
         <button className="qa-admin-link" onClick={openAdmin}>Portfolio Admin</button>
       </section>
     </main>
-    <footer className="qa-footer">© 2026 YOO HYUNJU · AI SOFTWARE QA ENGINEER</footer>
+    <footer className="qa-footer">© 2026 YOO HYUNJU · AI SOFTWARE QA ENGINEER · 포트폴리오 콘텐츠의 무단 재배포를 금합니다.</footer>
   </div>
 }
