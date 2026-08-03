@@ -48,7 +48,7 @@ function Portfolio({ data, openAdmin }) {
     { id: 'r-data', title: 'R 기초 및 데이터 조작', subtitle: 'R 자료형과 자료구조를 익히고 Data Frame 생성, 파생변수·고객등급 생성, CSV 저장과 행 결합을 실습했습니다.', stack: 'R · RStudio · dplyr · Data Frame', image: 'assets/page-3.webp', label: 'DATA MANIPULATION PROJECT', href: 'data-analysis-projects.html#r-data' },
   ]
   const downloads = [
-    ['AWS 웹 서버·장애복구 프로젝트', 'ZIP · 보고서·증빙·S3 결과물', 'downloads/AWS_VOC_Improve_Team4_Final.zip'],
+    ['AWS 웹 서버·장애복구 프로젝트', 'PNG · 개인 장애복구 증빙', 'assets/aws-project/12_장애복구_정상화면_정보가림.png'],
     ['RAG 답변 개선 포트폴리오', 'PDF · 자동 평가와 답변 개선', 'downloads/RAG_챗봇_QA_포트폴리오_오렌지.pdf'],
     ['RAG 품질평가 포트폴리오', 'PDF · Two-Stage Evaluation', 'downloads/RAG_챗봇_품질평가_포트폴리오.pdf'],
     ['AI Agent 운영 모니터링', 'PDF · 기능·성능·장애·운영', 'portfolio.pdf'],

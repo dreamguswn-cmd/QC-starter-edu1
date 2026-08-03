@@ -117,12 +117,6 @@ export const portfolioV2Defaults = {
     description: '아래 QA 성과와 대표 프로젝트는 이 교육 과정에서 직접 실행하고 결과를 기록한 실습입니다.',
     topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
   },
-  career: [
-    ['분당서울대학교병원', '2013.03 - 2015.02'],
-    ['충주건국대학교병원', '2009.11 - 2013.02'],
-    ['강릉아산병원', '2008.08 - 2009.11'],
-    ['신촌세브란스병원', '2007.03 - 2008.02'],
-  ],
   achievements: [
     { value: '5건', label: 'AWS 개인 과제 테스트 실행' },
     { value: '100%', label: '테스트 케이스 통과율' },
@@ -213,7 +207,6 @@ export default function PortfolioV2({ data, openAdmin }) {
       <nav className={menuOpen ? 'is-open' : ''} aria-label="주요 메뉴">
         <a href="#about" onClick={() => setMenuOpen(false)}>소개</a>
         <a href="#education" onClick={() => setMenuOpen(false)}>교육</a>
-        <a href="#career" onClick={() => setMenuOpen(false)}>이전 경력</a>
         <a href="#achievements" onClick={() => setMenuOpen(false)}>QA 성과</a>
         <a href="#projects" onClick={() => setMenuOpen(false)}>대표 프로젝트</a>
         <a href="#skills" onClick={() => setMenuOpen(false)}>기술 역량</a>
@@ -262,11 +255,6 @@ export default function PortfolioV2({ data, openAdmin }) {
           <p>{content.education.description}</p>
           <ul>{content.education.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
         </div>
-      </section>
-
-      <section id="career" className="qa-section qa-career">
-        <div className="qa-heading"><p className="qa-kicker">PREVIOUS CAREER</p><h2>임상병리·정도관리 실무 경력</h2><p>AI Software QA 회사 경력이 아닌 이전 직무 경력입니다. 정확성·재현성·이상치 확인 경험을 QA 역량으로 연결하고 있습니다.</p></div>
-        <div className="qa-career-list">{content.career.map(([company, period]) => <article key={company}><b>{company}</b><span>{period}</span></article>)}</div>
       </section>
 
       <section id="achievements" className="qa-section">
