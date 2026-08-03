@@ -27,7 +27,7 @@ export const fallbackProjects = [
   { id: 'p4', sort_order: 4, title: 'VOC Improve 멀티 에이전트 QA', subtitle: '6개 Agent와 독립 Judge를 활용한 배포 품질 판정', role: '팀 프로젝트', stack: 'Multi-Agent · Release Gate', image: 'assets/voc-improve-cover.svg', href: 'downloads/VOC_Presentation_v1.8.pptx' },
   { id: 'p5', sort_order: 5, title: 'AI 서비스 품질평가 실습', subtitle: 'Fake Judge·Jupyter·Streamlit 기반 평가 결과 시각화', role: '분석·구현', stack: 'Python · Streamlit', image: 'assets/ai-quality-streamlit.png', href: 'downloads/AI_Service_Quality_Portfolio.pdf' },
   { id: 'p6', sort_order: 6, title: '챗봇 비교 QA 파이프라인', subtitle: 'Rule 기반과 API 기반 응답을 동일 테스트케이스로 비교', role: '검증 자동화', stack: 'Validator · Dashboard', image: 'assets/final_pipeline_dashboard.png', href: 'downloads/기존_AI_QA_Python_포트폴리오.pdf' },
-  { id: 'p7', sort_order: 7, title: 'AWS 웹 서버 구축·장애복구', subtitle: 'EC2·Apache·S3·CloudTrail 점검과 장애 재현·복구 검증', role: '클라우드 운영', stack: 'AWS · EC2 · S3', image: 'assets/aws-project/07_웹서버_정상화면.png', href: 'downloads/AWS_VOC_Improve_Team4_Final.zip' },
+  { id: 'p7', sort_order: 7, title: 'AWS 웹 서버 구축·장애복구', subtitle: 'EC2·Apache·S3·CloudTrail 점검과 장애 재현·복구 검증', role: '클라우드 운영', stack: 'AWS · EC2 · S3', image: 'assets/aws-project/07_웹서버_정상화면.png', href: 'assets/aws-project/12_장애복구_정상화면_정보가림.png' },
 ]
 
 export const fallbackAssets = {

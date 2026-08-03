@@ -147,22 +147,8 @@ for title, score, note in skills:
     font(p.add_run(f"{title}  {score}  "), 9.7, True, BLUE)
     font(p.add_run(note), 9.3, False, INK)
 
-heading(doc, "PREVIOUS CAREER - 임상병리·정도관리")
-para(doc, "아래 경력은 AI Software QA 회사 경력이 아니라 이전 임상병리 직무 경력입니다.", 9.3, False, MUTED, 6)
-careers = [
-    ("분당서울대학교병원", "2013.03 - 2015.02"),
-    ("충주건국대학교병원", "2009.11 - 2013.02"),
-    ("강릉아산병원", "2008.08 - 2009.11"),
-    ("신촌세브란스병원", "2007.03 - 2008.02"),
-]
-for company, period in careers:
-    p = doc.add_paragraph()
-    p.paragraph_format.space_after = Pt(7)
-    p.paragraph_format.tab_stops.add_tab_stop(Inches(5.45))
-    font(p.add_run(company), 11, True, INK)
-    font(p.add_run(f"\t{period}"), 9.5, False, MUTED)
-
-heading(doc, "TRANSFERABLE QUALITY EXPERIENCE")
+heading(doc, "TRANSFERABLE QUALITY EXPERIENCE - 이전 직무")
+para(doc, "AI Software QA 회사 경력은 없으며, 의료기관에서 약 8년간 수행한 품질관리 경험 중 지원 직무와 연결되는 역량만 요약했습니다.", 9.3, False, MUTED, 6)
 bullet(doc, "매일 정도관리(QC)를 실행하고 기준 이탈 시 원인을 확인한 경험")
 bullet(doc, "검사 결과의 정확성·재현성을 확인하고 레퍼런스를 재설정·재검증한 경험")
 bullet(doc, "검사 장비 품질관리(QA), 결과 보고, 협업과 사내 교육 경험")
