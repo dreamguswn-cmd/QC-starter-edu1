@@ -138,6 +138,19 @@ QA 교육 프로젝트 외에 직접 기획하고 구현한 웹사이트입니�
 | 모바일 청첩장 | 모바일 우선 반응형 웹페이지 | [포트폴리오에서 보기](https://dreamguswn-cmd.github.io/QC-starter-edu1/invitation.html) | [GitHub](https://github.com/dreamguswn-cmd/QC-starter-edu1) |
 | 초등돌봄교실 자료관리 | 아동 개인정보를 보호하는 비공개 운영 자료관리 시스템 | [공개 소개](https://dreamguswn-cmd.github.io/QC-starter-edu1/care-class-entrance.html) | [GitHub](https://github.com/dreamguswn-cmd/QC-starter-edu1) |
 
+## AI Music Content
+
+포트폴리오의 전문적인 분위기와 QA 용어 학습을 위해 생성형 AI 음악 콘텐츠를 직접 기획·제작했습니다.
+
+| 콘텐츠 | 용도 | 재생 방식 | 파일 |
+|---|---|---|---|
+| Quality in Motion | 포트폴리오 메인 BGM | 방문자가 직접 재생, 낮은 음량으로 반복 | [`public/audio/quality-in-motion-bgm.mp3`](public/audio/quality-in-motion-bgm.mp3) |
+| QA 용어 학습 노래 | QA 전문용어를 쉽게 설명하는 부가 학습 콘텐츠 | 페이지 하단에서 직접 재생, 1회 재생 | [`public/audio/qa-terms-learning-song.mp3`](public/audio/qa-terms-learning-song.mp3) |
+
+- 두 음악은 동시에 재생되지 않습니다.
+- 자동재생을 사용하지 않아 방문자의 선택과 열람 집중도를 우선합니다.
+- [기획 목적과 재생 정책](docs/audio-content.md)
+
 ## Project Structure
 
 ```text
@@ -151,6 +164,7 @@ src/
 
 public/
 ├─ assets/               # 프로젝트 이미지와 증빙 화면
+├─ audio/                # 메인 BGM과 QA 용어 학습 노래
 └─ downloads/            # 이력서와 프로젝트 결과물
 
 docs/
