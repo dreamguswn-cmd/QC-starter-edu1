@@ -128,7 +128,7 @@ export const portfolioV2Defaults = {
   sites: [
     { title: '유현주 교육 게임 LAB', category: 'EDUCATIONAL WEB GAME', summary: '수학, 영어, 타자 연습을 게임으로 학습하는 반응형 교육 사이트입니다.', image: 'assets/game-lab-cover.svg', live: 'https://dreamguswn-cmd.github.io/play-and-learn/', github: 'https://github.com/dreamguswn-cmd/play-and-learn' },
     { title: '우리 동네 매미 자연학습', category: 'NATURE LEARNING WEB', summary: '매미의 모습과 울음소리, 기온에 따른 활동을 체험하는 자연학습 사이트입니다.', image: 'assets/maeme-cover.png', live: 'https://dreamguswn-cmd.github.io/maeme/', github: 'https://github.com/dreamguswn-cmd/maeme' },
-    { title: '모바일 청첩장', category: 'MOBILE FIRST WEB', summary: '모바일 우선 반응형 구성과 갤러리, 연락처·계좌 복사 기능을 구현한 웹사이트입니다.', image: 'assets/invitation/couple-wedding.png', live: 'invitation.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
+    { title: '모바일 청첩장', category: 'MOBILE FIRST WEB', summary: '모바일 우선 반응형 구성과 갤러리, 연락처·계좌 복사 기능을 구현한 웹사이트입니다.', image: 'assets/invitation/couple-wedding.webp', live: 'invitation.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
     { title: '초등돌봄교실 자료관리', category: 'PRIVATE EDUCATION OPERATIONS', summary: '돌봄교실 운영 자료를 정리하고 관리자만 내부 자료를 확인할 수 있도록 만든 비공개 관리 시스템입니다.', image: '', live: 'care-class-entrance.html', github: 'https://github.com/dreamguswn-cmd/QC-starter-edu1' },
   ],
 }
