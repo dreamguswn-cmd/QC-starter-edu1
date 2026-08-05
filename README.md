@@ -52,13 +52,16 @@ AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정<br>
 
 ## Selected QA Projects
 
-### 1. VOC Improve 멀티 에이전트 QA
+### 1. VOC Improve × AWS 결과관리·운영감사 QA
 
 - 유형: 팀 프로젝트
-- 개인 기여: 테스트 실행, AI 품질 결과 검토, 배포 판정 자료와 최종 증빙 정리
-- 검증: 6개 Agent의 VOC 분석 결과를 독립 Judge 기준으로 비교
-- 결과: Agent 분석 → 품질평가 → Release Gate로 이어지는 팀 QA 흐름 정리
-- 기술: pytest, LLM Judge, Release Gate
+- 개인 기여: 테스트 실행, AI 품질 결과 검토, 단계형 AWS CLI 결과관리, S3 보안·무결성 및 CloudTrail 감사 확인, 배포 판정 자료와 최종 증빙 정리
+- 검증: pytest 89건(84 PASS / 5 FAIL), 실제 LLM Judge 70건(호출 70/70 성공, 품질 PASS 25 / FAIL 45)
+- 품질 판정: 평균 66.8점, Critical Failure 9건으로 운영 배포 보류
+- AWS 결과: QA 산출물 7개 업로드, 퍼블릭 차단·AES256·SHA-256 diff=0 확인, CloudTrail 감사 및 전체 삭제
+- 비용: 작업 전후 USD 0.00
+- 기술: pytest, LLM Judge, AWS CLI, S3, CloudTrail, SHA-256, Release Gate
+- 비공개 증빙: 38장 최종 완료보고서와 12분 수행 영상 보유(원본에 포함된 AWS 계정 정보 보호를 위해 공개 저장소에는 미게시)
 - [상세 QA 기록](docs/projects/voc-improve/README.md)
 
 ### 2. RAG 챗봇 자동 품질평가 및 답변 개선
