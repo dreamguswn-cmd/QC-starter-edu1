@@ -8,17 +8,17 @@ import { publicUrl } from './portfolioApi'
 export const qaProjects = [
   {
     id: 'voc', number: '01', label: '대표 프로젝트',
-    title: 'VOC Improve 멀티 에이전트 QA',
-    summary: '6개 AI Agent의 VOC 분석 결과를 독립 Judge로 평가하고, 배포 가능 여부까지 판정한 팀 프로젝트입니다.',
-    role: '팀 프로젝트에서 테스트 실행, AI 품질 결과 검토, 배포 판정 자료와 최종 증빙 정리를 담당했습니다.',
-    metrics: [['분석 Agent', '6개'], ['품질 평가', 'LLM Judge'], ['배포 판정', 'Release Gate'], ['유형', '팀 프로젝트']],
-    tags: ['pytest', 'LLM Judge', 'AWS EC2', 'S3', 'Release Gate'],
-    issue: '여러 Agent가 만든 VOC 분석 결과를 일관된 기준으로 평가하고 배포 가능 여부를 판단해야 했습니다.',
-    test: 'Agent별 결과를 독립 Judge의 품질 기준으로 비교하고 PASS·FAIL 및 배포 판정 흐름을 확인했습니다.',
-    action: '평가 결과와 실패 사유를 팀 보고서에 정리하고 최종 발표자료와 배포 판정 증빙을 교차 확인했습니다.',
-    result: '6개 Agent 분석부터 독립 평가와 Release Gate까지 이어지는 팀 QA 흐름 정리',
-    proof: '팀 품질보고서와 발표자료에서 AI 평가 흐름, 역할, 최종 판정을 확인할 수 있습니다.',
-    image: 'assets/voc-improve-cover.svg',
+    title: 'VOC Improve × AWS 결과관리·운영감사 QA',
+    summary: '6개 AI Agent의 VOC 처리 결과를 실제 LLM Judge로 평가하고, AWS에서 결과 저장·무결성 검증·운영감사·삭제까지 수행한 최종 팀 프로젝트입니다.',
+    role: '4팀 공동 프로젝트에서 테스트 실행과 AI 품질 결과 검토, 단계형 AWS CLI 결과관리, S3 보안·SHA-256 무결성·CloudTrail 감사 확인, 배포 판정 자료와 최종 증빙 정리를 담당했습니다.',
+    metrics: [['pytest', '89건'], ['테스트 결과', '84 PASS'], ['LLM 호출', '70/70'], ['최종 판정', '배포 보류']],
+    tags: ['pytest', 'LLM Judge', 'AWS CLI', 'S3', 'CloudTrail', 'SHA-256', 'Release Gate'],
+    issue: '기능 자동화가 정상이어도 AI 응답 품질이 운영 기준을 충족하는지 별도로 판단하고, 생성된 QA 결과물을 안전하게 보관·검증·감사한 뒤 비용 없이 정리해야 했습니다.',
+    test: 'pytest 89건과 실제 OpenAI LLM Judge 70건을 실행하고, S3 산출물 7개의 퍼블릭 차단·AES256 암호화·SHA-256 일치 여부와 CloudTrail 객체 이벤트를 확인했습니다.',
+    action: 'pytest 실패 5건과 LLM 품질 FAIL 45건, Critical 9건을 숨기지 않고 원인과 개선 대상을 기록했습니다. API 호출 성공과 품질 PASS를 분리해 평가하고 품질 게이트 미달 시 배포를 보류했습니다.',
+    result: 'pytest 84 PASS / 5 FAIL, LLM 호출 70/70 성공, 품질 PASS 25건·FAIL 45건·평균 66.8점. AWS 산출물 7개 무결성 검증과 감사·삭제를 완료했으며 운영 배포는 보류했습니다.',
+    proof: '38장 최종 완료보고서와 12분 수행 영상으로 테스트 결과, S3 보안·무결성, CloudTrail 감사, 리소스 삭제, 작업 전후 비용 USD 0.00을 증빙했습니다. AWS 계정 정보 보호를 위해 원본은 비공개로 보관합니다.',
+    image: 'assets/voc-final-cover.png',
     evidence: 'downloads/VOC_Quality_Report_Team4.docx',
     detail: 'downloads/VOC_Presentation_v1.8.pptx',
   },
@@ -94,7 +94,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 6,
+  copyRevision: 7,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -150,7 +150,7 @@ export default function PortfolioV2({ data, openAdmin }) {
     ? savedContent.projects.map((project) => {
         const revised = qaProjects.find((item) => item.id === project.id)
         if (!revised) return project
-        if (savedContent.copyRevision < 6) {
+        if (savedContent.copyRevision < 7) {
           return { ...project, ...revised }
         }
         return savedContent.copyRevision >= 2 ? project : { ...project, role: revised.role }
@@ -279,7 +279,7 @@ export default function PortfolioV2({ data, openAdmin }) {
                 <div><span>05 · 증빙</span><p>{project.proof}</p></div>
               </div>
               <div className="qa-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-              <div className="qa-project-actions"><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={`${base}?project=${project.id}#overview`}><ExternalLink/> 프로젝트 자세히 보기</a></div>
+              <div className="qa-project-actions"><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a>{project.video && <a href={local(project.video)} target="_blank" rel="noreferrer"><Play/> 수행 영상</a>}<a href={`${base}?project=${project.id}#overview`}><ExternalLink/> 프로젝트 자세히 보기</a></div>
             </div>
           </article>)}
         </div>
@@ -326,7 +326,7 @@ function ProjectDetail({ project, local }) {
       <section id="overview" className="qa-detail-hero"><p>{project.label}</p><h1>{project.title}</h1><strong>{project.summary}</strong><div>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></section>
       <section id="contribution" className="qa-detail-section"><p className="qa-kicker">MY CONTRIBUTION</p><h2>개인 기여</h2><p>{project.role}</p><div className="qa-project-metrics">{project.metrics.map(([key, value]) => <div key={key}><small>{key}</small><b>{value}</b></div>)}</div></section>
       <section id="process" className="qa-detail-section qa-detail-process"><p className="qa-kicker">QA PROCESS</p><h2>문제에서 재검증까지</h2><article><b>01 문제 정의</b><p>{project.issue}</p></article><article><b>02 테스트 설계·실행</b><p>{project.test}</p></article><article><b>03 결함·개선 및 재검증</b><p>{project.action}</p></article></section>
-      <section id="evidence" className="qa-detail-section qa-detail-evidence"><p className="qa-kicker">RESULT & EVIDENCE</p><h2>검증 결과와 증빙</h2><p>{project.result}</p><p>{project.proof}</p><div><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={local(project.detail)} target="_blank" rel="noreferrer"><ExternalLink/> 원본 상세 자료</a></div></section>
+      <section id="evidence" className="qa-detail-section qa-detail-evidence"><p className="qa-kicker">RESULT & EVIDENCE</p><h2>검증 결과와 증빙</h2><p>{project.result}</p><p>{project.proof}</p><div><a href={local(project.evidence)} target="_blank" rel="noreferrer"><ShieldCheck/> 증빙 보기</a><a href={local(project.detail)} target="_blank" rel="noreferrer"><ExternalLink/> 최종 완료보고서</a>{project.video && <a href={local(project.video)} target="_blank" rel="noreferrer"><Play/> 수행 영상 보기</a>}</div></section>
     </main>
   </div>
 }
