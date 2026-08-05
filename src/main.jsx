@@ -104,7 +104,7 @@ function Portfolio({ data, openAdmin }) {
           </article>)}
           <article className="invitation-project">
             <a href={local('invitation.html')} target="_blank" rel="noreferrer">
-              <div className="project-image"><img src={local('assets/invitation/couple-wedding.png')} alt="모바일 청첩장 프로젝트 대표 화면"/><strong>♥</strong></div>
+              <div className="project-image"><img src={local('assets/invitation/couple-wedding.webp')} alt="모바일 청첩장 프로젝트 대표 화면"/><strong>♥</strong></div>
               <div className="project-body"><span>WEB PROJECT</span><h3>모바일 청첩장 웹페이지</h3><p>모바일 우선 반응형 청첩장과 갤러리, 연락·계좌 복사 기능을 구현했습니다.</p><footer><b>Mobile First · JavaScript</b><small>청첩장 보기 →</small></footer></div>
             </a>
           </article>
