@@ -148,7 +148,7 @@ function Portfolio({ data, openAdmin }) {
       </section>
 
       <section className="training">
-        <div><p className="eyebrow">CURRENT TRAINING</p><h2>AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정</h2><p>대우능력개발원 · 2026.05.27 – 2026.08.07</p></div>
+        <div><p className="eyebrow">EDUCATION COMPLETED</p><h2>AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정 수료</h2><p>대우능력개발원 · 2026.05.26 – 2026.08.07 · 256시간</p></div>
         <Award/>
       </section>
 
