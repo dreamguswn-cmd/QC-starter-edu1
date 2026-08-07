@@ -94,7 +94,7 @@ const capabilities = [
 ]
 
 export const portfolioV2Defaults = {
-  copyRevision: 7,
+  copyRevision: 8,
   hero: {
     eyebrow: 'AI SOFTWARE QA PORTFOLIO',
     name: '유현주',
@@ -112,9 +112,9 @@ export const portfolioV2Defaults = {
   education: {
     institution: '대우능력개발원',
     course: 'AI 기반 소프트웨어 테스터(QA) 및 모니터링 실무 과정',
-    period: '2026.05.27 – 2026.08.07',
-    status: '수강 중',
-    description: '아래 QA 성과와 대표 프로젝트는 이 교육 과정에서 직접 실행하고 결과를 기록한 실습입니다.',
+    period: '2026.05.26 – 2026.08.07 · 256시간',
+    status: '교육 수료',
+    description: '대우능력개발원에서 AI 기반 소프트웨어 테스터 및 모니터링 실무과정을 수료했습니다. 아래 QA 성과와 대표 프로젝트는 교육 중 직접 실행하고 결과를 기록한 실습입니다.',
     topics: ['기능·API·회귀 테스트와 테스트 케이스 작성', 'pytest 자동화 및 k6 성능 검증', 'AI 응답 품질평가와 RAG 검증', 'Prometheus·Grafana 운영 모니터링', 'AWS 보안 점검, 장애 재현과 복구', '팀 프로젝트 결과 보고와 증빙 관리'],
   },
   achievements: [
@@ -163,12 +163,15 @@ export default function PortfolioV2({ data, openAdmin }) {
       ? savedContent.about.title
       : portfolioV2Defaults.about.title,
   }
+  const refreshedEducation = savedContent.copyRevision >= 8
+    ? { ...portfolioV2Defaults.education, ...savedContent.education }
+    : portfolioV2Defaults.education
   const content = {
     ...portfolioV2Defaults,
     ...savedContent,
     hero: { ...portfolioV2Defaults.hero, ...savedContent.hero },
     about: refreshedAbout,
-    education: { ...portfolioV2Defaults.education, ...savedContent.education },
+    education: refreshedEducation,
     achievements: savedContent.copyRevision >= 6 && savedContent.achievements?.length ? savedContent.achievements : portfolioV2Defaults.achievements,
     projects: refreshedProjects,
     capabilities: savedContent.capabilities?.length
@@ -244,6 +247,11 @@ export default function PortfolioV2({ data, openAdmin }) {
         <div>{content.about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
       </section>
 
+      <section className="qa-section qa-keywords" aria-labelledby="keyword-title">
+        <div className="qa-heading"><p className="qa-kicker">HOW I WORK</p><h2 id="keyword-title">꼼꼼함 · 실행력 · 헌신</h2><p>문제를 끝까지 검증하고, 배운 기술을 직접 구현하며, 사용자에게 도움이 되는 품질을 생각합니다.</p></div>
+        <img src={local('assets/profile-keywords.webp')} alt="유현주의 업무 강점: 꼼꼼함, 실행력, 헌신"/>
+      </section>
+
       <section id="education" className="qa-section qa-education">
         <div className="qa-education-intro">
           <p className="qa-kicker">EDUCATION & TRAINING</p>
@@ -253,7 +261,10 @@ export default function PortfolioV2({ data, openAdmin }) {
         </div>
         <div className="qa-education-detail">
           <p>{content.education.description}</p>
-          <ul>{content.education.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
+          <div className="qa-education-detail-body">
+            <ul>{content.education.topics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
+            <figure className="qa-certificate"><a href={local('assets/education-certificate-public.webp')} target="_blank" rel="noreferrer"><img src={local('assets/education-certificate-public.webp')} alt="대우능력개발원 AI 기반 소프트웨어 테스터 및 모니터링 실무과정 수료증"/></a><figcaption>대우능력개발원 교육 수료증 · 개인정보 비공개 처리</figcaption></figure>
+          </div>
         </div>
       </section>
 
